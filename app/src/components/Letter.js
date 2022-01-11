@@ -5,10 +5,10 @@ import styled from 'styled-components'
 // import { Col, Row, Button } from 'react-bootstrap';
 // import {FaSignOutAlt} from 'react-icons/fa'
 
-function HelloStr({str, str2}){
+function Letter({str, propTwo}){
 
     return (
-      <Text>Hello {str}, {str2 || "can take two props"}</Text>
+      <Text>Hello {str}, {propTwo}</Text>
     )
 }
 
@@ -16,11 +16,11 @@ const Text = styled.p`
   color: red;
 `
 
-HelloStr.propTypes = {
+Letter.propTypes = {
   str: PropTypes.string.isRequired,
   // user: PropTypes.shape({
   //   phoneNumber: null
   // })
 }
 
-export default HelloStr
+export default Letter

@@ -1,13 +1,32 @@
-import logo from './logo.svg';
+import React, { useState } from "react";
 import './App.css';
-import HelloStr from './components/HelloStr';
+import styled, { ThemeProvider } from "styled-components";
+import { lightTheme, darkTheme, GlobalStyles } from "./Themes";
+
+import Letter from './components/Letter';
+
+const StyledApp = styled.div`
+  color: ${(props) => props.theme.fontColor};
+`;
 
 function App() {
+
+  const [theme, setTheme] = useState("light");
+
+  const themeToggler = () => {
+    theme === "light" ? setTheme("dark") : setTheme("light");
+  };
+
+  
   return (
-    <div className="App">
-      <p>Hello world</p>
-      <HelloStr str="World!" />
-    </div>
+    <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
+      <GlobalStyles />
+      <StyledApp>
+        <p>Hello world</p>
+        <Letter str="World!"/>
+        <button onClick={() => themeToggler()}>Change Theme</button>
+      </StyledApp>
+    </ThemeProvider>
   );
 }
 
