@@ -31,7 +31,7 @@ function App() {
           <Container>
             <Navbar.Brand href="#home">WordleSolver</Navbar.Brand>
           </Container>
-          <Container>
+          <Container className="justify-content-end">
             <ToggleSwitch
               defaultValue={true}
               toggleFn={themeToggler}
