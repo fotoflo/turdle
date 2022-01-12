@@ -7,25 +7,22 @@ import { Card, Col } from 'react-bootstrap';
 
 function GameLetter({order, activeLetter, setActiveLetter, gameState, setGameState } ){
 
-    useEffect(() => { setActiveLetter(0) }, []);
+    useEffect( () => { setActiveLetter(0) }, []);
 
     return (
       <Col onClick={ () => setActiveLetter(order) }>
-        <LetterBox className="col"/>
+        <LetterBox className="col" order={order} activeLetter={activeLetter}/>
         <span>{order}</span>
       </Col>
     )
-}
-
-const LetterBox = styled(Card)`
-  border: 1px solid ${(props) => {
-    console.log("props", props);
     
-    return props.order === props.activeLetter ? "red" : "grey"
-  }};
-  height: 10rem;
+}
+    
+const LetterBox = styled(Card)`
+border: ${(props) => { return props.order === props.activeLetter ? 3 : 1 }}px solid ${(props) => { return props.order === props.activeLetter ? "red" : "grey" }};
+height: 10rem;
 `
-
+    
 
 
 GameLetter.propTypes = {
