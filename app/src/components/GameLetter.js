@@ -18,9 +18,14 @@ function GameLetter({order, activeLetter, setActiveLetter, gameState, setGameSta
 }
 
 const LetterBox = styled(Card)`
-  border: 1px solid ${ (props) => props.order === props.activeLetter ? "yellow" : "grey"  };
+  border: 1px solid ${(props) => {
+    console.log("props", props);
+    
+    return props.order === props.activeLetter ? "red" : "grey"
+  }};
   height: 10rem;
 `
+
 
 
 GameLetter.propTypes = {
