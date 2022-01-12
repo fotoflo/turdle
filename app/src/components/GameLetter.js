@@ -11,7 +11,7 @@ function GameLetter({order, activeLetter, setActiveLetter, gameState, setGameSta
 
     return (
       <Col onClick={ () => setActiveLetter(order) }>
-        <LetterBox className="col" order={order} activeLetter={activeLetter}/>
+        <LetterBox className="col" order={order} activeletter={activeLetter}/>
         <span>{order}</span>
       </Col>
     )
@@ -19,7 +19,10 @@ function GameLetter({order, activeLetter, setActiveLetter, gameState, setGameSta
 }
     
 const LetterBox = styled(Card)`
-border: ${(props) => { return props.order === props.activeLetter ? 3 : 1 }}px solid ${(props) => { return props.order === props.activeLetter ? "red" : "grey" }};
+border: ${(props) => { return props.order === props.activeletter ? 3 : 1 }}px
+  solid ${(props) => { return props.order === props.activeletter ? "red" : "grey" }
+};
+
 height: 10rem;
 `
     
