@@ -28,6 +28,7 @@ ToggleSwitch.propTypes = {
 const CheckboxContainer = styled.div`
   display: inline-block;
   vertical-align: middle;
+  caret-color: transparent;
 `
 
 const HiddenCheckbox = styled.input.attrs({ type: 'checkbox' })`
@@ -49,9 +50,8 @@ const StyledCheckbox = styled.div`
   display: inline-block;
   width: 16px;
   height: 16px;
-  background: ${props => props.checked ? offColor : offColor };
+  background: ${props => props.checked ? offColor : onColor };
   border-radius: 3px;
-  transition: all 150ms;
 `
 
 
