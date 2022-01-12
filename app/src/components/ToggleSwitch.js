@@ -1,9 +1,7 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components'
-
-const onColor = 'GhostWhite'
-const offColor = 'DarkSlateGray'
+import { lightTheme, darkTheme } from "../Themes";
 
 function ToggleSwitch({className, defaultValue, toggleFn, ...props}){
    const [checked, setChecked] = useState(defaultValue || false);
@@ -50,9 +48,8 @@ const StyledCheckbox = styled.div`
   display: inline-block;
   width: 16px;
   height: 16px;
-  background: ${props => props.checked ? offColor : onColor };
+  background: ${props => props.checked ? darkTheme.body : lightTheme.body };
   border-radius: 3px;
 `
-
 
 export default ToggleSwitch

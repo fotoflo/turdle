@@ -3,15 +3,12 @@ import './App.css';
 import styled, { ThemeProvider } from "styled-components";
 import { lightTheme, darkTheme, GlobalStyles } from "./Themes";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { FaRegQuestionCircle } from 'react-icons/fa';
 
 import {Navbar, Container} from 'react-bootstrap'
 
 import Letter from './components/Letter';
 import ToggleSwitch from './components/ToggleSwitch';
-
-const StyledApp = styled.div`
-  color: ${(props) => props.theme.fontColor};
-`;
 
 function App() {
 
@@ -27,7 +24,10 @@ function App() {
     <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
       <GlobalStyles />
       <StyledApp>
-        <Navbar variant={theme}>
+        <StyledNavbar variant={theme} className="justify-content-between">
+          <Container>
+            <Navbar.Brand href="#home"><FaRegQuestionCircle /></Navbar.Brand>
+          </Container>
           <Container>
             <Navbar.Brand href="#home">WordleSolver</Navbar.Brand>
           </Container>
@@ -37,7 +37,7 @@ function App() {
               toggleFn={themeToggler}
             />
           </Container>
-        </Navbar>
+        </StyledNavbar>
         <p>Hello world</p>
         <Letter str="World!"/>
         {/* <button onClick={() => themeToggler()}>Change Theme</button> */}
@@ -45,5 +45,17 @@ function App() {
     </ThemeProvider>
   );
 }
+
+const StyledApp = styled.div`
+  color: ${(props) => props.theme.fontColor};
+`;
+
+const StyledNavbar = styled(Navbar)`
+  border-bottom: 1px solid ${(props) => props.theme.fontColor};
+  left: 50%;
+  transform: translatex(-50%);
+  width:80%;
+  margin-bottom: 10px;
+`
 
 export default App;
