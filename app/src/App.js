@@ -4,6 +4,7 @@ import styled, { ThemeProvider } from "styled-components";
 import { lightTheme, darkTheme, GlobalStyles } from "./Themes";
 
 import Letter from './components/Letter';
+import ToggleSwitch from './components/ToggleSwitch';
 
 const StyledApp = styled.div`
   color: ${(props) => props.theme.fontColor};
@@ -15,6 +16,7 @@ function App() {
 
   const themeToggler = () => {
     theme === "light" ? setTheme("dark") : setTheme("light");
+    console.log("toggling")
   };
 
   
@@ -24,7 +26,11 @@ function App() {
       <StyledApp>
         <p>Hello world</p>
         <Letter str="World!"/>
-        <button onClick={() => themeToggler()}>Change Theme</button>
+        {/* <button onClick={() => themeToggler()}>Change Theme</button> */}
+        <ToggleSwitch
+          defaultValue={true}
+          toggleFn={themeToggler}
+        />
       </StyledApp>
     </ThemeProvider>
   );
