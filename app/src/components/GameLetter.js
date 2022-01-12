@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components'
 
@@ -6,6 +6,8 @@ import { Card, Col } from 'react-bootstrap';
 // import {FaSignOutAlt} from 'react-icons/fa'
 
 function GameLetter({order, activeLetter, setActiveLetter, gameState, setGameState } ){
+
+    useEffect(() => { setActiveLetter(0) }, []);
 
     return (
       <Col onClick={ () => setActiveLetter(order) }>
