@@ -14,7 +14,6 @@ import ToggleSwitch from './components/ToggleSwitch';
 import GameBoard from './components/GameBoard';
 
 function App() {
-
   const [theme, setTheme] = useState("light");
 
   const themeToggler = () => {
