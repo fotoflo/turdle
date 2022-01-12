@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components'
 
 import KeyboardLetter from './KeyboardLetter'
 import { Container, Row } from 'react-bootstrap';
@@ -8,12 +7,12 @@ import { Container, Row } from 'react-bootstrap';
 // import { Col, Row, Button } from 'react-bootstrap';
 // import {FaSignOutAlt} from 'react-icons/fa'
 
-function Keyboard({str, str2}){
+function Keyboard({...props}){
 
     return (
       <Row>
         <Container>
-          <Row justify-content-center>
+          <Row>
             <KeyboardLetter label="Q"/>
             <KeyboardLetter label="W" />
             <KeyboardLetter label="E" />
@@ -25,8 +24,8 @@ function Keyboard({str, str2}){
             <KeyboardLetter label="O" />
             <KeyboardLetter label="P" />
           </Row>
-          <Row justify-content-center >
-            <KeyboardLetter label="A" md={{offset:1}}/>
+          <Row>
+            <KeyboardLetter label="A" />
             <KeyboardLetter label="S" />
             <KeyboardLetter label="D" />
             <KeyboardLetter label="F" />
@@ -51,10 +50,6 @@ function Keyboard({str, str2}){
       </Row>
     )
 }
-
-const Text = styled.p`
-  color: red;
-`
 
 Keyboard.propTypes = {
   str: PropTypes.string,

@@ -2,13 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components'
 
-import { Card, Col } from 'react-bootstrap';
+import { Col } from 'react-bootstrap';
 // import {FaSignOutAlt} from 'react-icons/fa'
 
-function KeyboardLetter({label, md}){
+function KeyboardLetter({label}){
 
     return (
-      <KeyBox md={md}>{label}</KeyBox>
+      <KeyBox 
+        className="text-center align-middle">
+          {label}
+      </KeyBox>
     )
 }
 
