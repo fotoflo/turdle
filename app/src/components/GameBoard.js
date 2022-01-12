@@ -18,25 +18,21 @@ function GameBoard(...props){
     })
 
     const [activeLetter, setActiveLetter] = useState(0) // set of {0,1,2,3,4,5}
-    const [gameState, setGameState] = useState([
-      {
-         r: 1 // a exists
-      }, 
-      {
-         o: 2 // its correct 
-      },
-      { }, // nothing
-      {
-         g: 2, e: 2 // both correct
-      },
-      {
-         u: 0 // toggled off
-      }
-    ]);
+    const [gameState, setGameState] = useState([{},{},{},{},{}]);
+
+    function iterateKey(key){
+      const max = 2;
+      return key < max ? key+1 : 0;
+    }
 
     function keydownHandler( {key} ){
       if( !key.match(/^[a-zA-Z]{1}$/)  ) return;
-      console.log(key)
+      gameState[activeLetter] = {
+        [key]: iterateKey(key),
+        ...gameState[activeLetter]
+      }
+      setGameState(gameState)
+      debugger
     }
 
     // const toggleActiveLetterState = (char) => {
