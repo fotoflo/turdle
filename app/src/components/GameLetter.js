@@ -2,25 +2,28 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components'
 
-// import { Col, Row, Button } from 'react-bootstrap';
+import { Card, Col } from 'react-bootstrap';
 // import {FaSignOutAlt} from 'react-icons/fa'
 
-function Letter({str, propTwo}){
+function GameLetter({str, propTwo}){
 
     return (
-      <Text>Hello {str}, {propTwo}</Text>
+      <Col>
+        <LetterBox className="col"/>
+      </Col>
     )
 }
 
-const Text = styled.p`
-  color: red;
+const LetterBox = styled(Card)`
+  border: 1px solid grey;
+  height: 10rem;
 `
 
-Letter.propTypes = {
+GameLetter.propTypes = {
   str: PropTypes.string.isRequired,
   // user: PropTypes.shape({
   //   phoneNumber: null
   // })
 }
 
-export default Letter
+export default GameLetter

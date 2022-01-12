@@ -1,14 +1,17 @@
 import React, { useState } from "react";
 import './App.css';
 import styled, { ThemeProvider } from "styled-components";
+
 import { lightTheme, darkTheme, GlobalStyles } from "./Themes";
+
 import 'bootstrap/dist/css/bootstrap.min.css';
+
 import { FaRegQuestionCircle } from 'react-icons/fa';
 
 import {Navbar, Container} from 'react-bootstrap'
 
-import Letter from './components/Letter';
 import ToggleSwitch from './components/ToggleSwitch';
+import GameBoard from './components/GameBoard';
 
 function App() {
 
@@ -38,9 +41,7 @@ function App() {
             />
           </Container>
         </StyledNavbar>
-        <p>Hello world</p>
-        <Letter str="World!"/>
-        {/* <button onClick={() => themeToggler()}>Change Theme</button> */}
+        <GameBoard />
       </StyledApp>
     </ThemeProvider>
   );
@@ -55,7 +56,7 @@ const StyledNavbar = styled(Navbar)`
   left: 50%;
   transform: translatex(-50%);
   width:80%;
-  margin-bottom: 10px;
+  margin-bottom: 2rem;
 `
 
 export default App;
