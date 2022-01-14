@@ -27,7 +27,8 @@ function GameBoard(...props){
 
     function keydownHandler( {key: pressedKey} ){
       if( !pressedKey.match(/^[a-zA-Z]{1}$/)  ) return;
-      
+      pressedKey = pressedKey.toLowerCase()
+
       let newState = [...gameState];
 
       newState[activeLetter] = {
@@ -50,6 +51,7 @@ function GameBoard(...props){
           <Keyboard 
             gameState={gameState}
             setGameState={setGameState}
+            keydownHandler={keydownHandler}
           />
           <p>activeLetter: {activeLetter}</p>
       </Container>

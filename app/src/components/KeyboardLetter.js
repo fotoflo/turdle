@@ -1,14 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components'
-
 import { Col } from 'react-bootstrap';
-// import {FaSignOutAlt} from 'react-icons/fa'
 
-function KeyboardLetter({label}){
+function KeyboardLetter({label, ...props}){
 
     return (
       <KeyBox 
+        onClick={props.onClick}
         className="text-center align-middle">
           {label}
       </KeyBox>

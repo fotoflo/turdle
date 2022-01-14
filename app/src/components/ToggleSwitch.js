@@ -26,7 +26,6 @@ ToggleSwitch.propTypes = {
 const CheckboxContainer = styled.div`
   display: inline-block;
   vertical-align: middle;
-  caret-color: transparent;
 `
 
 const HiddenCheckbox = styled.input.attrs({ type: 'checkbox' })`
