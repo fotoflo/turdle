@@ -10,37 +10,37 @@ function Keyboard({...props}){
       <Row>
         <Container>
           <Row>
-            <KeyboardLetter {...props} label="Q"/>
-            <KeyboardLetter {...props} label="W" />
-            <KeyboardLetter {...props} label="E" />
-            <KeyboardLetter {...props} label="R" />
-            <KeyboardLetter {...props} label="T" />
-            <KeyboardLetter {...props} label="Y" />
-            <KeyboardLetter {...props} label="U" />
-            <KeyboardLetter {...props} label="I" />
-            <KeyboardLetter {...props} label="O" />
-            <KeyboardLetter {...props} label="P" />
+            <KeyboardLetter {...props} label="q"/>
+            <KeyboardLetter {...props} label="w" />
+            <KeyboardLetter {...props} label="e" />
+            <KeyboardLetter {...props} label="r" />
+            <KeyboardLetter {...props} label="t" />
+            <KeyboardLetter {...props} label="y" />
+            <KeyboardLetter {...props} label="u" />
+            <KeyboardLetter {...props} label="i" />
+            <KeyboardLetter {...props} label="o" />
+            <KeyboardLetter {...props} label="p" />
           </Row>
           <Row>
-            <KeyboardLetter {...props} label="A" />
-            <KeyboardLetter {...props} label="S" />
-            <KeyboardLetter {...props} label="D" />
-            <KeyboardLetter {...props} label="F" />
-            <KeyboardLetter {...props} label="G" />
-            <KeyboardLetter {...props} label="H" />
-            <KeyboardLetter {...props} label="J" />
-            <KeyboardLetter {...props} label="K" />
-            <KeyboardLetter {...props} label="L" />
+            <KeyboardLetter {...props} label="a" />
+            <KeyboardLetter {...props} label="s" />
+            <KeyboardLetter {...props} label="d" />
+            <KeyboardLetter {...props} label="f" />
+            <KeyboardLetter {...props} label="g" />
+            <KeyboardLetter {...props} label="h" />
+            <KeyboardLetter {...props} label="j" />
+            <KeyboardLetter {...props} label="k" />
+            <KeyboardLetter {...props} label="l" />
           </Row>
           <Row>
             <KeyboardLetter {...props} label="ENTER" />
-            <KeyboardLetter {...props} label="Z" />
-            <KeyboardLetter {...props} label="X" />
-            <KeyboardLetter {...props} label="C" />
-            <KeyboardLetter {...props} label="V" />
-            <KeyboardLetter {...props} label="B" />
-            <KeyboardLetter {...props} label="N" />
-            <KeyboardLetter {...props} label="M" />
+            <KeyboardLetter {...props} label="z" />
+            <KeyboardLetter {...props} label="x" />
+            <KeyboardLetter {...props} label="c" />
+            <KeyboardLetter {...props} label="v" />
+            <KeyboardLetter {...props} label="b" />
+            <KeyboardLetter {...props} label="n" />
+            <KeyboardLetter {...props} label="m" />
             <KeyboardLetter {...props} label="⌫" />
           </Row>
         </Container>

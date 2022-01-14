@@ -19,9 +19,10 @@ function GameBoard(...props){
 
     const [activeLetter, setActiveLetter] = useState(0) // set of {0,1,2,3,4,5}
     const [gameState, setGameState] = useState([{},{},{},{},{}]);
+    const [keyboardState, setKeyboardState] = useState({});
 
     function iterate(number){
-      const max = 3;
+      const max = 2;
       return number < max ? number+1 : 0;
     }
 
@@ -29,14 +30,20 @@ function GameBoard(...props){
       if( !pressedKey.match(/^[a-zA-Z]{1}$/)  ) return;
       pressedKey = pressedKey.toLowerCase()
 
-      let newState = [...gameState];
+      let newGameState = [...gameState];
 
-      newState[activeLetter] = {
+      newGameState[activeLetter] = {
         ...gameState[activeLetter],
-        [pressedKey]: iterate( newState[activeLetter][pressedKey] )  // order matters, here we overwrite the ...gamestate
+        [pressedKey]: iterate( newGameState[activeLetter][pressedKey] )  // order matters, here we overwrite the ...gamestate
       }
 
-      setGameState(newState) 
+      const newKeyboardState = {
+        ...keyboardState,
+        [pressedKey]: iterate( newGameState[activeLetter][pressedKey] )
+      }
+
+      setGameState(newGameState)
+      setKeyboardState(newKeyboardState) 
     }
 
     return (
@@ -47,13 +54,13 @@ function GameBoard(...props){
             activeLetter={activeLetter}
             setActiveLetter={setActiveLetter}
           />
+          <p>activeLetter: {activeLetter}</p>
+          <p>keyboardState: {JSON.stringify(keyboardState)}</p>
 
           <Keyboard 
-            gameState={gameState}
-            setGameState={setGameState}
+            keyboardState={keyboardState}
             keydownHandler={keydownHandler}
           />
-          <p>activeLetter: {activeLetter}</p>
       </Container>
     )
 }
