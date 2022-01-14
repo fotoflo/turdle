@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Container } from 'react-bootstrap';
 import GameRow from './GameRow';
 import Keyboard from './Keyboard';
+import HintPanel from './HintPanel';
 
 
 // import { Col, Row, Button } from 'react-bootstrap';
@@ -22,7 +23,7 @@ function GameBoard(...props){
     const [keyboardState, setKeyboardState] = useState({});
 
     function iterate(number){
-      const max = 2;
+      const max = 3;
       return number < max ? number+1 : 0;
     }
 
@@ -49,6 +50,11 @@ function GameBoard(...props){
 
     return (
       <Container>
+          <HintPanel 
+            gameState={gameState}
+            keyboardState={keyboardState}
+          />
+
           <GameRow
             gameState={gameState}
             setGameState={setGameState}
