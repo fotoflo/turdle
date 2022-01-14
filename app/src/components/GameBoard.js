@@ -28,18 +28,19 @@ function GameBoard(...props){
 
     function keydownHandler( {key: pressedKey} ){
       if( !pressedKey.match(/^[a-zA-Z]{1}$/)  ) return;
-      pressedKey = pressedKey.toLowerCase()
 
       let newGameState = [...gameState];
+      pressedKey = pressedKey.toLowerCase()
+      const currentValue = newGameState[activeLetter][pressedKey] || 0
+      const newValue = iterate( currentValue )  
 
       newGameState[activeLetter] = {
-        ...gameState[activeLetter],
-        [pressedKey]: iterate( newGameState[activeLetter][pressedKey] )  // order matters, here we overwrite the ...gamestate
+        [pressedKey]: newValue
       }
 
       const newKeyboardState = {
         ...keyboardState,
-        [pressedKey]: iterate( newGameState[activeLetter][pressedKey] )
+        [pressedKey]: newValue // order matters, here we overwrite the ...keyboardState on the pressedKey
       }
 
       setGameState(newGameState)

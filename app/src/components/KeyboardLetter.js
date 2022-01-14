@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components'
 import { Col } from 'react-bootstrap';
@@ -14,7 +14,7 @@ function KeyboardLetter({label, keydownHandler, keyboardState, ...props}){
       onClick={()=>keydownHandler({key: label})}
       className="text-center align-middle"
     >
-      {label.toUpperCase()}
+      {label.toUpperCase()} - {letterState}
     </KeyBox>
     )
   }

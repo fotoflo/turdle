@@ -1,29 +1,37 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components'
 
-import { Card, Col } from 'react-bootstrap';
-// import {FaSignOutAlt} from 'react-icons/fa'
+import {  Col } from 'react-bootstrap';
 
 function GameLetter({order, activeLetter, setActiveLetter, gameState, setGameState } ){
 
-    useEffect( () => { setActiveLetter(0) }, []);
+    const letterValue = Object.keys(gameState[order])[0]
+    const letterState = gameState[order][letterValue] || 0;
 
     return (
       <Col onClick={ () => setActiveLetter(order) }>
-        <LetterBox className="col" order={order} activeletter={activeLetter}/>
+        <LetterBox 
+          className="col" 
+          order={order}
+          activeletter={activeLetter}
+          letterstate={letterState}
+        >
+          {letterValue}:
+          {letterState}
+        </LetterBox>
         <span>{order}</span>
       </Col>
     )
     
 }
-    
-const LetterBox = styled(Card)`
-border: ${(props) => { return props.order === props.activeletter ? 3 : 1 }}px
-  solid ${(props) => { return props.order === props.activeletter ? "red" : "grey" }
-};
 
-height: 10rem;
+const LetterBox = styled.div`
+  border: ${(props) => { return props.order === props.activeletter ? 3 : 1 }}px
+      solid ${(props) => { return props.order === props.activeletter ? "red" : "grey" }
+    };
+  background-color: ${ (props) =>  props.theme[props.letterstate]   };
+  height: 10rem;
 `
     
 
