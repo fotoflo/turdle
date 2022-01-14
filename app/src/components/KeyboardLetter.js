@@ -3,11 +3,13 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components'
 import { Col } from 'react-bootstrap';
 
-function KeyboardLetter({label, ...props}){
+function KeyboardLetter({label, keydownHandler, gameState, ...props}){
+
+    debugger
 
     return (
       <KeyBox 
-        onClick={props.onClick}
+        onClick={()=>keydownHandler({key: label})}
         className="text-center align-middle">
           {label}
       </KeyBox>
@@ -22,6 +24,8 @@ const KeyBox = styled(Col)`
 
 KeyboardLetter.propTypes = {
   label: PropTypes.string.isRequired,
+  keydownHandler: PropTypes.func.isRequired,
+  gameState: PropTypes.array.isRequired
   // user: PropTypes.shape({
   //   phoneNumber: null
   // })
