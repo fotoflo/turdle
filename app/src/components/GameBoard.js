@@ -38,15 +38,6 @@ function GameBoard(...props){
       setGameState(newState) 
     }
 
-    // const toggleActiveLetterState = (char) => {
-    //   debugger;
-    //   const states = [0, 1, 2] // off, incorrect, correct
-    //   console.log(states)
-    // }
-
-    // useEffect( ( key ) => {     //   toggleActiveLetterState(key)
-    // }, [key] ) ;
-
     return (
       <Container>
           <GameRow
