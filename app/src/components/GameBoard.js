@@ -20,19 +20,22 @@ function GameBoard(...props){
     const [activeLetter, setActiveLetter] = useState(0) // set of {0,1,2,3,4,5}
     const [gameState, setGameState] = useState([{},{},{},{},{}]);
 
-    function iterateKey(key){
-      const max = 2;
-      return key < max ? key+1 : 0;
+    function iterate(number){
+      const max = 3;
+      return number < max ? number+1 : 0;
     }
 
-    function keydownHandler( {key} ){
-      if( !key.match(/^[a-zA-Z]{1}$/)  ) return;
-      gameState[activeLetter] = {
-        [key]: iterateKey(key),
-        ...gameState[activeLetter]
+    function keydownHandler( {key: pressedKey} ){
+      if( !pressedKey.match(/^[a-zA-Z]{1}$/)  ) return;
+      
+      let newState = [...gameState];
+
+      newState[activeLetter] = {
+        ...gameState[activeLetter],
+        [pressedKey]: iterate( newState[activeLetter][pressedKey] )  // order matters, here we overwrite the ...gamestate
       }
-      setGameState(gameState)
-      debugger
+
+      setGameState(newState) 
     }
 
     // const toggleActiveLetterState = (char) => {
