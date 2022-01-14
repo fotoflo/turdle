@@ -1,11 +1,11 @@
 const lineReader = require('line-reader');
 const fs = require('fs')
 const inputFilename = 'google-10000-english-no-swears.txt'
-const outputFilename = 'fiveLetters.txt'
+const outputFilename = 'fiveLetterWords.txt'
 
 lineReader.eachLine(inputFilename, function(line, last) {
   if(line.length == 5){
-    writeLineToFile(line + "\n")
+    writeLineToFile(`"${line}",`)
     console.log(line, line.length);
   }
     
