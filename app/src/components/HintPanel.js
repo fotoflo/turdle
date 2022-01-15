@@ -10,55 +10,58 @@ import wordList from './FiveLetterWords.json'
 
 function HintPanel({gameState, keyboardState}){
 
-    // not in set
-    // get all the keyboard state 1's (doesn't contain)
-    const notInSet = Object.entries(keyboardState)
-      .filter( letterCount => letterCount[1] === 1 ) // [t, 1] get all entries with 1
-      .map( letterCount => letterCount[0] )  //  [t, 1] return t
-      .join('') // join 
+    // // not in set
+    // // get all the keyboard state 1's (doesn't contain)
+    // const notInSet = Object.entries(keyboardState)
+    //   .filter( letterCount => letterCount[1] === 1 ) // [t, 1] get all entries with 1
+    //   .map( letterCount => letterCount[0] )  //  [t, 1] return t
+    //   .join('') // join 
     
-      console.log(`notInSet: `, notInSet )
+    //   console.log(`notInSet: `, notInSet )
 
-    // in set
-    // get all the keyboard state 2's
-    const inSet = Object.entries(keyboardState)
-      .filter( letterCount => letterCount[1] === 2 ) // [t, 2] get all entries with 2
-      .map( letterCount => letterCount[0] )  //  [t, 1] return t
-      .join('') // join 
-    console.log(`inSet: `, inSet )
+    // // in set
+    // // get all the keyboard state 2's
+    // const inSet = (dictionary, ) => {
+    //   Object.entries(keyboardState)
+    //   .filter( letterCount => letterCount[1] === 2 ) // [t, 2] get all entries with 2
+    //   .map( letterCount => letterCount[0] )  //  [t, 1] return t
+    //   .join('') // join 
+    // }
 
-    // letter in slot
-    // get all the gamestate 3s 
-    const inSlot = gameState
-      .filter(gameLetter => Object.keys(gameLetter)[0] === 3 )
-      .map( letterCount => letterCount[0] )  //  [t, 1] return t
-      .join('') // join 
+    // // letter in slot
+    // // get all the gamestate 3s 
+    // const inSlot = gameState
+    //   .filter(gameLetter => Object.keys(gameLetter)[0] === 3 )
+    //   .map( letterCount => letterCount[0] )  //  [t, 1] return t
+    //   .join('') // join 
 
-    // contains
-    const inSetRegex = new RegExp(`[${inSet}]`)
-    const withChar = wordList.filter( 
-      word => word.match(inSetRegex)
-    )
+    // // contains
+    // const inSetRegex = new RegExp(`[${inSet}]`)
+    // const withChar = wordList.filter( 
+    //   word => word.match(inSetRegex)
+    // )
 
-    // doesnt contain
-    const notInSetRegex = new RegExp(`[${notInSet}]`)
-    const withoutChar = withChar.filter( 
-      word => !word.match(notInSetRegex)
-    )
+    // // doesnt contain
+    // const notInSetRegex = new RegExp(`[${notInSet}]`)
+    // const withoutChar = withChar.filter( 
+    //   word => !word.match(notInSetRegex)
+    // )
     
-    const loc = 2;
-    const char = 'u';
+    // const loc = 0;
+    // const char = 'f';
 
-    const charInLocation = withoutChar.filter(
-      (word) => word[loc] === char
-    )
+    // const charInLocation = withoutChar.filter(
+    //   (word) => word[loc] === char
+    // )
 
-    const results = charInLocation.join(" ")
+    // const results = charInLocation.join(" ")
 
+    const results = "trying again"
     return (
       <Row>
         <Col> 
-            <span>Hints: {charInLocation.length}</span>
+            <span>Hints:</span>
+            {/* <span> {charInLocation.length} </span> */}
             <p>{results}</p>
         </Col>
       </Row>

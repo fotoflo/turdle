@@ -9,6 +9,7 @@
   "author": "Alex Miller (fotoflo@gmail.com)",
   "license": "ISC",
   "dependencies": {
+    "@use-it/event-listener": "^0.1.7",
     "app": "^0.1.0",
     "bootstrap": "^5.1.3",
     "create-react-app": "^5.0.0",
