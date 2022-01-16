@@ -18,15 +18,10 @@ export const findWordsWithoutChars = (wordList, chars) => {
 }
 
 export const findWordsWithCharInSlot = (wordList, CharSlotPairs) => {
-  let newList = [];
-
-  CharSlotPairs  // [{x:0}, {r:4}]
-    .map( (pair) => {
+  return CharSlotPairs  // [{x:0}, {r:4}]
+    .flatmap( pair => {
       const char = Object.keys(pair)[0]
       const slot = pair[char]
-      const filteredList = wordList.filter(  word => word[slot] === char ) 
-      newList = newList.concat( filteredList )
+      return wordList.filter(  word => word[slot] === char ) 
     })
-  console.log(`newList: ${newList}`)
-  return newList
 }
