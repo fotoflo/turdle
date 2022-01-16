@@ -12,22 +12,21 @@ export const findWordsWithChars  = (wordList, chars) => {
   return wordList.filter(  word => word.match(charsRegex)  )
 }
 
-export const findWordsWithoutChars = (wordlist, chars) => {
+export const findWordsWithoutChars = (wordList, chars) => {
   const charsRegex = new RegExp(`[${chars}]`)
-  return wordlist.filter(  word => !word.match(charsRegex) )
+  return wordList.filter(  word => !word.match(charsRegex) )
 }
-// // letter in slot
-// // get all the gamestate 3s 
-// const inSlot = gameState
-//   .filter(gameLetter => Object.keys(gameLetter)[0] === 3 )
-//   .map( letterCount => letterCount[0] )  //  [t, 1] return t
-//   .join('') // join 
 
-// const loc = 0;
-// const char = 'f';
+export const findWordsWithCharInSlot = (wordList, CharSlotPairs) => {
+  let newList = [];
 
-// const charInLocation = withoutChar.filter(
-//   (word) => word[loc] === char
-// )
-
-// const results = charInLocation.join(" ")
+  CharSlotPairs  // [{x:0}, {r:4}]
+    .map( (pair) => {
+      const char = Object.keys(pair)[0]
+      const slot = pair[char]
+      const filteredList = wordList.filter(  word => word[slot] === char ) 
+      newList = newList.concat( filteredList )
+    })
+  console.log(`newList: ${newList}`)
+  return newList
+}

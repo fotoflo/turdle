@@ -48,8 +48,8 @@ describe.only( 'findWordsWithCharInSlot', ()=>{
   const wordlist = ['xenon', 'rewax', 'roger', 'bob']
 
 	it(`it should return a list of words have the right char in the right slot" `, () => {
-    let result = findWordsWithoutChars(wordlist, charSlotPairs)
-    expect( result.sort() ).toEqual( [ 'xenon', 'roger' ].sort() )
+    let result = findWordsWithCharInSlot(wordlist, charSlotPairs)
+    expect( result.sort() ).toEqual( [ 'roger', 'xenon' ].sort() )
 	}) 
 })
 
