@@ -12,8 +12,8 @@ export const getKeyValuePairsByValueFromGameState = (gameState, value) => {
 
   return gameState
     .filter( pair =>{
-      const [key, value] = getKeyValueFromPair(pair)
-      return value == 3
+      const [k, v] = getKeyValueFromPair(pair)
+      return v == value
     } )
 } 
 
@@ -62,16 +62,17 @@ export const getCharSlotPairsFromExactMatches = (exactMatches) => {
   })
 }
 
-export const filterWordList = (wordList, gameState, KeyboardState) => {
-  const exactMatches = getKeyValuePairsByValueFromGameState(gameState,3)
-  console.log(`Exact matches: ${JSON.stringify(exactMatches)}`)
-  const charSlotPairs = getCharSlotPairsFromExactMatches(exactMatches)
-  console.log(`charSlotPairs: ${JSON.stringify(charSlotPairs)}`)
+export const filterWordList = (wordList, gameState, keyboardState) => {
+  const exactMatchList = getKeyValuePairsByValueFromGameState(gameState,3)
+  const nonMatchList = getKeyValuePairsByValueFromGameState(gameState,1)
+  const includedList = getCharsFromKeyboardState(keyboardState, 1)
   
-  const exactMatchWordList = charSlotPairs
-    .flatMap(charSlotPair => wordList.findWordsWithCharInSlot(charSlotPair))
+  const newWordlist = wordList
+  .findWordsWithChars(includedList)
+  .findWordsWithoutChars(nonMatchList)
 
-  console.log(`exactMatchWordList: ${JSON.stringify(exactMatchWordList)}`)
+  debugger;
+
 
   return ["list"]
 }

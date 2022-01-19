@@ -90,6 +90,10 @@ describe( 'getKeyValuePairsByValueFromGameState', ()=>{
     const result = getKeyValuePairsByValueFromGameState(sampleGameState, 3)
 	  expect(result.sort() ).toEqual([{w:3}, {u:3}].sort())
 	}) 
+  it(`it should return the key/value pairs with value 1" `, () => {
+    const result = getKeyValuePairsByValueFromGameState(sampleGameState, 1)
+	  expect(result.sort() ).toEqual([{c:1},{t:1}].sort())
+	}) 
 })
 
 describe( 'Array.prototype.indexOfObject(obj)', ()=>{
@@ -101,7 +105,7 @@ describe( 'Array.prototype.indexOfObject(obj)', ()=>{
 })
 
 
-describe.only( 'getCharSlotPairsFromExactMatches(matches)', ()=>{
+describe( 'getCharSlotPairsFromExactMatches(matches)', ()=>{
   const exactMatches = [{"q":3},{"u":3},{"o":3}]
   it(`should return an array of the slots" `, () => {
     const result = getCharSlotPairsFromExactMatches(exactMatches)
