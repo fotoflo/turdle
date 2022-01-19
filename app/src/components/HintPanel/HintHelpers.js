@@ -54,10 +54,24 @@ Array.prototype.indexOfObject = function(obj){
   }
 }
 
+export const getCharSlotPairsFromExactMatches = (exactMatches) => {
+  //exact maches: [{"q":3},{"u":3},{"o":3}]
+  return exactMatches.map( (item, index) => {
+    const [key] = Object.keys(item)
+   return { char: key,  slot : index}
+  })
+}
+
 export const filterWordList = (wordList, gameState, KeyboardState) => {
-  const exactMatches = getKeyValuePairsFromGameState(gameState,3)
-  const loc = wordList.indexOfObject(exactMatches)
-  debugger
-  wordList.findWordsWithCharInSlot()
+  const exactMatches = getKeyValuePairsByValueFromGameState(gameState,3)
+  console.log(`Exact matches: ${JSON.stringify(exactMatches)}`)
+  const charSlotPairs = getCharSlotPairsFromExactMatches(exactMatches)
+  console.log(`charSlotPairs: ${JSON.stringify(charSlotPairs)}`)
   
+  const exactMatchWordList = charSlotPairs
+    .flatMap(charSlotPair => wordList.findWordsWithCharInSlot(charSlotPair))
+
+  console.log(`exactMatchWordList: ${JSON.stringify(exactMatchWordList)}`)
+
+  return ["list"]
 }
