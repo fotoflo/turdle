@@ -7,7 +7,6 @@ import {
   getKeyValuePairsByValueFromGameState,
   //Array.prototype.findWordsWithChars,
   //Array.prototype.findWordsWithoutChars,
-  //Array.prototype.findWordsWithCharInSlot,
   //Array.prototype.findWordsWithoutCharInSlot,
   //Array.prototype.indexOfObject(obj),
   getCharSlotPairsFromExactMatches,
@@ -53,17 +52,8 @@ describe( 'findWordsWithoutChars', ()=>{
 	}) 
 })
 
-describe( 'Array.prototype.findWordsWithCharInSlot', ()=>{
-  const charSlotPair = {char: "x", slot: 0};
-  const wordlist = ['xenon', 'rewax', 'roger', 'bob', 'xylophone']
 
-	it(`it should return a list of words have the right char in the right slot" `, () => {
-    const result = wordlist.findWordsWithCharInSlot(charSlotPair)
-    expect( result.sort() ).toEqual( [ 'xylophone', 'xenon' ].sort() )
-	}) 
-})
-
-describe.only( 'Array.prototype.findWordsWithCharsInSlots', ()=>{
+describe( 'Array.prototype.findWordsWithCharsInSlots', ()=>{
   const charSlotPairs = [{char: "x", slot: 0}, {char: "y", slot: 1}];
   const wordlist = ['xenon', 'rewax', 'roger', 'bob', 'xylophone']
 
