@@ -29,10 +29,12 @@ Array.prototype.findWordsWithoutChars = function (chars){
   return this.filter(  word => !word.match(charsRegex) )
 }
 
-Array.prototype.findWordsWithCharInSlot = function (charSlotPair){
-  //  charSlotPairs: {char: r, slot: 4}
-  return this  // wordlist = ['xenon', 'rewax', 'roger', 'bob']
-    .filter(  word => word[charSlotPair.slot] === charSlotPair.char ) 
+Array.prototype.findWordsWithCharsInSlots = function (charSlotPairs){
+  return this.filter( word => {
+    return charSlotPairs.every( (pair) => {
+      return word.charAt(pair.slot) === pair.char 
+    })
+  })
 }
 
 Array.prototype.findWordsWithoutCharInSlot = function (charSlotPair){

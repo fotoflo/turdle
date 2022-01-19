@@ -63,6 +63,16 @@ describe( 'Array.prototype.findWordsWithCharInSlot', ()=>{
 	}) 
 })
 
+describe.only( 'Array.prototype.findWordsWithCharsInSlots', ()=>{
+  const charSlotPairs = [{char: "x", slot: 0}, {char: "y", slot: 1}];
+  const wordlist = ['xenon', 'rewax', 'roger', 'bob', 'xylophone']
+
+	it(`it should return a list of words have the right char in the right slot" `, () => {
+    const result = wordlist.findWordsWithCharsInSlots(charSlotPairs)
+    expect( result.sort() ).toEqual( [ 'xylophone' ].sort() )
+	}) 
+})
+
 describe( 'Array.prototype.findWordsWithoutCharInSlot', ()=>{
 const charSlotPair = {char: "x", slot: 0}
   const wordlist = ['xenon', 'rewax', 'roger', 'bob']
@@ -117,7 +127,7 @@ describe( 'getCharSlotPairsFromExactMatches(matches)', ()=>{
 	}) 
 })
 
-describe.only( 'filterWordList', ()=>{
+describe.skip( 'filterWordList', ()=>{
 
 	it(`it should return a list of words have the right char in the right slot" `, () => {
     const wordlist = ['xenon', 'rewax', 'roger', 'bob', 'echo', 'xio']
