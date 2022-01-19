@@ -1,5 +1,3 @@
-import { array } from 'prop-types'
-import wordList from '../../FiveLetterWords.json'
 
 export const getCharsFromKeyboardState = (keyboardState, state) => {
   return Object.entries(keyboardState)
@@ -13,14 +11,18 @@ export const getKeyValuePairsByValueFromGameState = (gameState, value) => {
   return gameState
     .filter( pair =>{
       const [k, v] = getKeyValueFromPair(pair)
-      return v == value
+      return v === value
     } )
 } 
 
 Array.prototype.findWordsWithChars = function(chars){
-  const charsRegex = new RegExp(`[${chars}]`)
+  let regexStr = ''
+  chars.split("").forEach( char => regexStr += `(?=.*${char})` )
+  // const charsRegex = new RegExp(/(?=.*x)(?=.*e)\w/, 'g');
+  const charsRegex = new RegExp(`${regexStr}\\w`, 'g')
   return this.filter(  word => word.match(charsRegex)  )
 }
+
 
 Array.prototype.findWordsWithoutChars = function (chars){
   const charsRegex = new RegExp(`[${chars}]`)
@@ -64,15 +66,27 @@ export const getCharSlotPairsFromExactMatches = (exactMatches) => {
 
 export const filterWordList = (wordList, gameState, keyboardState) => {
   const exactMatchList = getKeyValuePairsByValueFromGameState(gameState,3)
+  const charSlotPairs = getCharSlotPairsFromExactMatches(exactMatchList)
   const nonMatchList = getKeyValuePairsByValueFromGameState(gameState,1)
-  const includedList = getCharsFromKeyboardState(keyboardState, 1)
+  const includedList = getCharsFromKeyboardState(keyboardState, 2)
+  const excludedList = getCharsFromKeyboardState(keyboardState, 1)
   
-  const newWordlist = wordList
+console.log(`finding words with exact match: ${JSON.stringify(exactMatchList)}`)
+console.log(`finding words with charSlotPair: ${JSON.stringify(charSlotPairs)}`)
+console.log(`finding words with non Match: ${JSON.stringify(nonMatchList)}`)
+console.log(`finding words included: ${JSON.stringify(includedList)}`)
+console.log(`finding words excluded: ${JSON.stringify(excludedList)}`)
+
+  const newWordList = wordList
   .findWordsWithChars(includedList)
-  .findWordsWithoutChars(nonMatchList)
+  .findWordsWithoutChars(excludedList)
+  .findWordsWithCharInSlot(charSlotPairs)
+  debugger
 
-  debugger;
+  const l = 20;
+  const elipses = newWordList.length > l ? "..." : "";
 
-
-  return ["list"]
+  return `${l}/${newWordList.length}: ` 
+    + newWordList.slice(0,l).join(" ") 
+    + elipses;
 }

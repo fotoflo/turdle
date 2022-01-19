@@ -32,9 +32,9 @@ describe( 'getCharsFromKeyboardState', ()=>{
 	}) 
 })
 
-describe( 'findWordsWithChars', ()=>{
-  const chars = "x";
-  const wordlist = ['xenon', 'rewax', 'roger', 'bob']
+describe( 'Array.prototype.findWordsWithChars', ()=>{
+  const chars = "xe";
+  const wordlist = ['xenon', 'rewax', 'roger', 'bob', 'echo', 'xio']
 
 	it(`it should return a list of words that have the chars" `, () => {
     const result = wordlist.findWordsWithChars(chars)
@@ -44,12 +44,12 @@ describe( 'findWordsWithChars', ()=>{
 })
 
 describe( 'findWordsWithoutChars', ()=>{
-  const chars = "x";
-  const wordlist = ['xenon', 'rewax', 'roger', 'bob']
+  const chars = "xr";
+  const wordlist = ['xenon', 'rewax', 'roger', 'bob', 'echo', 'xio']
 
 	it(`it should return a list of words that dont have the chars" `, () => {
     let result = wordlist.findWordsWithoutChars( chars)
-    expect( result.sort() ).toEqual( [ 'roger', 'bob' ].sort() )
+    expect( result.sort() ).toEqual( [ 'echo', 'bob' ].sort() )
 	}) 
 })
 
@@ -117,12 +117,16 @@ describe( 'getCharSlotPairsFromExactMatches(matches)', ()=>{
 	}) 
 })
 
-describe( 'filterWordList', ()=>{
+describe.only( 'filterWordList', ()=>{
 
 	it(`it should return a list of words have the right char in the right slot" `, () => {
-    const wordlist = ["quote","added","radio","until","color","track"]
-    const gameState = [{"q":3},{"u":3},{"o":3},{'x': 1},{}]
-    const keyboardState = {"q":3,"u":3,"o":3,"x":1,"c":1}
+    const wordlist = ['xenon', 'rewax', 'roger', 'bob', 'echo', 'xio']
+    // const gameState = [{"q":3},{"u":3},{"o":3},{'x': 1},{}] QUOTE
+    // const keyboardState = {"q":3,"u":3,"o":3,"t":2,"c":1,"e":1} QUOTE
+    
+    const gameState = [{"r":3},{"e":3},{"a":2},{"w":2},{"z":0}] // rewax
+    const keyboardState = {"r":3,"e":3,"w":2,"a":2,"m":0,"c":1,"z":0,"k":1,"n":1}
+    
     const result = filterWordList(wordlist, gameState, keyboardState)
     console.log("RESULT:", result)
     expect( result ).toEqual( [ 'quote' ] )

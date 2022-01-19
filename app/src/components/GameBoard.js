@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Container } from 'react-bootstrap';
 import GameRow from './GameRow';
 import Keyboard from './Keyboard';
-// import HintPanel from './HintPanel/HintPanel';
+import HintPanel from './HintPanel/HintPanel';
 
 
 // import { Col, Row, Button } from 'react-bootstrap';
@@ -50,10 +50,10 @@ function GameBoard(...props){
 
     return (
       <Container>
-          {/* <HintPanel 
+          <HintPanel 
             gameState={gameState}
             keyboardState={keyboardState}
-          /> */}
+          />
 
           <GameRow
             gameState={gameState}
