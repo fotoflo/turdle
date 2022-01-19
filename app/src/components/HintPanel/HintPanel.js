@@ -10,7 +10,7 @@ import {filterWordList} from './HintHelpers'
 function HintPanel({gameState, keyboardState}){
 
 
-    // const results = filterWordList(wordList, gameState, keyboardState)
+    const results = filterWordList(wordList, gameState, keyboardState)
     return (
       <Row>
         <Col> 

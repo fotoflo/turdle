@@ -66,14 +66,26 @@ export const getCharSlotPairsFromExactMatches = (exactMatches) => {
   })
 }
 
+export const getCharSlotPairsFromGameState = (gameState)=>{
+  //gamestate = [{"v":3},{},{},{"u":3},{}]
+  const charSlotPairs = gameState.map( (slot, index) => {
+    return {
+      "slot": index,
+      "char": Object.keys(slot)[0]
+    } || null
+  })
+
+  return charSlotPairs.filter( (pair) => typeof(pair.char) !== 'undefined')
+  // return charSlotPairs //[{"char":"v","slot":0},{"char":"u","slot":3}] 
+}
+
 export const filterWordList = (wordList, gameState, keyboardState) => {
-  const exactMatchList = getKeyValuePairsByValueFromGameState(gameState,3)
-  const charSlotPairs = getCharSlotPairsFromExactMatches(exactMatchList)
+  const charSlotPairs = getCharSlotPairsFromGameState(gameState)
   const nonMatchList = getKeyValuePairsByValueFromGameState(gameState,1)
   const includedList = getCharsFromKeyboardState(keyboardState, 2)
   const excludedList = getCharsFromKeyboardState(keyboardState, 1)
+
   
-console.log(`finding words with exact match: ${JSON.stringify(exactMatchList)}`)
 console.log(`finding words with charSlotPair: ${JSON.stringify(charSlotPairs)}`)
 console.log(`finding words with non Match: ${JSON.stringify(nonMatchList)}`)
 console.log(`finding words included: ${JSON.stringify(includedList)}`)
@@ -82,8 +94,7 @@ console.log(`finding words excluded: ${JSON.stringify(excludedList)}`)
   const newWordList = wordList
   .findWordsWithChars(includedList)
   .findWordsWithoutChars(excludedList)
-  .findWordsWithCharInSlot(charSlotPairs)
-  debugger
+  .findWordsWithCharsInSlots(charSlotPairs)
 
   const l = 20;
   const elipses = newWordList.length > l ? "..." : "";

@@ -50,10 +50,10 @@ function GameBoard(...props){
 
     return (
       <Container>
-          {/* <HintPanel 
+          <HintPanel 
             gameState={gameState}
             keyboardState={keyboardState}
-          /> */}
+          />
 
           <GameRow
             gameState={gameState}

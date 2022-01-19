@@ -9,6 +9,7 @@ import {
   //Array.prototype.findWordsWithoutChars,
   //Array.prototype.findWordsWithoutCharInSlot,
   //Array.prototype.indexOfObject(obj),
+  getCharSlotPairsFromGameState,
   getCharSlotPairsFromExactMatches,
   getKeyValueFromPair,
   filterWordList
@@ -51,7 +52,6 @@ describe( 'findWordsWithoutChars', ()=>{
     expect( result.sort() ).toEqual( [ 'echo', 'bob' ].sort() )
 	}) 
 })
-
 
 describe( 'Array.prototype.findWordsWithCharsInSlots', ()=>{
   const charSlotPairs = [{char: "x", slot: 0}, {char: "y", slot: 1}];
@@ -117,6 +117,14 @@ describe( 'getCharSlotPairsFromExactMatches(matches)', ()=>{
 	}) 
 })
 
+describe('getCharSlotPairsFromGameState', ()=> {
+  it('should return charSlotPairs from gameState', ()=>{
+    const gameState = [{"v":3},{},{},{"u":3},{}]
+    const result = getCharSlotPairsFromGameState(gameState)
+    expect( result.sort() ).toEqual( [{"slot":0,"char":'v'},{"slot":3, "char":"u"}] ) 
+  })
+})
+
 describe.skip( 'filterWordList', ()=>{
 
 	it(`it should return a list of words have the right char in the right slot" `, () => {
@@ -129,7 +137,7 @@ describe.skip( 'filterWordList', ()=>{
     
     const result = filterWordList(wordlist, gameState, keyboardState)
     console.log("RESULT:", result)
-    expect( result ).toEqual( [ 'quote' ] )
+    expect( result ).toEqual( [ 'rewax' ] )
 	}) 
 })
 
