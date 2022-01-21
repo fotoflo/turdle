@@ -53,13 +53,18 @@ describe( 'findWordsWithoutChars', ()=>{
 	}) 
 })
 
-describe( 'Array.prototype.findWordsWithCharsInSlots', ()=>{
+describe.only( 'Array.prototype.findWordsWithCharsInSlots', ()=>{
   const charSlotPairs = [{char: "x", slot: 0}, {char: "y", slot: 1}];
   const wordlist = ['xenon', 'rewax', 'roger', 'bob', 'xylophone']
 
 	it(`it should return a list of words have the right char in the right slot" `, () => {
     const result = wordlist.findWordsWithCharsInSlots(charSlotPairs)
     expect( result.sort() ).toEqual( [ 'xylophone' ].sort() )
+	}) 
+
+  it(`it should return the whole list if there are no slot pairs" `, () => {
+    const result = wordlist.findWordsWithCharsInSlots({})
+    expect( result.sort() ).toEqual( wordlist.sort() )
 	}) 
 })
 
@@ -117,11 +122,18 @@ describe( 'getCharSlotPairsFromExactMatches(matches)', ()=>{
 	}) 
 })
 
-describe('getCharSlotPairsFromGameState', ()=> {
-  it('should return charSlotPairs from gameState', ()=>{
+describe.only('getCharSlotPairsFromGameState', ()=> {
+  xit('should return charSlotPairs from gameState', ()=>{
     const gameState = [{"v":3},{},{},{"u":3},{}]
     const result = getCharSlotPairsFromGameState(gameState)
     expect( result.sort() ).toEqual( [{"slot":0,"char":'v'},{"slot":3, "char":"u"}] ) 
+  })
+
+  it('should return an empty array no slots', () => {
+    const gameState = [{"v":1},{},{},{"u":2},{}]
+    const result = getCharSlotPairsFromGameState(gameState)
+    debugger
+    expect( result ).toEqual( [] ) 
   })
 })
 
