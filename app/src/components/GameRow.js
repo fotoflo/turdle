@@ -7,16 +7,25 @@ import { Container, Row } from 'react-bootstrap';
 // import { Col, Row, Button } from 'react-bootstrap';
 // import {FaSignOutAlt} from 'react-icons/fa'
 
-function GameRow(props){
+function GameRow({gameRow, gameboardState, ...props}){
 
     return (
       <Container>
         <Row>
-          <GameSlot gameRow={props.gameRow} slot={0} {...props} />
-          <GameSlot gameRow={props.gameRow} slot={1} {...props} />
-          <GameSlot gameRow={props.gameRow} slot={2} {...props} />
-          <GameSlot gameRow={props.gameRow} slot={3} {...props} />
-          <GameSlot gameRow={props.gameRow} slot={4} {...props} />
+          { 
+            Array(gameboardState.slots).fill(0).map(
+              (e,i)=>{
+                return <GameSlot
+                  key={`row-${gameRow}__slot-${i}`}
+                  gameboardState={gameboardState}
+                  gameRow={gameRow}
+                  slot={i}
+                  {...props} 
+                />
+              })
+
+          }
+
         </Row>
       </Container>
     )
@@ -24,7 +33,7 @@ function GameRow(props){
 
 
 GameRow.propTypes = {
-  activeLetter: PropTypes.number.isRequired,
+  activeLetter: PropTypes.string.isRequired,
   setActiveLetter: PropTypes.func.isRequired,
 }
 

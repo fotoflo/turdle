@@ -33,11 +33,8 @@ Array.prototype.findWordsWithCharsInSlots = function (charSlotPairs){
   if( charSlotPairs.length === 0 ) return this
   if( Object.keys(charSlotPairs).length === 0 ) return this
 
-  debugger
-
   return this.filter( word => {
     return charSlotPairs.every( (pair) => {
-      debugger
       return word.charAt(pair.slot) === pair.char 
     })
   })
@@ -76,7 +73,6 @@ export const getCharSlotPairsFromGameState = (gameState)=>{
   //gamestate = [{"v":3},{},{},{"u":3},{}] , return the v and u
   //gamestate = [{"v":1},{},{},{"u":2},{}], return []
   const charSlotPairs = gameState.map( (slot, index) => {
-    debugger
     return {
       "slot": index,
       "char": Object.keys(slot)[0]

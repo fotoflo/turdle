@@ -4,31 +4,34 @@ import styled from 'styled-components'
 
 import {  Col } from 'react-bootstrap';
 
-function GameLetter({slot, gameRow, activeLetter, setActiveLetter, gameState, setGameState } ){
+function GameLetter({slot, gameboardState, gameRow, activeLetter, setActiveLetter, ...props } ){
 
-    const letterValue = Object.keys(gameState[slot])[0]
-    // const letterState = gameState[slot][letterValue] || 0;
+  
+    const slotKey = `row-${gameRow}__slot-${slot}`
+    // const letterState = gameState[slot][key] || 0;
 
     return (
-      <Col onClick={ () => setActiveLetter(slot) }>
+      <Col onClick={ () => setActiveLetter(slotKey) }>
         <SlotBox 
           className="col" 
+          slotKey={slotKey}
+          gameboardState={gameboardState}
           slot={slot}
           gameRow={gameRow}
-          activeletter={activeLetter}
+          activeLetter={activeLetter}
           // letterstate={letterState}
         >
-          {/* {letterValue}: {letterState} */}
+          {/* {slotKey}: {letterState} */}
         </SlotBox>
-        <span>{slot}</span>
+        <span>{slotKey}</span>
       </Col>
     )
     
 }
 
 const SlotBox = styled.div`
-  border: ${(props) => { return props.slot === props.activeletter ? 3 : 1 }}px
-      solid ${(props) => { return props.slot === props.activeletter ? "red" : "grey" }
+  border: ${(props) => { debugger; return props.slotKey === props.activeLetter ? 3 : 1 }}px
+      solid ${(props) => { return props.slotKey === props.activeLetter ? "red" : "grey" }
     };
   background-color: ${ (props) =>  props.theme[props.letterstate]   };
   height: 6rem;

@@ -58,7 +58,7 @@ function GameBoard(...props){
     
 
 
-    const [activeLetter, setActiveLetter] = useState(0) // set of {0,1,2,3,4,5}
+    const [activeLetter, setActiveLetter] = useState("row-0__slot-0") // set of {0,1,2,3,4,5}
     const [gameState, setGameState] = useState([{},{},{},{},{}]);
     const [gameboardState, setGameboardState] = useState(newGameboardState)
     const [keyboardState, setKeyboardState] = useState({});
