@@ -8,7 +8,7 @@ function GameLetter({gameSlot, gameboardState, gameRow, activeLetter, setActiveL
 
   
     const slotKey = `row-${gameRow}__slot-${gameSlot}`
-    const slotIndex = ( gameRow * gameboardState.slots ) + gameSlot + 1
+    const slotIndex = ( gameRow * gameboardState.slots ) + gameSlot
     // const letterState = gameState[slot][key] || 0;
 
     return (
@@ -25,7 +25,7 @@ function GameLetter({gameSlot, gameboardState, gameRow, activeLetter, setActiveL
           slotKey={slotKey}
           // letterstate={letterState}
         >
-          {/* {gameboardState.chars[props.index].letter} */}
+          {JSON.stringify(gameboardState.chars[slotIndex])}
         </SlotBox>
         <span>{slotIndex}: {slotKey}</span>
       </Col>
@@ -39,6 +39,7 @@ const SlotBox = styled.div`
     };
   background-color: ${ (props) =>  props.theme[props.letterstate]   };
   height: 6rem;
+  font-size: 12px;
 `
     
 

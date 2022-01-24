@@ -14,12 +14,12 @@ function GameRow({gameRow, gameboardState, ...props}){
         <Row>
           { 
             Array(gameboardState.slots).fill(0).map(
-              (e,i)=>{
+              (e,j)=>{
                 return <GameSlot
-                  key={`row-${gameRow}__slot-${i}`}
+                  key={`row-${gameRow}__slot-${j}`}
                   gameboardState={gameboardState}
                   gameRow={gameRow}
-                  gameSlot={i}
+                  gameSlot={j}
                   {...props} 
                 />
               })

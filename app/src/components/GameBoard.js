@@ -19,10 +19,10 @@ function GameBoard(...props){
       }
     })
 
-    const word = "hello"
+    const word = "hai"
 
     const generateNewGameboardState = () => {
-      const rows = 5
+      const rows = 2
       const slots = word.length
       const chars = []
       
@@ -75,12 +75,13 @@ function GameBoard(...props){
       let newGameboardState =  Object.assign({}, gameboardState);
       let [newLetter] = newGameboardState.chars.filter(c => c.key==activeLetter);
 
-      newLetter.letter = pressedKey
+      // newLetter.letter = pressedKey
+      // debugger
 
-      newGameboardState.chars[newLetter.index] = newLetter
-      debugger
-      
-      setGameboardState(newGameboardState)
+      // newGameboardState.chars[newLetter.index] = newLetter
+
+
+      // setGameboardState(newGameboardState.chars)
 
       // const currentStatus = newGameboardState[activeLetter][pressedKey] || 0
 
@@ -106,7 +107,7 @@ function GameBoard(...props){
             keyboardState={keyboardState}
           />
 
-          <InfoBox>GameboardState = {JSON.stringify(gameboardState)}</InfoBox>
+          {/* <InfoBox>GameboardState = {JSON.stringify(gameboardState)}</InfoBox> */}
           
           { 
             Array(gameboardState.rows).fill(0).map(
