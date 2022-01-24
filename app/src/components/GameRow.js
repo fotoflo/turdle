@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import GameLetter from './GameLetter'
+import GameSlot from './GameSlot'
 import { Container, Row } from 'react-bootstrap';
 
 // import { Col, Row, Button } from 'react-bootstrap';
@@ -11,13 +11,12 @@ function GameRow(props){
 
     return (
       <Container>
-        GameRow Props: {JSON.stringify([props])}
         <Row>
-          <GameLetter order={0} {...props} />
-          <GameLetter order={1} {...props} />
-          <GameLetter order={2} {...props} />
-          <GameLetter order={3} {...props} />
-          <GameLetter order={4} {...props} />
+          <GameSlot gameRow={props.gameRow} slot={0} {...props} />
+          <GameSlot gameRow={props.gameRow} slot={1} {...props} />
+          <GameSlot gameRow={props.gameRow} slot={2} {...props} />
+          <GameSlot gameRow={props.gameRow} slot={3} {...props} />
+          <GameSlot gameRow={props.gameRow} slot={4} {...props} />
         </Row>
       </Container>
     )
@@ -27,8 +26,6 @@ function GameRow(props){
 GameRow.propTypes = {
   activeLetter: PropTypes.number.isRequired,
   setActiveLetter: PropTypes.func.isRequired,
-  gameState: PropTypes.array.isRequired,
-  setGameState: PropTypes.func.isRequired
 }
 
 export default GameRow
