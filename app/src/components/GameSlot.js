@@ -21,7 +21,6 @@ function GameLetter({slot, gameboardState, gameRow, activeLetter, setActiveLette
           activeLetter={activeLetter}
           // letterstate={letterState}
         >
-          {/* {slotKey}: {letterState} */}
         </SlotBox>
         <span>{slotKey}</span>
       </Col>

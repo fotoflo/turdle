@@ -46,8 +46,6 @@ function GameBoard(...props){
           // for (row in chars.map( char => chars.row) ) console.log(row)
           //
           // we also want to be able to generate the <Row><Slot /><Slot /><Slot /></Row> rows based on the count
-
-          console.log(`key =  ${JSON.stringify(newGameboardState[key]) } `)
         }
       }
 
@@ -56,10 +54,7 @@ function GameBoard(...props){
 
     const newGameboardState = generateNewGameboardState()
     
-
-
     const [activeLetter, setActiveLetter] = useState("row-0__slot-0") // set of {0,1,2,3,4,5}
-    const [gameState, setGameState] = useState([{},{},{},{},{}]);
     const [gameboardState, setGameboardState] = useState(newGameboardState)
     const [keyboardState, setKeyboardState] = useState({});
     
@@ -72,30 +67,31 @@ function GameBoard(...props){
     function keydownHandler( {key: pressedKey} ){
       if( !pressedKey.match(/^[a-zA-Z]{1}$/)  ) return;
 
-      let newGameState = [...gameState];
       let newGameboardState = [...gameboardState];
       pressedKey = pressedKey.toLowerCase()
 
-      const currentStatus = newGameState[activeLetter][pressedKey] || 0
-      const newStatus = iterateStatus( currentStatus )  
+      debugger
+      // const currentStatus = newGameboardState[activeLetter][pressedKey] || 0
 
-      newGameState[activeLetter] = {
-        [pressedKey]: newStatus
-      }
+      // const newStatus = iterateStatus( currentStatus )  
 
-      const newKeyboardState = {
-        ...keyboardState,
-        [pressedKey]: newStatus // order matters, here we overwrite the ...keyboardState on the pressedKey
-      }
+      // newGameboardState[activeLetter] = {
+      //   // [pressedKey]: newStatus
+      // }
 
-      setGameState(newGameState)
-      setKeyboardState(newKeyboardState) 
+      // const newKeyboardState = {
+      //   ...keyboardState,
+      //   [pressedKey]: newStatus // order matters, here we overwrite the ...keyboardState on the pressedKey
+      // }
+
+      // setGameboardState(newGameboardState)
+      // setKeyboardState(newKeyboardState) 
     }
 
     return (
       <Container>
           <HintPanel 
-            gameState={gameState}
+            newGameboardState={newGameboardState}
             keyboardState={keyboardState}
           />
 
@@ -109,7 +105,6 @@ function GameBoard(...props){
                   gameboardState={gameboardState}
                   activeLetter={activeLetter}
                   setActiveLetter={setActiveLetter}
-                  gameState={gameState}
                   gameRow={i}
                 i/>
               })

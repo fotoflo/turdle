@@ -6,14 +6,14 @@ export const getCharsFromKeyboardState = (keyboardState, state) => {
     .join('') // join 
 } 
 
-export const getKeyValuePairsByValueFromGameState = (gameState, value) => {
+// export const getKeyValuePairsByValueFromGameState = (gameState, value) => {
 
-  return gameState
-    .filter( pair =>{
-      const [k, v] = getKeyValueFromPair(pair)
-      return v === value
-    } )
-} 
+//   return gameState
+//     .filter( pair =>{
+//       const [k, v] = getKeyValueFromPair(pair)
+//       return v === value
+//     } )
+// } 
 
 Array.prototype.findWordsWithChars = function(chars){
   let regexStr = ''
@@ -69,40 +69,40 @@ export const getCharSlotPairsFromExactMatches = (exactMatches) => {
   })
 }
 
-export const getCharSlotPairsFromGameState = (gameState)=>{
-  //gamestate = [{"v":3},{},{},{"u":3},{}] , return the v and u
-  //gamestate = [{"v":1},{},{},{"u":2},{}], return []
-  const charSlotPairs = gameState.map( (slot, index) => {
-    return {
-      "slot": index,
-      "char": Object.keys(slot)[0]
-    } || null
-  })
+// export const getCharSlotPairsFromGameState = (gameState)=>{
+//   //gamestate = [{"v":3},{},{},{"u":3},{}] , return the v and u
+//   //gamestate = [{"v":1},{},{},{"u":2},{}], return []
+//   const charSlotPairs = gameState.map( (slot, index) => {
+//     return {
+//       "slot": index,
+//       "char": Object.keys(slot)[0]
+//     } || null
+//   })
 
-  return charSlotPairs.filter( (pair) => typeof(pair.char) !== 'undefined')
-  // return charSlotPairs //[{"char":"v","slot":0},{"char":"u","slot":3}] 
-}
+//   return charSlotPairs.filter( (pair) => typeof(pair.char) !== 'undefined')
+//   // return charSlotPairs //[{"char":"v","slot":0},{"char":"u","slot":3}] 
+// }
 
 export const filterWordList = (wordList, gameState, keyboardState) => {
-  const charSlotPairs = getCharSlotPairsFromGameState(gameState)
-  const nonMatchList = getKeyValuePairsByValueFromGameState(gameState,1)
-  const includedList = getCharsFromKeyboardState(keyboardState, 2)
-  const excludedList = getCharsFromKeyboardState(keyboardState, 1)
+//   const charSlotPairs = getCharSlotPairsFromGameState(gameState)
+
+//   const includedList = getCharsFromKeyboardState(keyboardState, 2)
+//   const excludedList = getCharsFromKeyboardState(keyboardState, 1)
 
   
-console.log(`finding words with charSlotPair: ${JSON.stringify(charSlotPairs)}`)
-console.log(`finding words with non Match: ${JSON.stringify(nonMatchList)}`)
-console.log(`finding words included: ${JSON.stringify(includedList)}`)
-console.log(`finding words excluded: ${JSON.stringify(excludedList)}`)
+// console.log(`finding words with charSlotPair: ${JSON.stringify(charSlotPairs)}`)
+// console.log(`finding words with non Match: ${JSON.stringify(nonMatchList)}`)
+// console.log(`finding words included: ${JSON.stringify(includedList)}`)
+// console.log(`finding words excluded: ${JSON.stringify(excludedList)}`)
 
-  const newWordList = wordList
-  .findWordsWithCharsInSlots(charSlotPairs)
-  .findWordsWithChars(includedList)
+//   const newWordList = wordList
+//   .findWordsWithCharsInSlots(charSlotPairs)
+//   .findWordsWithChars(includedList)
 
-  const l = 20;
-  const elipses = newWordList.length > l ? "..." : "";
+//   const l = 20;
+//   const elipses = newWordList.length > l ? "..." : "";
 
-  return `${l}/${newWordList.length}: ` 
-    + newWordList.slice(0,l).join(" ") 
-    + elipses;
+//   return `${l}/${newWordList.length}: ` 
+//     + newWordList.slice(0,l).join(" ") 
+//     + elipses;
 }

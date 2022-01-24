@@ -10,7 +10,7 @@ import {filterWordList} from './HintHelpers'
 function HintPanel({gameState, keyboardState}){
 
 
-    const results = filterWordList(wordList, gameState, keyboardState)
+    const results = filterWordList(wordList, keyboardState)
     return (
       <Row>
         <Col> 
@@ -24,7 +24,7 @@ function HintPanel({gameState, keyboardState}){
 
 
 HintPanel.propTypes = {
-  gameState: PropTypes.array.isRequired,
+  // gameState: PropTypes.array.isRequired,
   keyboardState: PropTypes.object.isRequired,
   // user: PropTypes.shape({
   //   phoneNumber: null
