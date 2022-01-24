@@ -26,6 +26,12 @@ function GameBoard(...props){
       const slots = word.length
       const chars = []
       
+
+      /// we want to be able to do chars.filter( char => char.key === "row-2__slot-1" )
+      /// and chars.filter( char => char.letter === "e" ) etc
+      // for (row in chars.map( char => chars.row) ) console.log(row)
+      //
+      // we also want to be able to generate the <Row><Slot /><Slot /><Slot /></Row> rows based on the count
       const newGameboardState = { rows, slots, chars}
 
       let index = 0;
@@ -44,12 +50,6 @@ function GameBoard(...props){
             }
           )
           index++;
-
-          /// we want to be able to do chars.filter( char => char.key === "row-2__slot-1" )
-          /// and chars.filter( char => char.letter === "e" ) etc
-          // for (row in chars.map( char => chars.row) ) console.log(row)
-          //
-          // we also want to be able to generate the <Row><Slot /><Slot /><Slot /></Row> rows based on the count
         }
       }
 
@@ -72,32 +72,19 @@ function GameBoard(...props){
       if( !pressedKey.match(/^[a-zA-Z]{1}$/)  ) return;
       pressedKey = pressedKey.toLowerCase()
 
-      const chars =  gameboardState.chars;
-      
+      const chars =  gameboardState.chars;  // an array    
       const [newLetter] = chars.filter(c => c.key==activeLetter);
-
-      newLetter.letter = pressedKey
       
+      newLetter.letter = pressedKey
+      newLetter.status = iterateStatus( newLetter.status )  
+      
+      // set the new letter
       chars[newLetter.index] = newLetter
       gameboardState.chars = chars
-      
+
       setGameboardState(gameboardState)
       
-      // const currentStatus = newGameboardState[activeLetter][pressedKey] || 0
 
-      // const newStatus = iterateStatus( currentStatus )  
-
-      // newGameboardState[activeLetter] = {
-      //   // [pressedKey]: newStatus
-      // }
-
-      // const newKeyboardState = {
-      //   ...keyboardState,
-      //   [pressedKey]: newStatus // order matters, here we overwrite the ...keyboardState on the pressedKey
-      // }
-
-      // setGameboardState(newGameboardState)
-      // setKeyboardState(newKeyboardState) 
     }
 
     return (
