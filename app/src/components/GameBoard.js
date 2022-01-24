@@ -28,18 +28,22 @@ function GameBoard(...props){
       
       const newGameboardState = { rows, slots, chars}
 
+      let index = 0;
+
       for(let i = 0; i < rows; i++){
         for(let j = 0; j < slots; j++){
           const key = `row-${i}__slot-${j}`
           chars.push(
             {
               key,
+              index,
               row : i,
               slot : j,
               letter : "",
               status: 0
             }
           )
+          index++;
 
           /// we want to be able to do chars.filter( char => char.key === "row-2__slot-1" )
           /// and chars.filter( char => char.letter === "e" ) etc
@@ -66,11 +70,18 @@ function GameBoard(...props){
 
     function keydownHandler( {key: pressedKey} ){
       if( !pressedKey.match(/^[a-zA-Z]{1}$/)  ) return;
-
-      let newGameboardState = [...gameboardState];
       pressedKey = pressedKey.toLowerCase()
 
+      let newGameboardState =  Object.assign({}, gameboardState);
+      let [newLetter] = newGameboardState.chars.filter(c => c.key==activeLetter);
+
+      newLetter.letter = pressedKey
+
+      newGameboardState.chars[newLetter.index] = newLetter
       debugger
+      
+      setGameboardState(newGameboardState)
+
       // const currentStatus = newGameboardState[activeLetter][pressedKey] || 0
 
       // const newStatus = iterateStatus( currentStatus )  

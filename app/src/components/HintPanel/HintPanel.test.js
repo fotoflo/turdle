@@ -132,7 +132,6 @@ describe.only('getCharSlotPairsFromGameState', ()=> {
   it('should return an empty array no slots', () => {
     const gameState = [{"v":1},{},{},{"u":2},{}]
     const result = getCharSlotPairsFromGameState(gameState)
-    debugger
     expect( result ).toEqual( [] ) 
   })
 })

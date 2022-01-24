@@ -19,7 +19,7 @@ function GameRow({gameRow, gameboardState, ...props}){
                   key={`row-${gameRow}__slot-${i}`}
                   gameboardState={gameboardState}
                   gameRow={gameRow}
-                  slot={i}
+                  gameSlot={i}
                   {...props} 
                 />
               })
