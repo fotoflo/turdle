@@ -44,24 +44,30 @@ export const getLetterSlotPairsByStatusFromCharsArray = (chars, status) =>{
 
 export const filterWordList = (wordList, chars) => {
 
-  const excludedList =  getLetterSlotPairsByStatusFromCharsArray(chars, 1)
-  const includedList =  getLetterSlotPairsByStatusFromCharsArray(chars, 2)
+  let excludedList =  getLetterSlotPairsByStatusFromCharsArray(chars, 1)
+  excludedList = excludedList.map( c => c.letter ).join("")
+
+  let includedList =  getLetterSlotPairsByStatusFromCharsArray(chars, 2)
+  includedList = includedList.map( c => c.letter ).join("")
+  // [{letter: "h", slot:0},{letter: "i", slot:1}] -> "hi"
+
   const inSlotList = getLetterSlotPairsByStatusFromCharsArray(chars, 3)
 
 
   console.log(`****** FILTERING ******`)
-console.log(`finding words with with letter in slot: ${JSON.stringify(inSlotList)}`)
-console.log(`finding words included: ${JSON.stringify(includedList)}`)
-console.log(`finding words excluded: ${JSON.stringify(excludedList)}`)
+  console.log(`finding words with with letter in slot: ${JSON.stringify(inSlotList)}`)
+  console.log(`finding words including: ${JSON.stringify(includedList)}`)
+  console.log(`finding words excluding: ${JSON.stringify(excludedList)}`)
 
   const newWordList = wordList
     .findWordsWithLettersInSlots(inSlotList)
-  //   .findWordsWithChars(includedList)
+    .findWordsWithChars(includedList)
+    .findWordsWithoutChars(excludedList)
 
   const l = 20;
   const elipses = newWordList.length > l ? "..." : "";
 
-  return `${l}/${newWordList.length}: ` 
+  return `${ l < newWordList.length  ? l : newWordList.length }/${newWordList.length}: ` 
     + newWordList.slice(0,l).join(" ") 
     + elipses;
 }
