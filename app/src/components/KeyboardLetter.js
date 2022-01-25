@@ -3,18 +3,20 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Col } from 'react-bootstrap';
 
-function KeyboardLetter({label, keydownHandler, keyboardState, ...props}){
+function KeyboardLetter({label, keydownHandler, gameboardState, ...props}){
 
-  const letterState = keyboardState[label] || 0 ;
+  const matchingChars = gameboardState.chars.filter( c => c.letter === label).sort( (a,b) => a.status < b.status)
+
+  console.log(`matching chars ${JSON.stringify(matchingChars)}`)
 
   return (
     <KeyBox 
       {...props}
-      letterstate={letterState}
+      // letterstate={letterState}
       onClick={()=>keydownHandler({key: label})}
       className="text-center align-middle"
     >
-      {label.toUpperCase()} - {letterState}
+      {label.toUpperCase()}
     </KeyBox>
     )
   }
@@ -30,7 +32,7 @@ function KeyboardLetter({label, keydownHandler, keyboardState, ...props}){
   KeyboardLetter.propTypes = {
     label: PropTypes.string.isRequired,
     keydownHandler: PropTypes.func.isRequired,
-    keyboardState: PropTypes.object.isRequired
+    gameboardState: PropTypes.object.isRequired
     // user: PropTypes.shape({
       //   phoneNumber: null
       // })

@@ -60,9 +60,7 @@ function GameBoard(...props){
     
     const [activeLetter, setActiveLetter] = useState("row-0__slot-0") // set of {0,1,2,3,4,5}
     const [gameboardState, setGameboardState] = useState(newGameboardState)
-    const [keyboardState, setKeyboardState] = useState({});
     
-
     function iterateStatus(number){
       const max = 3;
       return number < max ? number+1 : 0;
@@ -89,7 +87,6 @@ function GameBoard(...props){
       <Container>
           <HintPanel 
             newGameboardState={newGameboardState}
-            keyboardState={keyboardState}
           />
 
           {/* <InfoBox>GameboardState = {JSON.stringify(gameboardState)}</InfoBox> */}
@@ -109,10 +106,9 @@ function GameBoard(...props){
           }
 
           <p>activeLetter: {activeLetter}</p>
-          <p>keyboardState: {JSON.stringify(keyboardState)}</p>
 
           <Keyboard 
-            keyboardState={keyboardState}
+            gameboardState={gameboardState}
             keydownHandler={keydownHandler}
           />
       </Container>

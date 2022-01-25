@@ -9,7 +9,7 @@ function Keyboard({...props}){
     return (
       <Row>
         <Container>
-          <Row>
+          {/* <Row>
             <KeyboardLetter {...props} label="q"/>
             <KeyboardLetter {...props} label="w" />
             <KeyboardLetter {...props} label="e" />
@@ -20,19 +20,19 @@ function Keyboard({...props}){
             <KeyboardLetter {...props} label="i" />
             <KeyboardLetter {...props} label="o" />
             <KeyboardLetter {...props} label="p" />
-          </Row>
+          </Row> */}
           <Row>
             <KeyboardLetter {...props} label="a" />
             <KeyboardLetter {...props} label="s" />
-            <KeyboardLetter {...props} label="d" />
+            {/* <KeyboardLetter {...props} label="d" />
             <KeyboardLetter {...props} label="f" />
             <KeyboardLetter {...props} label="g" />
             <KeyboardLetter {...props} label="h" />
             <KeyboardLetter {...props} label="j" />
             <KeyboardLetter {...props} label="k" />
-            <KeyboardLetter {...props} label="l" />
+            <KeyboardLetter {...props} label="l" /> */}
           </Row>
-          <Row>
+          {/* <Row>
             <KeyboardLetter {...props} label="ENTER" />
             <KeyboardLetter {...props} label="z" />
             <KeyboardLetter {...props} label="x" />
@@ -42,7 +42,7 @@ function Keyboard({...props}){
             <KeyboardLetter {...props} label="n" />
             <KeyboardLetter {...props} label="m" />
             <KeyboardLetter {...props} label="⌫" />
-          </Row>
+          </Row> */}
         </Container>
       </Row>
     )

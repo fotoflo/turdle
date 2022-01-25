@@ -7,10 +7,10 @@ import wordList from '../../FiveLetterWords.json'
 import {filterWordList} from './HintHelpers'
 // import {FaSignOutAlt} from 'react-icons/fa'
 
-function HintPanel({gameState, keyboardState}){
+function HintPanel({gameState}){
 
 
-    const results = filterWordList(wordList, keyboardState)
+    const results = filterWordList(wordList)
     return (
       <Row>
         <Col> 
@@ -25,7 +25,6 @@ function HintPanel({gameState, keyboardState}){
 
 HintPanel.propTypes = {
   // gameState: PropTypes.array.isRequired,
-  keyboardState: PropTypes.object.isRequired,
   // user: PropTypes.shape({
   //   phoneNumber: null
   // })
