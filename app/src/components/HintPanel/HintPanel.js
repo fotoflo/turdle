@@ -11,17 +11,17 @@ function HintPanel({gameboardState}){
 
     const [hints, setHints] = useState()
 
-    useEffect( () => {
-      const hints = filterWordList(wordList)
-      setHints(hints)
-    }, [gameboardState])
+    // useEffect( () => {
+    //   const hints = filterWordList(wordList)
+    //   setHints(hints)
+    // }, [gameboardState])
 
     return (
       <Row>
         <Col> 
         <InfoBox>
             <span>Hints:</span>
-            {gameboardState.word}
+            {JSON.stringify(gameboardState)}
             <p>{hints}</p>
         </InfoBox>
         </Col>

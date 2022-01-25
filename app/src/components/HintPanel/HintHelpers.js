@@ -1,20 +1,3 @@
-
-export const getCharsFromKeyboardState = (keyboardState, state) => {
-  return Object.entries(keyboardState)
-    .filter( letterCount => letterCount[1] === state ) // [t, 2] get all entries with 2
-    .map( letterCount => letterCount[0] )  //  [t, ...] array return t
-    .join('') // join 
-} 
-
-// export const getKeyValuePairsByValueFromGameState = (gameState, value) => {
-
-//   return gameState
-//     .filter( pair =>{
-//       const [k, v] = getKeyValueFromPair(pair)
-//       return v === value
-//     } )
-// } 
-
 Array.prototype.findWordsWithChars = function(chars){
   let regexStr = ''
   chars.split("").forEach( char => regexStr += `(?=.*${char})` )
@@ -40,7 +23,7 @@ Array.prototype.findWordsWithCharsInSlots = function (charSlotPairs){
   })
 }
 
-Array.prototype.findWordsWithoutCharInSlot = function (charSlotPair){
+Array.prototype.findWordsWithoutCharsInSlots = function (charSlotPair){
   //  charSlotPairs: {char: r, slot: 4}
   return this  // wordlist = ['xenon', 'rewax', 'roger', 'bob']
     .filter(  word => word[charSlotPair.slot] !== charSlotPair.char ) 
@@ -53,38 +36,14 @@ export const getKeyValueFromPair = (pair) => {
   return [char, slot]
 }
 
-Array.prototype.indexOfObject = function(obj){
-  for(let i = 0; i < this.length; i++){
-    if(JSON.stringify(this[i]) === JSON.stringify(obj) ){
-      return i
-    }
-  }
+export const getLetterSlotPairsFromCharsArray = (chars, status) =>{
+  return chars
+    .filter( c => c.status === status)
+    .map( c => { return { letter: c.letter, slot: c.slot }})
 }
 
-export const getCharSlotPairsFromExactMatches = (exactMatches) => {
-  //exact maches: [{"q":3},{"u":3},{"o":3}]
-  return exactMatches.map( (item, index) => {
-    const [key] = Object.keys(item)
-   return { char: key,  slot : index}
-  })
-}
-
-// export const getCharSlotPairsFromGameState = (gameState)=>{
-//   //gamestate = [{"v":3},{},{},{"u":3},{}] , return the v and u
-//   //gamestate = [{"v":1},{},{},{"u":2},{}], return []
-//   const charSlotPairs = gameState.map( (slot, index) => {
-//     return {
-//       "slot": index,
-//       "char": Object.keys(slot)[0]
-//     } || null
-//   })
-
-//   return charSlotPairs.filter( (pair) => typeof(pair.char) !== 'undefined')
-//   // return charSlotPairs //[{"char":"v","slot":0},{"char":"u","slot":3}] 
-// }
-
-export const filterWordList = (wordList, gameState, keyboardState) => {
-//   const charSlotPairs = getCharSlotPairsFromGameState(gameState)
+// export const filterWordList = (wordList, gameboardState, keyboardState) => {
+  //  const charSlotPairs = getCharSlotPairsFromCharsArrayByStatus(gameboardState.chars)
 
 //   const includedList = getCharsFromKeyboardState(keyboardState, 2)
 //   const excludedList = getCharsFromKeyboardState(keyboardState, 1)
@@ -105,4 +64,4 @@ export const filterWordList = (wordList, gameState, keyboardState) => {
 //   return `${l}/${newWordList.length}: ` 
 //     + newWordList.slice(0,l).join(" ") 
 //     + elipses;
-}
+// }
