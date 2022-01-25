@@ -19,7 +19,7 @@ function GameBoard({showHints, ...props}){
     })
 
     const generateNewGameboardState = () => {
-      const word = "hi"
+      const word = "hello"
       const rows = 1
       const slots = word.length
       const chars = []

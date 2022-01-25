@@ -12,13 +12,13 @@ Array.prototype.findWordsWithoutChars = function (chars){
   return this.filter(  word => !word.match(charsRegex) )
 }
 
-Array.prototype.findWordsWithCharsInSlots = function (charSlotPairs){
-  if( charSlotPairs.length === 0 ) return this
-  if( Object.keys(charSlotPairs).length === 0 ) return this
+Array.prototype.findWordsWithLettersInSlots = function (letterSlotPairs){
+  if( letterSlotPairs.length === 0 ) return this
+  if( Object.keys(letterSlotPairs).length === 0 ) return this
 
   return this.filter( word => {
-    return charSlotPairs.every( (pair) => {
-      return word.charAt(pair.slot) === pair.char 
+    return letterSlotPairs.every( (pair) => {
+      return word.charAt(pair.slot) === pair.letter 
     })
   })
 }
@@ -36,32 +36,32 @@ export const getKeyValueFromPair = (pair) => {
   return [char, slot]
 }
 
-export const getLetterSlotPairsFromCharsArray = (chars) =>{
+export const getLetterSlotPairsByStatusFromCharsArray = (chars, status) =>{
   return chars
-    .filter( c => c.status === 3) // 3 means its a pair
+    .filter( c => c.status === status) // 3 means its a pair
     .map( c => { return { letter: c.letter, slot: c.slot }})
 }
 
-// export const filterWordList = (wordList, gameboardState, keyboardState) => {
-  //  const charSlotPairs = getCharSlotPairsFromCharsArrayByStatus(gameboardState.chars)
+export const filterWordList = (wordList, chars) => {
 
-//   const includedList = getCharsFromKeyboardState(keyboardState, 2)
-//   const excludedList = getCharsFromKeyboardState(keyboardState, 1)
+  const excludedList =  getLetterSlotPairsByStatusFromCharsArray(chars, 1)
+  const includedList =  getLetterSlotPairsByStatusFromCharsArray(chars, 2)
+  const inSlotList = getLetterSlotPairsByStatusFromCharsArray(chars, 3)
 
-  
-// console.log(`finding words with charSlotPair: ${JSON.stringify(charSlotPairs)}`)
-// console.log(`finding words with non Match: ${JSON.stringify(nonMatchList)}`)
-// console.log(`finding words included: ${JSON.stringify(includedList)}`)
-// console.log(`finding words excluded: ${JSON.stringify(excludedList)}`)
 
-//   const newWordList = wordList
-//   .findWordsWithCharsInSlots(charSlotPairs)
-//   .findWordsWithChars(includedList)
+  console.log(`****** FILTERING ******`)
+console.log(`finding words with with letter in slot: ${JSON.stringify(inSlotList)}`)
+console.log(`finding words included: ${JSON.stringify(includedList)}`)
+console.log(`finding words excluded: ${JSON.stringify(excludedList)}`)
 
-//   const l = 20;
-//   const elipses = newWordList.length > l ? "..." : "";
+  const newWordList = wordList
+    .findWordsWithLettersInSlots(inSlotList)
+  //   .findWordsWithChars(includedList)
 
-//   return `${l}/${newWordList.length}: ` 
-//     + newWordList.slice(0,l).join(" ") 
-//     + elipses;
-// }
+  const l = 20;
+  const elipses = newWordList.length > l ? "..." : "";
+
+  return `${l}/${newWordList.length}: ` 
+    + newWordList.slice(0,l).join(" ") 
+    + elipses;
+}

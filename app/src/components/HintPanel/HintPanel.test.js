@@ -6,9 +6,9 @@ import {
 
   //Array.prototype.findWordsWithChars,
   //Array.prototype.findWordsWithoutChars,
-  //Array.prototype.findWordsWitCharsInSlots,
+  //Array.prototype.findWordsWithLettersInSlots,
   //Array.prototype.findWordsWithoutCharsInSlots,
-  getLetterSlotPairsFromCharsArray,
+  getLetterSlotPairsByStatusFromCharsArray,
   filterWordList
 } from './HintHelpers';
 
@@ -43,17 +43,17 @@ describe( 'findWordsWithoutChars', ()=>{
 	}) 
 })
 
-describe( 'Array.prototype.findWordsWithCharsInSlots', ()=>{
-  const charSlotPairs = [{char: "x", slot: 0}, {char: "y", slot: 1}];
+describe( 'Array.prototype.findWordsWithLettersInSlots', ()=>{
+  const letterSlotPairs = [{letter: "x", slot: 0}, {letter: "y", slot: 1}];
   const wordlist = ['xenon', 'rewax', 'roger', 'bob', 'xylophone']
 
-	it(`it should return a list of words have the right char in the right slot" `, () => {
-    const result = wordlist.findWordsWithCharsInSlots(charSlotPairs)
+	it(`it should return a list of words have the right Letter in the right slot" `, () => {
+    const result = wordlist.findWordsWithLettersInSlots(letterSlotPairs)
     expect( result.sort() ).toEqual( [ 'xylophone' ].sort() )
 	}) 
 
   it(`it should return the whole list if there are no slot pairs" `, () => {
-    const result = wordlist.findWordsWithCharsInSlots({})
+    const result = wordlist.findWordsWithLettersInSlots({})
     expect( result.sort() ).toEqual( wordlist.sort() )
 	}) 
 })
@@ -69,7 +69,7 @@ const wordlist = ['xenon', 'rewax', 'roger', 'bob']
 })
 
 
-describe.only( 'getLetterSlotPairsFromCharsArray(gameboardState.chars)', ()=>{
+describe( 'getLetterSlotPairsFromCharsArray(gameboardState.chars)', ()=>{
   const chars = [{
                 "key":"row-0__slot-0","index":0,"row":0,"slot":0,"letter":"h","status":3
               },{
@@ -77,7 +77,7 @@ describe.only( 'getLetterSlotPairsFromCharsArray(gameboardState.chars)', ()=>{
               }]
 
 	it(`it should return a list of char/slot pairs from the gameboardState.chars array" `, () => {
-    const result = getLetterSlotPairsFromCharsArray(chars, 3)
+    const result = getLetterSlotPairsByStatusFromCharsArray(chars, 3)
     console.log(JSON.stringify(result))
     expect( result ).toEqual( [{letter: 'h', slot:0}, {letter: 'i', slot:1}] ) 
 	}) 
