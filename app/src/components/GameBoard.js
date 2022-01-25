@@ -64,8 +64,71 @@ function GameBoard({showHints, ...props}){
       return number < max ? number+1 : 0;
     }
 
+    function indexOfActiveLetter(){
+      return gameboardState.chars.filter( c => c.key === activeLetter)[0].index;
+    }
+
+    function nextActiveLetter(){
+      const i = indexOfActiveLetter()
+      setActiveLetter(gameboardState.chars[i+1].key)
+    }
+    function prevActiveLetter(){
+      const i = indexOfActiveLetter()
+      setActiveLetter(gameboardState.chars[i-1].key)
+    }
+
+    function prevActiveRow(){
+      const i = indexOfActiveLetter()
+      setActiveLetter(gameboardState.chars[i-gameboardState.slots].key)
+    }
+    
+    function nextActiveRow(){
+      const i = indexOfActiveLetter()
+      setActiveLetter(gameboardState.chars[i+gameboardState.slots].key)
+    }
+
+    function resetActiveLetter(){
+      const i = indexOfActiveLetter()
+      const letter = gameboardState.chars[i]
+      letter.letter = ''
+      letter.status = 0
+      
+      const newChars =  [...gameboardState.chars]  // an array    
+      newChars[i] = letter
+
+      setGameboardState({...gameboardState, chars: newChars })
+    }
+
+
     function keydownHandler( {key: pressedKey} ){
-      if( !pressedKey.match(/^[a-zA-Z]{1}$/)  ) return;
+
+      console.log(pressedKey)
+
+      switch(true){
+        case pressedKey == " ":
+        case pressedKey == "Tab":
+        case pressedKey == "ArrowRight" :
+          nextActiveLetter()
+          return;
+        case pressedKey == "ArrowLeft":
+          prevActiveLetter()
+          return;
+        case pressedKey == "ArrowDown":
+          nextActiveRow()
+          return;
+        case pressedKey == "ArrowUp":
+          prevActiveRow()
+          return;
+        case pressedKey == "Backspace":
+        case pressedKey == "Delete":
+          resetActiveLetter()
+          return;
+        case !pressedKey.match(/^[a-zA-Z]{1}$/):
+          return;
+        default:
+          break;
+      }
+      
       pressedKey = pressedKey.toLowerCase()
 
       const newChars =  [...gameboardState.chars]  // an array    
