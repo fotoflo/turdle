@@ -6,9 +6,6 @@ import { Col } from 'react-bootstrap';
 
 function GameLetter({gameSlot, gameboardState, gameRow, activeLetter, setActiveLetter, ...props } ){
 
-  
-
-    // const letterState = gameState[slot][key] || 0;
     const slotKey = `row-${gameRow}__slot-${gameSlot}`
     const slotIndex = ( gameRow * gameboardState.slots ) + gameSlot
     const char = gameboardState.chars[slotIndex];
@@ -52,9 +49,9 @@ const SlotBox = styled.div`
 GameLetter.propTypes = {
   gameSlot: PropTypes.number.isRequired,
   gameRow:  PropTypes.number.isRequired,
-  activeLetter: PropTypes.number.isRequired,
+  activeLetter: PropTypes.string.isRequired,
   setActiveLetter: PropTypes.func.isRequired,
-  gameboardState: PropTypes.array.isRequired
+  gameboardState: PropTypes.object.isRequired
 }
 
 export default GameLetter

@@ -9,7 +9,7 @@ import HintPanel from './HintPanel/HintPanel';
 // import { Col, Row, Button } from 'react-bootstrap';
 // import {FaSignOutAlt} from 'react-icons/fa'
 
-function GameBoard(...props){
+function GameBoard({showHints, ...props}){
 
     useEffect( () => {
       window.addEventListener("keydown", keydownHandler);
@@ -84,9 +84,11 @@ function GameBoard(...props){
 
     return (
       <Container>
-          <HintPanel 
-            newGameboardState={newGameboardState}
-          />
+          { showHints === true &&
+              <HintPanel 
+                gameboardState={gameboardState}
+              />  
+          }
           
           { 
             Array(gameboardState.rows).fill(0).map(
@@ -110,7 +112,7 @@ function GameBoard(...props){
 }
 
 GameBoard.propTypes = {
-  str: PropTypes.string,
+  showHints: PropTypes.bool,
 }
 
 export default GameBoard

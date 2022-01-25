@@ -6,21 +6,26 @@ import { lightTheme, darkTheme, GlobalStyles } from "./Themes";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import { FaRegQuestionCircle } from 'react-icons/fa';
+import { FaLightbulb, FaRegQuestionCircle } from 'react-icons/fa';
 
 import {Navbar, Container} from 'react-bootstrap'
 
-import ToggleSwitch from './components/ToggleSwitch';
+import ThemeToggleSwitch from './components/ThemeToggleSwitch';
 import GameBoard from './components/GameBoard';
 
 function App() {
   const [theme, setTheme] = useState("light");
+  const [showHints, setShowHints] = useState(true);
 
   const themeToggler = () => {
     theme === "light" ? setTheme("dark") : setTheme("light");
     console.log("toggling")
   };
 
+  const hintToggler = () => {
+    showHints === false ? setShowHints(true) : setShowHints(false);
+    console.log("toggling")
+  };
   
   return (
     <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
@@ -34,19 +39,30 @@ function App() {
             <Navbar.Brand href="#home">WordleSolver</Navbar.Brand>
           </Container>
           <Container className="justify-content-end">
-            <ToggleSwitch
+            <ThemeToggleSwitch
               defaultValue={true}
               toggleFn={themeToggler}
             />
+            <HintToggler
+              onClick={hintToggler}
+            >
+              <FaLightbulb />
+            </HintToggler>
           </Container>
         </StyledNavbar>
-        <GameBoard />
+        <GameBoard 
+          showHints={showHints}
+        />
       </StyledApp>
     </ThemeProvider>
   );
 }
 
 const StyledApp = styled.div`
+  color: ${(props) => props.theme.fontColor};
+`;
+
+const HintToggler = styled.div`
   color: ${(props) => props.theme.fontColor};
 `;
 
