@@ -36,9 +36,9 @@ export const getKeyValueFromPair = (pair) => {
   return [char, slot]
 }
 
-export const getLetterSlotPairsFromCharsArray = (chars, status) =>{
+export const getLetterSlotPairsFromCharsArray = (chars) =>{
   return chars
-    .filter( c => c.status === status)
+    .filter( c => c.status === 3) // 3 means its a pair
     .map( c => { return { letter: c.letter, slot: c.slot }})
 }
 
