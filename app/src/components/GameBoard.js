@@ -18,9 +18,8 @@ function GameBoard({showHints, ...props}){
       }
     })
 
-    const word = "hello"
-
     const generateNewGameboardState = () => {
+      const word = "hello"
       const rows = 2
       const slots = word.length
       const chars = []
@@ -31,7 +30,7 @@ function GameBoard({showHints, ...props}){
       // for (row in chars.map( char => chars.row) ) console.log(row)
       //
       // we also want to be able to generate the <Row><Slot /><Slot /><Slot /></Row> rows based on the count
-      const newGameboardState = { rows, slots, chars}
+      const newGameboardState = { word, rows, slots, chars}
 
       let index = 0;
 
@@ -85,9 +84,9 @@ function GameBoard({showHints, ...props}){
     return (
       <Container>
           { showHints === true &&
-              <HintPanel 
-                gameboardState={gameboardState}
-              />  
+            <HintPanel 
+              gameboardState={gameboardState}
+            />  
           }
           
           { 

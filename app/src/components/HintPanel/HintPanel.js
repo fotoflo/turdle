@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components'
 
@@ -9,14 +9,20 @@ import {filterWordList} from './HintHelpers'
 
 function HintPanel({gameboardState}){
 
-    const results = filterWordList(wordList)
+    const [hints, setHints] = useState()
+
+    useEffect( () => {
+      const hints = filterWordList(wordList)
+      setHints(hints)
+    }, [gameboardState])
+
     return (
       <Row>
         <Col> 
         <InfoBox>
             <span>Hints:</span>
-            {JSON.stringify(gameboardState.chars)}
-            <p>{results}</p>
+            {gameboardState.word}
+            <p>{hints}</p>
         </InfoBox>
         </Col>
       </Row>
