@@ -11,14 +11,7 @@ function GameLetter({gameSlot, gameboardState, gameRow, activeLetter, setActiveL
     // const letterState = gameState[slot][key] || 0;
     const slotKey = `row-${gameRow}__slot-${gameSlot}`
     const slotIndex = ( gameRow * gameboardState.slots ) + gameSlot
-
-    const [char, setChar] = useState(gameboardState.chars[slotIndex].letter)
-
-    useEffect( () => {
-      const letter = gameboardState.chars[slotIndex].letter
-      console.log("Setting Char", letter)
-      setChar( letter )
-    }, [gameboardState])
+    const char = gameboardState.chars[slotIndex];
 
     return (
       <Col onClick={ () => setActiveLetter(slotKey) }>
@@ -26,6 +19,8 @@ function GameLetter({gameSlot, gameboardState, gameRow, activeLetter, setActiveL
           className="col" 
           gameboardState={gameboardState}
           activeLetter={activeLetter}
+          
+          char={char}
 
           gameSlot={gameSlot}
           gameRow={gameRow}
@@ -34,7 +29,7 @@ function GameLetter({gameSlot, gameboardState, gameRow, activeLetter, setActiveL
           slotKey={slotKey}
           // letterstate={letterState}
         >
-          char:{char}
+          {char.letter} : {char.status}
         </SlotBox>
         <span>{slotIndex}: {slotKey}</span>
       </Col>
@@ -46,7 +41,7 @@ const SlotBox = styled.div`
   border: ${(props) => { return props.slotKey === props.activeLetter ? 3 : 1 }}px
       solid ${(props) => { return props.slotKey === props.activeLetter ? "red" : "grey" }
     };
-  background-color: ${ (props) =>  props.theme[props.letterstate]   };
+  background-color: ${ (props) =>  props.theme[props.char.status]   };
   height: 6rem;
   font-size: 12px;
 `
