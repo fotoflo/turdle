@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components'
 
@@ -7,9 +7,18 @@ import {  Col } from 'react-bootstrap';
 function GameLetter({gameSlot, gameboardState, gameRow, activeLetter, setActiveLetter, ...props } ){
 
   
+
+    // const letterState = gameState[slot][key] || 0;
     const slotKey = `row-${gameRow}__slot-${gameSlot}`
     const slotIndex = ( gameRow * gameboardState.slots ) + gameSlot
-    // const letterState = gameState[slot][key] || 0;
+
+    const [char, setChar] = useState(gameboardState.chars[slotIndex].letter)
+
+    useEffect( () => {
+      const letter = gameboardState.chars[slotIndex].letter
+      console.log("Setting Char", letter)
+      setChar( letter )
+    }, [gameboardState])
 
     return (
       <Col onClick={ () => setActiveLetter(slotKey) }>
@@ -25,7 +34,7 @@ function GameLetter({gameSlot, gameboardState, gameRow, activeLetter, setActiveL
           slotKey={slotKey}
           // letterstate={letterState}
         >
-          {JSON.stringify(gameboardState.chars[slotIndex])}
+          char:{char}
         </SlotBox>
         <span>{slotIndex}: {slotKey}</span>
       </Col>

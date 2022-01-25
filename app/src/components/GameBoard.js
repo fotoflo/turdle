@@ -72,19 +72,17 @@ function GameBoard(...props){
       if( !pressedKey.match(/^[a-zA-Z]{1}$/)  ) return;
       pressedKey = pressedKey.toLowerCase()
 
-      const chars =  gameboardState.chars;  // an array    
-      const [newLetter] = chars.filter(c => c.key==activeLetter);
+      const newChars =  [...gameboardState.chars]  // an array    
+      const [newLetter] = gameboardState.chars.filter(c => c.key==activeLetter);
       
       newLetter.letter = pressedKey
       newLetter.status = iterateStatus( newLetter.status )  
       
       // set the new letter
-      chars[newLetter.index] = newLetter
-      gameboardState.chars = chars
+      newChars[newLetter.index] = newLetter
+      gameboardState.chars = newChars
 
-      setGameboardState(gameboardState)
-      
-
+      setGameboardState({...gameboardState, chars: newChars})
     }
 
     return (
