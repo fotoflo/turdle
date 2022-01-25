@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components'
 
-import {  Col } from 'react-bootstrap';
+import { Col } from 'react-bootstrap';
 
 function GameLetter({gameSlot, gameboardState, gameRow, activeLetter, setActiveLetter, ...props } ){
 
@@ -29,9 +29,8 @@ function GameLetter({gameSlot, gameboardState, gameRow, activeLetter, setActiveL
           slotKey={slotKey}
           // letterstate={letterState}
         >
-          {char.letter} : {char.status}
+          {char.letter}
         </SlotBox>
-        <span>{slotIndex}: {slotKey}</span>
       </Col>
     )
     
@@ -43,20 +42,19 @@ const SlotBox = styled.div`
     };
   background-color: ${ (props) =>  props.theme[props.char.status]   };
   height: 6rem;
-  font-size: 12px;
+  width: 6rem;
+  font-size: 3rem;
+  text-align: center;
+  margin-top: 10px;
 `
     
 
-
-// GameLetter.propTypes = {
-//   slot: PropTypes.number.isRequired,
-//   activeLetter: PropTypes.number.isRequired,
-//   setActiveLetter: PropTypes.func.isRequired,
-//   gameState: PropTypes.array.isRequired,
-//   setGameState: PropTypes.func.isRequired
-//   // user: PropTypes.shape({
-//   //   phoneNumber: null
-//   // })
-// }
+GameLetter.propTypes = {
+  gameSlot: PropTypes.number.isRequired,
+  gameRow:  PropTypes.number.isRequired,
+  activeLetter: PropTypes.number.isRequired,
+  setActiveLetter: PropTypes.func.isRequired,
+  gameboardState: PropTypes.array.isRequired
+}
 
 export default GameLetter

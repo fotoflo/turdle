@@ -17,7 +17,7 @@ function KeyboardLetter({label, keydownHandler, gameboardState, ...props}){
       status = matchingChars[0].status || 0;
     }
     setStatus(status)
-  }, [gameboardState])
+  }, [gameboardState, label])
 
   return (
     <KeyBox 

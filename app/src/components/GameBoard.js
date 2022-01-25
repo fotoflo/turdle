@@ -1,10 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
-import { Container, Row } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 import GameRow from './GameRow';
 import Keyboard from './Keyboard';
 import HintPanel from './HintPanel/HintPanel';
-import styled from 'styled-components';
 
 
 // import { Col, Row, Button } from 'react-bootstrap';
@@ -19,7 +18,7 @@ function GameBoard(...props){
       }
     })
 
-    const word = "hai"
+    const word = "hello"
 
     const generateNewGameboardState = () => {
       const rows = 2
@@ -71,7 +70,7 @@ function GameBoard(...props){
       pressedKey = pressedKey.toLowerCase()
 
       const newChars =  [...gameboardState.chars]  // an array    
-      const [newLetter] = gameboardState.chars.filter(c => c.key==activeLetter);
+      const [newLetter] = gameboardState.chars.filter(c => c.key === activeLetter);
       
       newLetter.letter = pressedKey
       newLetter.status = iterateStatus( newLetter.status )  
@@ -88,8 +87,6 @@ function GameBoard(...props){
           <HintPanel 
             newGameboardState={newGameboardState}
           />
-
-          {/* <InfoBox>GameboardState = {JSON.stringify(gameboardState)}</InfoBox> */}
           
           { 
             Array(gameboardState.rows).fill(0).map(
@@ -102,10 +99,7 @@ function GameBoard(...props){
                   gameRow={i}
                 i/>
               })
-
           }
-
-          <p>activeLetter: {activeLetter}</p>
 
           <Keyboard 
             gameboardState={gameboardState}
@@ -114,17 +108,6 @@ function GameBoard(...props){
       </Container>
     )
 }
-
-const InfoBox = styled.div`
-  border: 1px solid grey;
-  background-color: ivory;
-  height: 8rem;
-  font-size: 10px;
-  overflow: hidden;
-  margin-bottom: 12px;
-`
-    
-
 
 GameBoard.propTypes = {
   str: PropTypes.string,
