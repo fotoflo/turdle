@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
-import { Button, Container } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 import GameRow from './GameRow';
 import Keyboard from './Keyboard';
 import HintPanel from './HintPanel/HintPanel';
@@ -138,9 +138,6 @@ function GameBoard({showHints, ...props}){
     }
 
     const addRowsToGameboardWhenLastRowIsFull = () => {
-      // find empty rows, delete them
-      const slots = gameboardState.slots
-      
       // create and fill rows Array
       const rows = new Array(gameboardState.rows).fill([])
       gameboardState.chars
@@ -150,7 +147,7 @@ function GameBoard({showHints, ...props}){
       // if every char in the last row has a letter
       // add a new row
       if( rows[rows.length-1]
-          .every( char => char.letter != '') )
+          .every( char => char.letter !== '') )
           {
             addRowToGameboard()
           }
@@ -158,7 +155,6 @@ function GameBoard({showHints, ...props}){
 
 
     function addRowToGameboard(){
-      const currentRows = gameboardState.rows
       let newGameboardState = Object.assign({}, gameboardState)
 
       const blankRows = generateNewGameboardState(1, newGameboardState.rows)
