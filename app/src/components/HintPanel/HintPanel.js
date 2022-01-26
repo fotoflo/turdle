@@ -4,7 +4,7 @@ import styled from 'styled-components'
 
 import { Col, Row } from 'react-bootstrap';
 import wordList from '../../FiveLetterWords.json'
-import {filterWordList} from './HintHelpers'
+import { getHints } from './HintHelpers'
 // import {FaSignOutAlt} from 'react-icons/fa'
 
 function HintPanel({gameboardState}){
@@ -12,7 +12,7 @@ function HintPanel({gameboardState}){
     const [hints, setHints] = useState()
 
     useEffect( () => {
-      const hints = filterWordList(wordList, gameboardState.chars)
+      const hints = getHints(wordList, gameboardState.chars, 80)
       setHints(hints)
     }, [gameboardState])
 
@@ -32,7 +32,7 @@ const InfoBox = styled.div`
   border: 1px solid grey;
   background-color: ivory;
   height: 8rem;
-  font-size: 10px;
+  font-size: 12px;
   overflow: hidden;
   margin-bottom: 12px;
 `

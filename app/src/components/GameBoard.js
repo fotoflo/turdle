@@ -105,22 +105,22 @@ function GameBoard({showHints, ...props}){
       console.log(pressedKey)
 
       switch(true){
-        case pressedKey == " ":
-        case pressedKey == "Tab":
-        case pressedKey == "ArrowRight" :
+        case pressedKey === " ":
+        case pressedKey === "Tab":
+        case pressedKey === "ArrowRight" :
           nextActiveLetter()
           return;
-        case pressedKey == "ArrowLeft":
+        case pressedKey === "ArrowLeft":
           prevActiveLetter()
           return;
-        case pressedKey == "ArrowDown":
+        case pressedKey === "ArrowDown":
           nextActiveRow()
           return;
-        case pressedKey == "ArrowUp":
+        case pressedKey === "ArrowUp":
           prevActiveRow()
           return;
-        case pressedKey == "Backspace":
-        case pressedKey == "Delete":
+        case pressedKey === "Backspace":
+        case pressedKey === "Delete":
           resetActiveLetter()
           return;
         case !pressedKey.match(/^[a-zA-Z]{1}$/):

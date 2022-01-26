@@ -7,7 +7,8 @@ import {
   //Array.prototype.findWordsWithChars,
   //Array.prototype.findWordsWithoutChars,
   //Array.prototype.findWordsWithLettersInSlots,
-  //Array.prototype.findWordsWithoutCharsInSlots,
+  //Array.prototype.findWordsWithoutLettersInSlots
+  //Array.prototype.findWordsWithCharsButNotInSlot,
   getLetterSlotPairsByStatusFromCharsArray,
   filterWordList
 } from './HintHelpers';
@@ -58,6 +59,21 @@ describe( 'Array.prototype.findWordsWithLettersInSlots', ()=>{
 	}) 
 })
 
+describe.only( 'Array.prototype.findWordsWithCharsButNotInSlot', ()=>{
+  const letterSlotPairs = [{letter: "a", slot: 1}];
+  const wordlist = ['japan','happy','thank','gamma','tampa','manga']
+
+	it(`it should return a list of words have the right Letter in the right slot" `, () => {
+    const result = wordlist.findWordsWithCharsButNotInSlot(letterSlotPairs)
+    expect( result.sort() ).toEqual( [ 'thank' ].sort() )
+	}) 
+
+  it(`it should return the whole list if there are no slot pairs" `, () => {
+    const result = wordlist.findWordsWithLettersInSlots({})
+    expect( result.sort() ).toEqual( wordlist.sort() )
+	}) 
+})
+
 describe( 'Array.prototype.findWordsWithoutCharsInSlots', ()=>{
 const charSlotPair = {char: "x", slot: 0}
 const wordlist = ['xenon', 'rewax', 'roger', 'bob']
@@ -84,19 +100,48 @@ describe( 'getLetterSlotPairsFromCharsArray(gameboardState.chars)', ()=>{
 })
   
 
-describe.skip( 'filterWordList', ()=>{
+describe.only( 'filterWordList', ()=>{
 
 	it(`it should return a list of words have the right char in the right slot" `, () => {
-    const wordlist = ['xenon', 'rewax', 'roger', 'bob', 'echo', 'xio']
-    // const gameState = [{"q":3},{"u":3},{"o":3},{'x': 1},{}] QUOTE
-    // const keyboardState = {"q":3,"u":3,"o":3,"t":2,"c":1,"e":1} QUOTE
-    
-    const gameState = [{"r":3},{"e":3},{"a":2},{"w":2},{"z":0}] // rewax
-    const keyboardState = {"r":3,"e":3,"w":2,"a":2,"m":0,"c":1,"z":0,"k":1,"n":1}
-    
-    const result = filterWordList(wordlist, gameState, keyboardState)
+    const wordlist = the_wordlist;
+    const chars = [
+      {
+          "key": "row-0__slot-0",
+          "index": 0,
+          "row": 0,
+          "slot": 0,
+          "letter": "a",
+          "status": 3
+      },
+      {
+          "key": "row-0__slot-1",
+          "index": 1,
+          "row": 0,
+          "slot": 1,
+          "letter": "l",
+          "status": 3
+      },
+      {
+          "key": "row-0__slot-2",
+          "index": 2,
+          "row": 0,
+          "slot": 2,
+          "letter": "i",
+          "status": 3
+      },
+      {
+          "key": "row-0__slot-3",
+          "index": 3,
+          "row": 0,
+          "slot": 3,
+          "letter": "v",
+          "status": 3
+      }
+  ]
+
+    const result = filterWordList(wordlist, chars)
     console.log("RESULT:", result)
-    expect( result ).toEqual( [ 'rewax' ] )
+    expect( result ).toEqual( [ 'alive' ] )
 	}) 
 })
 

@@ -1,3 +1,5 @@
+/*eslint-disable no-extend-native */
+
 Array.prototype.findWordsWithChars = function(chars){
   let regexStr = ''
   chars.split("").forEach( char => regexStr += `(?=.*${char})` )
@@ -6,11 +8,27 @@ Array.prototype.findWordsWithChars = function(chars){
   return this.filter(  word => word.match(charsRegex)  )
 }
 
-
 Array.prototype.findWordsWithoutChars = function (chars){
   const charsRegex = new RegExp(`[${chars}]`)
   return this.filter(  word => !word.match(charsRegex) )
 }
+
+Array.prototype.findWordsWithCharsButNotInSlot = function (letterSlotPairs){
+  /// has the letter, but not in the slot
+  // arrow has w, but not in slot 1
+  if( letterSlotPairs.length === 0 ) return this
+  if( Object.keys(letterSlotPairs).length === 0 ) return this
+
+  const charsString = letterSlotPairs.map(pair => pair.letter).join()
+
+  return this.findWordsWithChars(charsString)
+    .filter( word => {
+    return letterSlotPairs.every( (pair) => {
+        return word.charAt(pair.slot) !== pair.letter 
+      })
+    })
+}
+
 
 Array.prototype.findWordsWithLettersInSlots = function (letterSlotPairs){
   if( letterSlotPairs.length === 0 ) return this
@@ -42,32 +60,42 @@ export const getLetterSlotPairsByStatusFromCharsArray = (chars, status) =>{
     .map( c => { return { letter: c.letter, slot: c.slot }})
 }
 
+const formatWordListAsHints = (wordList, count) =>{
+
+  const l = count;
+  const elipses = wordList.length > l ? "..." : "";
+
+  return `${ l < wordList.length  ? l : wordList.length }/${wordList.length}: ` 
+    + wordList.slice(0,l).join(" ") 
+    + elipses;
+}
+
+export const getHints = (wordList, chars, count) =>{
+  const hintList = filterWordList(wordList, chars) 
+  return formatWordListAsHints(hintList, count)
+}
+
 export const filterWordList = (wordList, chars) => {
+  
+  const inSlotList = getLetterSlotPairsByStatusFromCharsArray(chars, 3)
 
-  let excludedList =  getLetterSlotPairsByStatusFromCharsArray(chars, 1)
-  excludedList = excludedList.map( c => c.letter ).join("")
+  const excludedList =  getLetterSlotPairsByStatusFromCharsArray(chars, 1)
+  const excludedCharString = excludedList.map( c => c.letter ).join("")
 
-  let includedList =  getLetterSlotPairsByStatusFromCharsArray(chars, 2)
-  includedList = includedList.map( c => c.letter ).join("")
+  const includedList =  getLetterSlotPairsByStatusFromCharsArray(chars, 2)
   // [{letter: "h", slot:0},{letter: "i", slot:1}] -> "hi"
 
-  const inSlotList = getLetterSlotPairsByStatusFromCharsArray(chars, 3)
 
 
   console.log(`****** FILTERING ******`)
   console.log(`finding words with with letter in slot: ${JSON.stringify(inSlotList)}`)
+  console.log(`finding words excluding: ${JSON.stringify(excludedCharString)}`)
   console.log(`finding words including: ${JSON.stringify(includedList)}`)
-  console.log(`finding words excluding: ${JSON.stringify(excludedList)}`)
 
   const newWordList = wordList
     .findWordsWithLettersInSlots(inSlotList)
-    .findWordsWithChars(includedList)
-    .findWordsWithoutChars(excludedList)
+    .findWordsWithCharsButNotInSlot(includedList)
+    .findWordsWithoutChars(excludedCharString)
 
-  const l = 20;
-  const elipses = newWordList.length > l ? "..." : "";
-
-  return `${ l < newWordList.length  ? l : newWordList.length }/${newWordList.length}: ` 
-    + newWordList.slice(0,l).join(" ") 
-    + elipses;
+  return newWordList
 }
