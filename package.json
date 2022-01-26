@@ -1,9 +1,9 @@
 {
   "name": "wordle-solver",
   "version": "1.0.0",
-  "homepage": "https://fotoflo.github.io/wordle-solver",
+  "homepage": "https://fotoflo.github.io/wordlesolver",
   "description": "",
-  "main": "index.js",
+  "main": "index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "predeploy": "npm run build",
