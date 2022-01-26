@@ -6,7 +6,7 @@ import Keyboard from './Keyboard';
 import HintPanel from './HintPanel/HintPanel';
 
 
-function GameBoard({showHints, ...props}){
+function GameBoard({showHints, word, ...props}){
 
     useEffect( () => {
       window.addEventListener("keydown", keydownHandler);
@@ -17,7 +17,6 @@ function GameBoard({showHints, ...props}){
 
 
     const generateNewGameboardState = (rows = 1, startingRow = 0) => {
-      const word = "hello"
       const slots = word.length
       const chars = []
       /// we want to be able to do chars.filter( char => char.key === "row-2__slot-1" )
@@ -165,6 +164,7 @@ function GameBoard({showHints, ...props}){
 
     return (
       <Container>
+          {/* {word} */}
           { showHints === true &&
             <HintPanel 
               gameboardState={gameboardState}

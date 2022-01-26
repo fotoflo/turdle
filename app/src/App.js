@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import './App.css';
 import styled, { ThemeProvider } from "styled-components";
 
@@ -13,9 +13,21 @@ import {Navbar, Container} from 'react-bootstrap'
 import ThemeToggleSwitch from './components/ThemeToggleSwitch';
 import GameBoard from './components/GameBoard';
 
+import wordList from './FiveLetterWords.json'
+
+
 function App() {
   const [theme, setTheme] = useState("light");
   const [showHints, setShowHints] = useState(true);
+  const [word, setWord] = useState("hello");
+
+  useEffect( () => {
+    const max = wordList.length
+    const min = 1;
+
+    const rand =  Math.floor(Math.random() * (max - min + 1) + min)
+    setWord(wordList[rand])
+  }, [])
 
   const themeToggler = () => {
     theme === "light" ? setTheme("dark") : setTheme("light");
@@ -51,6 +63,7 @@ function App() {
           </Container>
         </StyledNavbar>
         <GameBoard 
+          word={word}
           showHints={showHints}
         />
       </StyledApp>

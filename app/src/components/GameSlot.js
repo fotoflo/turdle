@@ -26,7 +26,7 @@ function GameLetter({gameSlot, gameboardState, gameRow, activeLetter, setActiveL
           slotKey={slotKey}
           // letterstate={letterState}
         >
-          {char.letter}
+          {char.letter.toUpperCase()}
         </SlotBox>
       </Col>
     )
