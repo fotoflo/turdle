@@ -65,7 +65,7 @@ describe.only( 'Array.prototype.findWordsWithCharsButNotInSlot', ()=>{
 
 	it(`it should return a list of words have the right Letter in the right slot" `, () => {
     const result = wordlist.findWordsWithCharsButNotInSlot(letterSlotPairs)
-    expect( result.sort() ).toEqual( [ 'thank' ].sort() )
+    expect( result).toEqual( [ 'thank' ])
 	}) 
 
   it(`it should return the whole list if there are no slot pairs" `, () => {

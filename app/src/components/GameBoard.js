@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
-import { Container } from 'react-bootstrap';
+import { Button, Container } from 'react-bootstrap';
 import GameRow from './GameRow';
 import Keyboard from './Keyboard';
 import HintPanel from './HintPanel/HintPanel';
@@ -18,9 +18,8 @@ function GameBoard({showHints, ...props}){
       }
     })
 
-    const generateNewGameboardState = () => {
+    const generateNewGameboardState = (rows = 1, startingRow = 0) => {
       const word = "hello"
-      const rows = 3
       const slots = word.length
       const chars = []
       
@@ -32,9 +31,9 @@ function GameBoard({showHints, ...props}){
       // we also want to be able to generate the <Row><Slot /><Slot /><Slot /></Row> rows based on the count
       const newGameboardState = { word, rows, slots, chars}
 
-      let index = 0;
+      let index = startingRow * slots;
 
-      for(let i = 0; i < rows; i++){
+      for(let i = startingRow; i < rows + startingRow ; i++){
         for(let j = 0; j < slots; j++){
           const key = `row-${i}__slot-${j}`
           chars.push(
@@ -144,6 +143,17 @@ function GameBoard({showHints, ...props}){
       setGameboardState({...gameboardState, chars: newChars})
     }
 
+    function addRowToGameboard(){
+      const currentRows = gameboardState.rows
+      let newGameboardState = Object.assign({}, gameboardState)
+
+      const blankRows = generateNewGameboardState(1, newGameboardState.rows)
+      newGameboardState.chars = newGameboardState.chars.concat(blankRows.chars)
+      newGameboardState.rows++
+      debugger
+      setGameboardState(newGameboardState)
+    }
+
     return (
       <Container>
           { showHints === true &&
@@ -164,6 +174,8 @@ function GameBoard({showHints, ...props}){
                 i/>
               })
           }
+
+          <Button onClick={addRowToGameboard} />
 
           <Keyboard 
             gameboardState={gameboardState}
