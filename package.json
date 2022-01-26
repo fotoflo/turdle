@@ -1,10 +1,13 @@
 {
   "name": "wordle-solver",
   "version": "1.0.0",
+  "homepage": "https://fotoflo.github.io/wordle-solver",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "predeploy": "npm run build",
+    "build": "echo please use build in the ./app directory"
   },
   "author": "Alex Miller (fotoflo@gmail.com)",
   "license": "ISC",
