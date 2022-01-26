@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/wordlesolver/static/css/main.55fad669.css",
-    "main.js": "/wordlesolver/static/js/main.d5c8c994.js",
+    "main.js": "/wordlesolver/static/js/main.cba1d4eb.js",
     "static/js/787.706abdce.chunk.js": "/wordlesolver/static/js/787.706abdce.chunk.js",
     "index.html": "/wordlesolver/index.html",
     "main.55fad669.css.map": "/wordlesolver/static/css/main.55fad669.css.map",
-    "main.d5c8c994.js.map": "/wordlesolver/static/js/main.d5c8c994.js.map",
+    "main.cba1d4eb.js.map": "/wordlesolver/static/js/main.cba1d4eb.js.map",
     "787.706abdce.chunk.js.map": "/wordlesolver/static/js/787.706abdce.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.55fad669.css",
-    "static/js/main.d5c8c994.js"
+    "static/js/main.cba1d4eb.js"
   ]
 }
