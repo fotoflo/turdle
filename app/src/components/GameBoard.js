@@ -6,9 +6,6 @@ import Keyboard from './Keyboard';
 import HintPanel from './HintPanel/HintPanel';
 
 
-// import { Col, Row, Button } from 'react-bootstrap';
-// import {FaSignOutAlt} from 'react-icons/fa'
-
 function GameBoard({showHints, ...props}){
 
     useEffect( () => {
@@ -18,12 +15,11 @@ function GameBoard({showHints, ...props}){
       }
     })
 
+
     const generateNewGameboardState = (rows = 1, startingRow = 0) => {
       const word = "hello"
       const slots = word.length
       const chars = []
-      
-
       /// we want to be able to do chars.filter( char => char.key === "row-2__slot-1" )
       /// and chars.filter( char => char.letter === "e" ) etc
       // for (row in chars.map( char => chars.row) ) console.log(row)
@@ -57,7 +53,7 @@ function GameBoard({showHints, ...props}){
     
     const [activeLetter, setActiveLetter] = useState("row-0__slot-0") // set of {0,1,2,3,4,5}
     const [gameboardState, setGameboardState] = useState(newGameboardState)
-    
+
     function iterateStatus(number){
       const max = 3;
       return number < max ? number+1 : 0;
@@ -66,7 +62,6 @@ function GameBoard({showHints, ...props}){
     function indexOfActiveLetter(){
       return gameboardState.chars.filter( c => c.key === activeLetter)[0].index;
     }
-
     function nextActiveLetter(){
       const i = indexOfActiveLetter()
       setActiveLetter(gameboardState.chars[i+1].key)
@@ -75,12 +70,10 @@ function GameBoard({showHints, ...props}){
       const i = indexOfActiveLetter()
       setActiveLetter(gameboardState.chars[i-1].key)
     }
-
     function prevActiveRow(){
       const i = indexOfActiveLetter()
       setActiveLetter(gameboardState.chars[i-gameboardState.slots].key)
     }
-    
     function nextActiveRow(){
       const i = indexOfActiveLetter()
       setActiveLetter(gameboardState.chars[i+gameboardState.slots].key)
@@ -141,7 +134,28 @@ function GameBoard({showHints, ...props}){
       gameboardState.chars = newChars
 
       setGameboardState({...gameboardState, chars: newChars})
+      addRowsToGameboardWhenLastRowIsFull()
     }
+
+    const addRowsToGameboardWhenLastRowIsFull = () => {
+      // find empty rows, delete them
+      const slots = gameboardState.slots
+      
+      // create and fill rows Array
+      const rows = new Array(gameboardState.rows).fill([])
+      gameboardState.chars
+        .filter( char => char.letter ==='' )
+        .map( char => rows[char.row].push(char) )
+
+      // if every char in the last row has a letter
+      // add a new row
+      if( rows[rows.length-1]
+          .every( char => char.letter != '') )
+          {
+            addRowToGameboard()
+          }
+    }
+
 
     function addRowToGameboard(){
       const currentRows = gameboardState.rows
@@ -150,7 +164,6 @@ function GameBoard({showHints, ...props}){
       const blankRows = generateNewGameboardState(1, newGameboardState.rows)
       newGameboardState.chars = newGameboardState.chars.concat(blankRows.chars)
       newGameboardState.rows++
-      debugger
       setGameboardState(newGameboardState)
     }
 
@@ -174,8 +187,6 @@ function GameBoard({showHints, ...props}){
                 i/>
               })
           }
-
-          <Button onClick={addRowToGameboard} />
 
           <Keyboard 
             gameboardState={gameboardState}
