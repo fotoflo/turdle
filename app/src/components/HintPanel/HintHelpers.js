@@ -63,10 +63,10 @@ export const getLetterSlotPairsByStatusFromCharsArray = (chars, status) =>{
 const formatWordListAsHints = (wordList, maxLength) =>{
 
   const elipses = wordList.length > maxLength ? "..." : "";
-  wordList = wordList.slice(0,maxLength).join(" ") + elipses
-  const lengthInfo =  maxLength < wordList.length  ? maxLength : `${wordList.length }/${wordList.length}`
   
-  return [lengthInfo, wordList] 
+  return [`${ maxLength < wordList.length  ? maxLength : wordList.length }/${wordList.length}: `,
+  wordList.slice(0,maxLength).join(" ") + elipses]
+
 }
 
 // const formatWordListAsHints = (wordList, maxLength) =>{

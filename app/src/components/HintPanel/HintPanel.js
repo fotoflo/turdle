@@ -12,7 +12,7 @@ function HintPanel({gameboardState}){
     const [hintInfo, setHintInfo] = useState()
 
     useEffect( () => {
-      const [hintInfo, hints] = getHints(wordList, gameboardState.chars, 5)
+      const [hintInfo, hints] = getHints(wordList, gameboardState.chars, 50)
       setHints(hints)
       setHintInfo(hintInfo)
     }, [gameboardState])
