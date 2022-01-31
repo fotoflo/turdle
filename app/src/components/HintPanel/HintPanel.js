@@ -9,18 +9,19 @@ import { getHints } from './HintHelpers'
 function HintPanel({gameboardState}){
 
     const [hints, setHints] = useState()
+    const [hintInfo, setHintInfo] = useState()
 
     useEffect( () => {
-      const hints = getHints(wordList, gameboardState.chars, 80)
+      const [hintInfo, hints] = getHints(wordList, gameboardState.chars, 50)
       setHints(hints)
+      setHintInfo(hintInfo)
     }, [gameboardState])
 
     return (
       <Row>
         <Col> 
         <InfoBox>
-            <span>Hints:</span>
-            <p>{hints}</p>
+            <p><strong>Hints {hintInfo}: </strong>{hints}</p>
         </InfoBox>
         </Col>
       </Row>
@@ -29,11 +30,12 @@ function HintPanel({gameboardState}){
 
 const InfoBox = styled.div`
   border: 1px solid grey;
-  background-color: ivory;
+  background-color: ${props => props.theme.InfoBGColor};
   font-size: 12px;
   overflow: none;
   margin-bottom: 12px;
-  
+  height: 8rem;
+  padding: 5px 10px;
 `
 
 HintPanel.propTypes = {

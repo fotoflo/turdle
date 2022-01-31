@@ -65,9 +65,8 @@ const formatWordListAsHints = (wordList, count) =>{
   const l = count;
   const elipses = wordList.length > l ? "..." : "";
 
-  return `${ l < wordList.length  ? l : wordList.length }/${wordList.length}: ` 
-    + wordList.slice(0,l).join(" ") 
-    + elipses;
+  return [`${ l < wordList.length  ? l : wordList.length }/${wordList.length}: `,
+      wordList.slice(0,l).join(" ") + elipses]
 }
 
 export const getHints = (wordList, chars, count) =>{

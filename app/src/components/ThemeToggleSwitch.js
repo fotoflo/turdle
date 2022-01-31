@@ -28,9 +28,9 @@ const CheckboxContainer = styled.div`
   vertical-align: middle;
 `
 
+// Hide checkbox visually but remain accessible to screen readers.
+// Source: https://polished.js.org/docs/#hidevisually
 const HiddenCheckbox = styled.input.attrs({ type: 'checkbox' })`
-  // Hide checkbox visually but remain accessible to screen readers.
-  // Source: https://polished.js.org/docs/#hidevisually
   border: 0;
   clip: rect(0 0 0 0);
   clippath: inset(50%);
@@ -43,7 +43,6 @@ const HiddenCheckbox = styled.input.attrs({ type: 'checkbox' })`
 `
 
 const StyledCheckbox = styled.div`
-  display: inline-block;
   width: 16px;
   height: 16px;
   background: ${props => props.checked ? darkTheme.body : lightTheme.body };

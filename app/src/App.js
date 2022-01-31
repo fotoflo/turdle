@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
-import './App.css';
 import styled, { ThemeProvider } from "styled-components";
-
 import { lightTheme, darkTheme, GlobalStyles } from "./Themes";
 
 import 'bootstrap/dist/css/bootstrap.min.css';

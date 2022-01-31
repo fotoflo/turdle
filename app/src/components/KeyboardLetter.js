@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Col } from 'react-bootstrap';
+import './keyboard.css';
 
 function KeyboardLetter({label, keydownHandler, gameboardState, ...props}){
 
@@ -22,6 +23,7 @@ function KeyboardLetter({label, keydownHandler, gameboardState, ...props}){
   return (
     <KeyBox 
       {...props}
+      id={`${label}-key`}
       status={status}
       onClick={()=>keydownHandler({key: label})}
       className="text-center align-middle"
@@ -33,11 +35,15 @@ function KeyboardLetter({label, keydownHandler, gameboardState, ...props}){
 
 
   const KeyBox = styled(Col)`
-  margin-top: 10px;
+  line-height: 3rem;
+  text-align: center;
   border: 1px solid grey;
-  height: 4rem;
+  border-radius: 3px;
+  margin: 2px;
+  height: 3rem;
+  min-width: 20px;
+  font-size: 1.8rem;
   background-color: ${ (props) =>  props.theme[props.status]   };
-  font-size: 2rem;
   `
   
   KeyboardLetter.propTypes = {
