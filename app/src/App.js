@@ -46,7 +46,7 @@ function App() {
             <Navbar.Brand href="#home"><FaRegQuestionCircle /></Navbar.Brand>
           </Container>
           <Container>
-            <Navbar.Brand href="#home">WordleSolver</Navbar.Brand>
+            <Navbar.Brand href="#home">WordCheater</Navbar.Brand>
           </Container>
           <Container className="justify-content-end">
             <ThemeToggleSwitch

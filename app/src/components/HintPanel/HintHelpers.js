@@ -60,14 +60,34 @@ export const getLetterSlotPairsByStatusFromCharsArray = (chars, status) =>{
     .map( c => { return { letter: c.letter, slot: c.slot }})
 }
 
-const formatWordListAsHints = (wordList, count) =>{
+const formatWordListAsHints = (wordList, maxLength) =>{
 
-  const l = count;
-  const elipses = wordList.length > l ? "..." : "";
-
-  return [`${ l < wordList.length  ? l : wordList.length }/${wordList.length}: `,
-      wordList.slice(0,l).join(" ") + elipses]
+  const elipses = wordList.length > maxLength ? "..." : "";
+  wordList = wordList.slice(0,maxLength).join(" ") + elipses
+  const lengthInfo =  maxLength < wordList.length  ? maxLength : `${wordList.length }/${wordList.length}`
+  
+  return [lengthInfo, wordList] 
 }
+
+// const formatWordListAsHints = (wordList, maxLength) =>{
+
+//   const elipses = wordList.length > maxLength ? "..." : "";
+
+
+//   wordList = wordList.map( word => {
+//     const url = `https://www.dictionary.com/browse/${word}`
+//     return <a target="_blank" href={url}>{word}</a> 
+//   })
+
+//   const wordListSpan =  <span>{ props => wordList.slice(0,maxLength) + elipses}</span>
+  
+//   debugger
+
+//   const lengthInfo =  maxLength < wordList.length  ? maxLength : `${wordList.length }/${wordList.length}`
+  
+//   return [lengthInfo, wordListSpan] 
+// }
+
 
 export const getHints = (wordList, chars, count) =>{
   const hintList = filterWordList(wordList, chars) 
