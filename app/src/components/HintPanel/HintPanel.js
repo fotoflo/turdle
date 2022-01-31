@@ -30,10 +30,10 @@ function HintPanel({gameboardState}){
 const InfoBox = styled.div`
   border: 1px solid grey;
   background-color: ivory;
-  height: 8rem;
   font-size: 12px;
-  overflow: hidden;
+  overflow: none;
   margin-bottom: 12px;
+  
 `
 
 HintPanel.propTypes = {

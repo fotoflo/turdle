@@ -11,9 +11,8 @@ function GameLetter({gameSlot, gameboardState, gameRow, activeLetter, setActiveL
     const char = gameboardState.chars[slotIndex];
 
     return (
-      <Col onClick={ () => setActiveLetter(slotKey) }>
         <SlotBox 
-          className="col" 
+          onClick={ () => setActiveLetter(slotKey) }
           gameboardState={gameboardState}
           activeLetter={activeLetter}
           
@@ -28,7 +27,6 @@ function GameLetter({gameSlot, gameboardState, gameRow, activeLetter, setActiveL
         >
           {char.letter.toUpperCase()}
         </SlotBox>
-      </Col>
     )
     
 }
@@ -38,11 +36,11 @@ const SlotBox = styled.div`
       solid ${(props) => { return props.slotKey === props.activeLetter ? "red" : "grey" }
     };
   background-color: ${ (props) =>  props.theme[props.char.status]   };
-  height: 6rem;
-  width: 6rem;
+  height: 100%;
+  width: 100%;
   font-size: 3rem;
   text-align: center;
-  margin-top: 10px;
+  margin: 10px;
 `
     
 

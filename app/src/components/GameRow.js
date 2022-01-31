@@ -2,16 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import GameSlot from './GameSlot'
-import { Container, Row } from 'react-bootstrap';
+import styled from 'styled-components';
 
-// import { Col, Row, Button } from 'react-bootstrap';
 // import {FaSignOutAlt} from 'react-icons/fa'
 
 function GameRow({gameRow, gameboardState, ...props}){
 
     return (
-      <Container>
-        <Row>
+        <SlotRow id={`row-${gameRow}`}>
           { 
             Array(gameboardState.slots).fill(0).map(
               (e,j)=>{
@@ -25,12 +23,18 @@ function GameRow({gameRow, gameboardState, ...props}){
               })
 
           }
-
-        </Row>
-      </Container>
+        </SlotRow>
     )
 }
 
+const SlotRow = styled.div`
+  display: flex;
+  justifyContent: center;
+  height: 80px;
+  min-height: 80px;
+  max-height: 100px;
+  margin-bottom: 20px;
+`
 
 GameRow.propTypes = {
   activeLetter: PropTypes.string.isRequired,

@@ -4,7 +4,7 @@ import { Container } from 'react-bootstrap';
 import GameRow from './GameRow';
 import Keyboard from './Keyboard';
 import HintPanel from './HintPanel/HintPanel';
-
+import styled from 'styled-components';
 
 function GameBoard({showHints, word, ...props}){
 
@@ -163,7 +163,7 @@ function GameBoard({showHints, word, ...props}){
     }
 
     return (
-      <Container>
+      <GameBoardContainer id="GameBoardContainer">
           {/* {word} */}
           { showHints === true &&
             <HintPanel 
@@ -188,9 +188,12 @@ function GameBoard({showHints, word, ...props}){
             gameboardState={gameboardState}
             keydownHandler={keydownHandler}
           />
-      </Container>
+      </GameBoardContainer>
     )
 }
+
+const GameBoardContainer = styled(Container)`
+`
 
 GameBoard.propTypes = {
   showHints: PropTypes.bool,

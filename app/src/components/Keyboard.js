@@ -1,15 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import { Row } from 'react-bootstrap';
 import KeyboardLetter from './KeyboardLetter'
-import { Container, Row } from 'react-bootstrap';
+import styled from 'styled-components';
 
 function Keyboard({...props}){
 
     return (
-      <Row>
-        <Container>
-          <Row>
+      <KeyboardRow>
+        <KeyboardContainer>
+          <KeyRow>
             <KeyboardLetter {...props} label="q"/>
             <KeyboardLetter {...props} label="w" />
             <KeyboardLetter {...props} label="e" />
@@ -20,8 +20,8 @@ function Keyboard({...props}){
             <KeyboardLetter {...props} label="i" />
             <KeyboardLetter {...props} label="o" />
             <KeyboardLetter {...props} label="p" />
-          </Row>
-          <Row>
+          </KeyRow>
+          <KeyRow>
             <KeyboardLetter {...props} label="a" />
             <KeyboardLetter {...props} label="s" />
             <KeyboardLetter {...props} label="d" />
@@ -31,8 +31,8 @@ function Keyboard({...props}){
             <KeyboardLetter {...props} label="j" />
             <KeyboardLetter {...props} label="k" />
             <KeyboardLetter {...props} label="l" />
-          </Row>
-          <Row>
+          </KeyRow>
+          <KeyRow>
             <KeyboardLetter {...props} label="ENTER" />
             <KeyboardLetter {...props} label="z" />
             <KeyboardLetter {...props} label="x" />
@@ -42,11 +42,27 @@ function Keyboard({...props}){
             <KeyboardLetter {...props} label="n" />
             <KeyboardLetter {...props} label="m" />
             <KeyboardLetter {...props} label="⌫" />
-          </Row>
-        </Container>
-      </Row>
+          </KeyRow>
+        </KeyboardContainer>
+      </KeyboardRow>
     )
 }
+
+const KeyboardContainer = styled.div`
+  flex-wrap: nowrap;
+`
+
+
+ // contains the whole keyboard
+const KeyboardRow = styled.div`
+`
+
+//contains a row of keys
+const KeyRow = styled.div` 
+  display: flex;
+  flex-wrap: nowrap;
+`
+
 
 Keyboard.propTypes = {
   keydownHandler: PropTypes.func.isRequired
