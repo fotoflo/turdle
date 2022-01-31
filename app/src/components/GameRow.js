@@ -30,9 +30,9 @@ function GameRow({gameRow, gameboardState, ...props}){
 const SlotRow = styled.div`
   display: flex;
   justifyContent: center;
-  height: 80px;
-  min-height: 80px;
-  max-height: 100px;
+  height: 55px;
+  line-height: 48px;
+  font-size: 48px;
   margin-bottom: 20px;
 `
 

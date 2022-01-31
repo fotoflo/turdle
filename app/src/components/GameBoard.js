@@ -112,6 +112,7 @@ function GameBoard({showHints, word, ...props}){
           return;
         case pressedKey === "Backspace":
         case pressedKey === "Delete":
+        case pressedKey === "⌫":
           resetActiveLetter()
           return;
         case !pressedKey.match(/^[a-zA-Z]{1}$/):
