@@ -1,6 +1,7 @@
 body {
   min-width: 330px;
-  margin: 0;
+  max-width: 500px;
+  margin: auto !important;
   flex-wrap: nowrap;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
