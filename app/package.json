@@ -1,6 +1,6 @@
 {
-  "name": "turdle-the-worldle-solver",
-  "homepage": "https://fotoflo.github.io/wordlesolver",
+  "name": "wordcheater",
+  "homepage": "https://fotoflo.github.io/wordcheater",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
