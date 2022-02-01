@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Col } from 'react-bootstrap';
-import './keyboard.css';
 
 function KeyboardLetter({label, keydownHandler, gameboardState, ...props}){
 
