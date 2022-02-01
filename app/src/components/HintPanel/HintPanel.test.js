@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+// import { render, screen } from '@testing-library/react';
 // import HintPanel from './HintPanel';
 import the_wordlist from '../../FiveLetterWords.json'
 
@@ -27,7 +27,7 @@ describe( 'Array.prototype.findWordsWithChars', ()=>{
   const chars = "xe";
   const wordlist = ['xenon', 'rewax', 'roger', 'bob', 'echo', 'xio']
 
-	it(`it should return a list of words that have the chars" `, () => {
+	it(`should return a list of words that have the chars`, () => {
     const result = wordlist.findWordsWithChars(chars)
     console.log(result)
     expect( result.sort() ).toEqual( [ 'xenon', 'rewax' ].sort() )
@@ -38,7 +38,7 @@ describe( 'findWordsWithoutChars', ()=>{
   const chars = "xr";
   const wordlist = ['xenon', 'rewax', 'roger', 'bob', 'echo', 'xio']
 
-	it(`it should return a list of words that dont have the chars" `, () => {
+	it(`should return a list of words that dont have the chars`, () => {
     let result = wordlist.findWordsWithoutChars( chars)
     expect( result.sort() ).toEqual( [ 'echo', 'bob' ].sort() )
 	}) 
@@ -48,12 +48,12 @@ describe( 'Array.prototype.findWordsWithLettersInSlots', ()=>{
   const letterSlotPairs = [{letter: "x", slot: 0}, {letter: "y", slot: 1}];
   const wordlist = ['xenon', 'rewax', 'roger', 'bob', 'xylophone']
 
-	it(`it should return a list of words have the right Letter in the right slot" `, () => {
+	it(`should return a list of words have the right Letter in the right slot`, () => {
     const result = wordlist.findWordsWithLettersInSlots(letterSlotPairs)
     expect( result.sort() ).toEqual( [ 'xylophone' ].sort() )
 	}) 
 
-  it(`it should return the whole list if there are no slot pairs" `, () => {
+  it(`should return the whole list if there are no slot pairs`, () => {
     const result = wordlist.findWordsWithLettersInSlots({})
     expect( result.sort() ).toEqual( wordlist.sort() )
 	}) 
@@ -63,12 +63,12 @@ describe.only( 'Array.prototype.findWordsWithCharsButNotInSlot', ()=>{
   const letterSlotPairs = [{letter: "a", slot: 1}];
   const wordlist = ['japan','happy','thank','gamma','tampa','manga']
 
-	it(`it should return a list of words have the right Letter in the right slot" `, () => {
+	it(`should return a list of words have the right Letter in the right slot`, () => {
     const result = wordlist.findWordsWithCharsButNotInSlot(letterSlotPairs)
     expect( result).toEqual( [ 'thank' ])
 	}) 
 
-  it(`it should return the whole list if there are no slot pairs" `, () => {
+  it(`should return the whole list if there are no slot pairs`, () => {
     const result = wordlist.findWordsWithLettersInSlots({})
     expect( result.sort() ).toEqual( wordlist.sort() )
 	}) 
@@ -78,7 +78,7 @@ describe( 'Array.prototype.findWordsWithoutCharsInSlots', ()=>{
 const charSlotPair = {char: "x", slot: 0}
 const wordlist = ['xenon', 'rewax', 'roger', 'bob']
 
-	it(`it should return a list of words have the right char in the right slot" `, () => {
+	it(`should return a list of words have the right char in the right slot`, () => {
     const result = wordlist.findWordsWithoutCharsInSlots(charSlotPair)
     expect( result.sort() ).toEqual( [  'rewax', 'roger', 'bob' ].sort() )
 	}) 
@@ -92,7 +92,7 @@ describe( 'getLetterSlotPairsFromCharsArray(gameboardState.chars)', ()=>{
                 "key":"row-0__slot-1","index":1,"row":0,"slot":1,"letter":"i","status":3
               }]
 
-	it(`it should return a list of char/slot pairs from the gameboardState.chars array" `, () => {
+	it(`should return a list of char/slot pairs from the gameboardState.chars array`, () => {
     const result = getLetterSlotPairsByStatusFromCharsArray(chars, 3)
     console.log(JSON.stringify(result))
     expect( result ).toEqual( [{letter: 'h', slot:0}, {letter: 'i', slot:1}] ) 
@@ -102,7 +102,7 @@ describe( 'getLetterSlotPairsFromCharsArray(gameboardState.chars)', ()=>{
 
 describe.only( 'filterWordList', ()=>{
 
-	it(`it should return a list of words have the right char in the right slot" `, () => {
+	it(`should return a list of words have the right char in the right slot`, () => {
     const wordlist = the_wordlist;
     const chars = [
       {
@@ -144,4 +144,3 @@ describe.only( 'filterWordList', ()=>{
     expect( result ).toEqual( [ 'alive' ] )
 	}) 
 })
-
