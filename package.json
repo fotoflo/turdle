@@ -1,7 +1,7 @@
 {
-  "name": "wordle-solver",
+  "name": "wordcheater",
   "version": "1.0.0",
-  "homepage": "https://fotoflo.github.io/wordlesolver",
+  "homepage": "https://fotoflo.github.io/wordcheater",
   "description": "",
   "main": "index.html",
   "scripts": {
