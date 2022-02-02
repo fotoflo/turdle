@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import uuid from 'react-uuid'
+import Head from 'next/head'
 
+import uuid from 'react-uuid'
 
 import '../styles/globals.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -53,6 +54,10 @@ function App() {
   };
   
   return (
+    <>
+    <Head>
+      <title>WordCheater - The Wordle Solver</title>
+    </Head>
     <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
       <GlobalStyles />
       <StyledApp>
@@ -68,10 +73,10 @@ function App() {
             <ThemeToggleSwitch
               defaultValue={true}
               toggleFn={themeToggler}
-            />
+              />
             <HintToggler
               onClick={hintToggler}
-            >
+              >
               <FaLightbulb />
             </HintToggler>
           </Container>
@@ -79,9 +84,10 @@ function App() {
         <GameBoard 
           word={word}
           showHints={showHints}
-        />
+          />
       </StyledApp>
     </ThemeProvider>
+    </>
   );
 }
 
