@@ -53,9 +53,27 @@ function GameBoard({showHints, word, ...props}){
     const [activeLetter, setActiveLetter] = useState("row-0__slot-0") // set of {0,1,2,3,4,5}
     const [gameboardState, setGameboardState] = useState(newGameboardState)
 
-    function iterateStatus(number){
-      const max = 3;
-      return number < max ? number+1 : 0;
+    function iterateStatus(number, pressedKey){
+      if(showHints === true){
+        const max = 3;
+        return number < max ? number+1 : 0;
+      }else{
+        console.log(`showHints should be false ${showHints}`)
+        console.log(`pressedKey ${pressedKey}`)
+        const slot = activeLetter[ activeLetter.length - 1 ] // we onlys support 0-9 aka 10 letter words
+        if(word[slot] === pressedKey){
+            // they match, set status to 3, green
+            return 3
+        } else if( word.indexOf(pressedKey) !== -1 ) {
+          // the letter is in a dfferent slot
+            // set status to 2, yellow
+            return 2
+        } else {
+          // the letter is not in the word
+          // set status to 1, gray
+          return 1
+        }
+      }
     }
 
     function indexOfActiveLetter(){
@@ -93,7 +111,7 @@ function GameBoard({showHints, word, ...props}){
 
     function keydownHandler( {key: pressedKey} ){
 
-      console.log(pressedKey)
+      console.log(pressedKey, word)
 
       switch(true){
         case pressedKey === " ":
@@ -127,7 +145,7 @@ function GameBoard({showHints, word, ...props}){
       const [newLetter] = gameboardState.chars.filter(c => c.key === activeLetter);
       
       newLetter.letter = pressedKey
-      newLetter.status = iterateStatus( newLetter.status )  
+      newLetter.status = iterateStatus( newLetter.status, pressedKey )  
       
       // set the new letter
       newChars[newLetter.index] = newLetter
