@@ -10,14 +10,7 @@ class MyDocument extends Document {
       return (
             <Html>
               <Head>
-                <meta charset="utf-8" />
                 <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-                <meta name="viewport" content="width=device-width, initial-scale=1" />
-                <meta name="theme-color" content="#000000" />
-                <meta
-                  name="description"
-                  content="Web site created using create-react-app"
-                />
                 <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
                 {/* <!--
                   manifest.json provides metadata used when your web app is installed on a
@@ -51,11 +44,6 @@ class MyDocument extends Document {
                 `,
                   }}
                 />
-
-                <meta property="og:title" content="WordCheater - The Wordle Solver" />
-                <meta property="og:image" content="%PUBLIC_URL%/assets/WordCheaterOgImg.jpg" />
-                <meta property="og:description" content="WordCheater helps you find 5 letter words!" />
-
               </Head>
               <body>
                 <Main />

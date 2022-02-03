@@ -16,6 +16,7 @@ import { FaLightbulb, FaRegQuestionCircle } from 'react-icons/fa';
 import ThemeToggleSwitch from './components/ThemeToggleSwitch';
 import GameBoard from './components/GameBoard';
 import HelpModal from './components/HelpModal';
+import Meta from './components/Meta';
 
 import wordList from './FiveLetterWords.json'
 
@@ -25,9 +26,24 @@ function App() {
   
   const [theme, setTheme] = useState("light");
   
-  const [showHints, setShowHints] = useState(true);
   const [showModal, setShowModal] = useState(false);
+  
+  const [showHints, setShowHints] = useState(true); // runs at server render
 
+  useEffect( () => { // runs on Client on load
+    const hintsSetting = JSON.stringify(localStorage.getItem('showHints'))
+    if(hintsSetting === null){
+      localStorage.setItem('showHints', JSON.stringify(showHints))
+    }else{
+      setShowHints( (hintsSetting === '"true"')  )
+    }
+  }, [showHints])
+
+  const hintToggler = () => {
+    showHints === false ? setShowHints(true) : setShowHints(false);
+    showHints === false ? localStorage.setItem('showHints',true) : localStorage.setItem('showHints',false);
+    console.log("toggling")
+  };
 
 
   useEffect( () => {
@@ -43,11 +59,6 @@ function App() {
     console.log("toggling")
   };
 
-  const hintToggler = () => {
-    showHints === false ? setShowHints(true) : setShowHints(false);
-    console.log("toggling")
-  };
-
 
   const modalToggler = () => {
     showModal === true ? setShowModal(false): setShowModal(true)
@@ -56,7 +67,7 @@ function App() {
   return (
     <>
     <Head>
-      <title>WordCheater - The Wordle Solver</title>
+      <Meta />
     </Head>
     <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
       <GlobalStyles />
