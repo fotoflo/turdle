@@ -16,7 +16,6 @@ import { FaLightbulb, FaRegQuestionCircle } from 'react-icons/fa';
 import ThemeToggleSwitch from './components/ThemeToggleSwitch';
 import GameBoard from './components/GameBoard';
 import HelpModal from './components/HelpModal';
-import Meta from './components/Meta';
 
 import wordList from './FiveLetterWords.json'
 
@@ -67,7 +66,7 @@ function App() {
   return (
     <>
     <Head>
-      <Meta />
+      <title>WordCheater - The Wordle Solver</title>
     </Head>
     <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
       <GlobalStyles />
