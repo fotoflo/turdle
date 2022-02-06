@@ -17,7 +17,7 @@ import ThemeToggleSwitch from './components/ThemeToggleSwitch';
 import GameBoard from './components/GameBoard';
 import HelpModal from './components/HelpModal';
 
-import wordList from './FiveLetterWords.json'
+import wordList from '../dictonaries/wordle-possible-answers.json'
 
 
 function App() {
@@ -50,6 +50,7 @@ function App() {
     const min = 1;
 
     const rand =  Math.floor(Math.random() * (max - min + 1) + min)
+    console.log(`the word is ${wordList[rand]}`)
     setWord(wordList[rand])
   }, [])
 
