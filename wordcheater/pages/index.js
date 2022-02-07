@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 
 export default function Home() {
@@ -49,7 +48,7 @@ export default function Home() {
           />
 
       <meta property="og:title" content="WordCheater - The Wordle Solver" />
-      <meta property="og:image" content="%PUBLIC_URL%/assets/WordCheaterOgImg.jpg" />
+      <meta property="og:image" content="" />
       <meta property="og:description" content="WordCheater helps you find 5 letter words!" />
     </Head>
 
@@ -100,10 +99,6 @@ export default function Home() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Powered by{' '}
-          <span className={styles.logo}>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-          </span>
         </a>
       </footer>
     </div>
