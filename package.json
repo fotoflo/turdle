@@ -5,9 +5,8 @@
   "description": "",
   "main": "index.html",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "predeploy": "npm run build",
-    "build": "echo please use build in the ./app directory"
+    "test": "echo please use scripts in the ./wordcheater directory",
+    "build": "echo please use scripts in the ./wordcheater directory"
   },
   "author": "Alex Miller (fotoflo@gmail.com)",
   "license": "ISC",
