@@ -8,14 +8,14 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import styled, { ThemeProvider } from "styled-components";
 
 import {Navbar, Container} from 'react-bootstrap'
-import { lightTheme, darkTheme, GlobalStyles } from "./Themes";
+import { lightTheme, darkTheme, GlobalStyles } from "../components/Themes";
 import { FaLightbulb, FaRegQuestionCircle } from 'react-icons/fa';
 
 
 
-import ThemeToggleSwitch from './components/ThemeToggleSwitch';
-import GameBoard from './components/GameBoard';
-import HelpModal from './components/HelpModal';
+import ThemeToggleSwitch from '../components/ThemeToggleSwitch';
+import GameBoard from '../components/GameBoard';
+import HelpModal from '../components/HelpModal';
 
 import wordList from '../dictonaries/wordle-possible-answers.json'
 

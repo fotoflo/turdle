@@ -65,12 +65,9 @@ function GameBoard({showHints, word, ...props}){
             // they match, set status to 3, green
             return 3
         } else if( word.indexOf(pressedKey) !== -1 ) {
-          // the letter is in a dfferent slot
-            // set status to 2, yellow
+          // the letter is in a dfferent slot, set status to 2, yellow
             return 2
-        } else {
-          // the letter is not in the word
-          // set status to 1, gray
+        } else { // the letter is not in the word,  set status to 1, gray
           return 1
         }
       }

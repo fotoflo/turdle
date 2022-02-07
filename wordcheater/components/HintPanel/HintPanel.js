@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components'
 import { Col, Row } from 'react-bootstrap';
-import wordList from '../../../dictonaries/wordle-possible-answers.json'
+import wordList from '../../dictonaries/wordle-possible-answers.json'
 import { getHints } from './HintHelpers'
 // import {FaSignOutAlt} from 'react-icons/fa'
 
