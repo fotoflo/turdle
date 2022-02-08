@@ -78,18 +78,23 @@ function GameBoard({showHints, word, ...props}){
     }
     function nextActiveLetter(){
       const i = indexOfActiveLetter()
+      console.log(gameboardState.chars[i+1])
+      if(typeof(gameboardState.chars[i+1]) === "undefined") return 
       setActiveLetter(gameboardState.chars[i+1].key)
     }
     function prevActiveLetter(){
       const i = indexOfActiveLetter()
+      if(typeof(gameboardState.chars[i-1]) === "undefined" ) return 
       setActiveLetter(gameboardState.chars[i-1].key)
     }
     function prevActiveRow(){
       const i = indexOfActiveLetter()
+      if(typeof( gameboardState.chars[i-gameboardState.slots] ) === "undefined") return 
       setActiveLetter(gameboardState.chars[i-gameboardState.slots].key)
     }
     function nextActiveRow(){
       const i = indexOfActiveLetter()
+      if(typeof(gameboardState.chars[i+gameboardState.slots]) === "undefined") return 
       setActiveLetter(gameboardState.chars[i+gameboardState.slots].key)
     }
 
