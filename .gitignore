@@ -12,6 +12,9 @@
 /build
 /app/.next
 
+# helpers dictionaries
+output-files/*
+
 # misc
 .DS_Store
 .env.local
