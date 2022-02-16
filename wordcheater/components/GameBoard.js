@@ -6,7 +6,7 @@ import Keyboard from './Keyboard';
 import HintPanel from './HintPanel/HintPanel';
 import styled from 'styled-components';
 
-function GameBoard({showHints, word, ...props}){
+function GameBoard({showHints, setShowHints, word, ...props}){
 
     useEffect( () => {
       window.addEventListener("keydown", keydownHandler);
@@ -152,7 +152,7 @@ function GameBoard({showHints, word, ...props}){
       // set the new letter
       newChars[newLetter.index] = newLetter
       gameboardState.chars = newChars
-
+      
       setGameboardState({...gameboardState, chars: newChars})
       addRowsToGameboardWhenLastRowIsFull()
     }
