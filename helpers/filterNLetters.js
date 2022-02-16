@@ -5,7 +5,7 @@ const inputFilename = 'google-10000-english-no-swears.txt'
 const now = new Date()
 
 const conf = {
-  minWordSize : 1,
+  minWordSize : 3,
   outputDir: "./outputFiles",
 }
 
@@ -16,7 +16,9 @@ if (!fs.existsSync(conf.outputDir)){
 const createdFiles = []
 
 lineReader.eachLine(inputFilename, function(line, last) {
-  const filename = `${conf.outputDir}/${line.length}-letter-words.txt`
+  if(line.length < conf.minWordSize) return;
+  
+  const filename = `${conf.outputDir}/${line.length}-letter-words.json`
 
   if( !fs.existsSync(filename) ){
     writeLineToFile(filename, `["${line}"`) // write the first line with a bracket [
