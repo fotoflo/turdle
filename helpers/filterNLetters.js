@@ -19,19 +19,18 @@ lineReader.eachLine(inputFilename, function(line, last) {
   const filename = `${conf.outputDir}/${line.length}-letter-words.txt`
 
   if( !fs.existsSync(filename) ){
-    writeLineToFile(filename, `["${line}"`)
+    writeLineToFile(filename, `["${line}"`) // write the first line with a bracket [
     createdFiles.push(filename)
     console.log(`creating ${filename}`)
     return
   } 
 
-  writeLineToFile(filename, `,"${line}"`)
-  // console.log(filename, " - ", line, line.length);
+  writeLineToFile(filename, `,"${line}"`) // write each line as ,"word"
 
   if(last){
     for(i in createdFiles){
       console.log(`closing file ${createdFiles[i]}`);
-      writeLineToFile(createdFiles[i], "]")
+      writeLineToFile(createdFiles[i], "]") // add a bracket at the end of each file
     }
   }
 
