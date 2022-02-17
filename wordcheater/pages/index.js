@@ -8,10 +8,13 @@ import { lightTheme, darkTheme, GlobalStyles } from "../components/Themes";
 
 import GameBoard from '../components/GameBoard';
 
+import { getWordList } from "../appHelpers";
+
+const DEFAULT_WORD_LENGTH = 5;
 
 // wordlist comes from getServerSideProps
 // theme, showHints, setShowhings comes from _app.js
-function Index({wordList, theme, showHints, setShowHints }) {
+function Index({wordList, theme, showHints, wordLength }) {
 
   const [word, setWord] = useState("hello");
 
@@ -40,19 +43,19 @@ function Index({wordList, theme, showHints, setShowHints }) {
             wordList={wordList}
             word={word}
             showHints={showHints}
-            setShowHints={setShowHints}
         />
     </ThemeProvider>
     </>
   );
 }
 
+
 // Return the Wordlist
-export async function getStaticProps() { 
+export async function getServerSideProps() { 
   // Call an external API endpoint to get posts.
   // You can use any data fetching library
-  const res = await fetch('http://localhost:3000/api/wordlist?wordlength=5')
-  const wordList = await res.json()
+
+  const wordList = await getWordList(DEFAULT_WORD_LENGTH)
 
   console.log(' getStaticProps - wordList.length: ', wordList.length)
   // By returning { props: { wordList } }, the component
