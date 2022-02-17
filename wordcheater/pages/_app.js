@@ -7,12 +7,7 @@ import NavBar from "../components/NavBar";
 import HelpModal from "../components/HelpModal"
 import MainHead from "../components/MainHead"
 
-export default function Home({ Component, wordList }) {
-  useEffect(() => {
-    console.log(wordList);
-  }, []);
-
-
+export default function App({ Component, pageProps }) {
   const [theme, setTheme] = useState("light");
   const [showModal, setShowModal] = useState(false);
   const [showHints, setShowHints] = useState(false); // runs at server render
@@ -49,6 +44,7 @@ export default function Home({ Component, wordList }) {
         theme={theme}
         showHints={showHints}
         setShowHints={setShowHints}
+        {...pageProps} 
         />
         {/* THIS IS THE INDEX PAGE!! */}
 
