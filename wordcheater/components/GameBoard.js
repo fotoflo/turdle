@@ -6,7 +6,7 @@ import Keyboard from './Keyboard';
 import HintPanel from './HintPanel/HintPanel';
 import styled from 'styled-components';
 
-function GameBoard({showHints, setShowHints, word, ...props}){
+function GameBoard({word, showHints, ...props}){
 
     useEffect( () => {
       window.addEventListener("keydown", keydownHandler);
@@ -48,11 +48,14 @@ function GameBoard({showHints, setShowHints, word, ...props}){
       return newGameboardState
     }
 
-    const newGameboardState = generateNewGameboardState()
     
     const [activeLetter, setActiveLetter] = useState("row-0__slot-0") // set of {0,1,2,3,4,5}
-    const [gameboardState, setGameboardState] = useState(newGameboardState)
+    const [gameboardState, setGameboardState] = useState( generateNewGameboardState() )
 
+    useEffect( ()=>{
+      setGameboardState( generateNewGameboardState() )
+    },[word])
+    
     function iterateStatus(number, pressedKey){
       if(showHints === true){
         const max = 3;
