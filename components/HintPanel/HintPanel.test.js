@@ -1,6 +1,6 @@
 // import { render, screen } from '@testing-library/react';
 // import HintPanel from './HintPanel';
-import the_wordlist from '../../FiveLetterWords.json'
+import the_wordlist from '../../dictonaries/5-letter-words.json'
 
 import {
 
@@ -59,7 +59,7 @@ describe( 'Array.prototype.findWordsWithLettersInSlots', ()=>{
 	}) 
 })
 
-describe.only( 'Array.prototype.findWordsWithCharsButNotInSlot', ()=>{
+describe( 'Array.prototype.findWordsWithCharsButNotInSlot', ()=>{
   const letterSlotPairs = [{letter: "a", slot: 1}];
   const wordlist = ['japan','happy','thank','gamma','tampa','manga']
 
@@ -100,7 +100,7 @@ describe( 'getLetterSlotPairsFromCharsArray(gameboardState.chars)', ()=>{
 })
   
 
-describe.only( 'filterWordList', ()=>{
+describe( 'filterWordList', ()=>{
 
 	it(`should return a list of words have the right char in the right slot`, () => {
     const wordlist = the_wordlist;
