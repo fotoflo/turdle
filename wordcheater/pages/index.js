@@ -10,9 +10,9 @@ import { lightTheme, darkTheme, GlobalStyles } from "../components/Themes";
 import GameBoard from '../components/GameBoard';
 import NavBar from '../components/NavBar';
 
-const DEFAULT_WORD_LENGTH = 5;
-const MIN_WORD_LENGTH = 4;
-const MAX_WORD_LENGTH = 7;
+const DEFAULT_WORD_LENGTH = 3;
+const MIN_WORD_LENGTH = 3;
+const MAX_WORD_LENGTH = 11; // dicts go up to 16
 const WORDLIST_BASEURL = 'http://localhost:3000/api/wordlist';
 const fetcher = (...args) => fetch(...args).then(res => res.json());
 

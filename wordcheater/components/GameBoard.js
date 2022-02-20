@@ -158,6 +158,7 @@ function GameBoard({word, showHints, ...props}){
       
       setGameboardState({...gameboardState, chars: newChars})
       addRowsToGameboardWhenLastRowIsFull()
+      nextActiveLetter()
     }
 
     const addRowsToGameboardWhenLastRowIsFull = () => {
