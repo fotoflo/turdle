@@ -7,7 +7,7 @@ import { ThemeProvider } from "styled-components";
 
 import { lightTheme, darkTheme, GlobalStyles } from "../components/Themes";
 
-import GameBoard from '../components/GameBoard';
+import GameBoard from '../components/GameBoard/GameBoard';
 import NavBar from '../components/NavBar';
 
 const DEFAULT_WORD_LENGTH = 3;

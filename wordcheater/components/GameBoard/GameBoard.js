@@ -2,8 +2,8 @@ import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import { Container } from 'react-bootstrap';
 import GameRow from './GameRow';
-import Keyboard from './Keyboard';
-import HintPanel from './HintPanel/HintPanel';
+import Keyboard from '../Keyboard';
+import HintPanel from '../HintPanel/HintPanel';
 import styled from 'styled-components';
 
 function GameBoard({word, showHints, ...props}){
