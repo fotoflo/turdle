@@ -6,7 +6,12 @@ import Keyboard from '../Keyboard';
 import HintPanel from '../HintPanel/HintPanel';
 import styled from 'styled-components';
 
-import { generateNewGameboardState, composeGameboardRow } from './GameBoardHelpers';
+import {
+  generateNewGameboardState,
+  resetLetterByIndex,
+  addRowToGameboard,
+  charIndexExists
+} from './GameBoardHelpers';
 
 function GameBoard({word, showHints, ...props}){
 
@@ -25,12 +30,12 @@ function GameBoard({word, showHints, ...props}){
     },[word])
     
     function iterateStatus(number, pressedKey){
+      // if hints are on, iterate through the statuses
       if(showHints === true){
         const max = 3;
         return number < max ? number+1 : 0;
       }else{
-        console.log(`showHints should be false ${showHints}`)
-        console.log(`pressedKey ${pressedKey}`)
+        // check the statuses
         const slot = activeLetter[ activeLetter.length - 1 ] // we onlys support 0-9 aka 10 letter words
         if(word[slot] === pressedKey){
             // they match, set status to 3, green
@@ -50,37 +55,31 @@ function GameBoard({word, showHints, ...props}){
 
     function nextActiveLetter(){
       const i = indexOfActiveLetter()
-      if(typeof(gameboardState.chars[i+1]) === "undefined") return 
+      if(!charIndexExists(gameboardState, i+1)) return 
       setActiveLetter(gameboardState.chars[i+1].key)
     }
 
     function prevActiveLetter(){
       const i = indexOfActiveLetter()
-      if(typeof(gameboardState.chars[i-1]) === "undefined" ) return 
+      if(!charIndexExists(gameboardState, i-1)) return 
       setActiveLetter(gameboardState.chars[i-1].key)
     }
     function prevActiveRow(){
       const i = indexOfActiveLetter()
-      if(typeof( gameboardState.chars[i-gameboardState.slots] ) === "undefined") return 
+      if(!charIndexExists(i - gameboardState.slots )) return 
       setActiveLetter(gameboardState.chars[i-gameboardState.slots].key)
     }
     
     function nextActiveRow(){
       const i = indexOfActiveLetter()
-      if(typeof(gameboardState.chars[i+gameboardState.slots]) === "undefined") return 
+      if(charIndexExists(i+gameboardState.slots) === "undefined") return 
       setActiveLetter(gameboardState.chars[i+gameboardState.slots].key)
     }
 
     function resetActiveLetter(){
       const i = indexOfActiveLetter()
-      const letter = gameboardState.chars[i]
-      letter.letter = ''
-      letter.status = 0
-      
-      const newChars =  [...gameboardState.chars]  // an array    
-      newChars[i] = letter
-
-      setGameboardState({...gameboardState, chars: newChars })
+      const newGameboardState = resetLetterByIndex(gameboardState, i)
+      setGameboardState(newGameboardState)
     }
 
 
@@ -143,17 +142,13 @@ function GameBoard({word, showHints, ...props}){
       if( rows[rows.length-1]
           .every( char => char.letter !== '') )
           {
-            addRowToGameboard(word)
+            addRowToGameboardState(word)
           }
     }
 
 
-    function addRowToGameboard(word){
-      let newGameboardState = Object.assign({}, gameboardState)
-
-      const blankRow = composeGameboardRow(gameboardState.rows, gameboardState.slots)
-      newGameboardState.chars = newGameboardState.chars.concat(blankRow)
-      newGameboardState.rows++
+    function addRowToGameboardState(word){
+      const newGameboardState = addRowToGameboard(gameboardState)
       setGameboardState(newGameboardState)
     }
 

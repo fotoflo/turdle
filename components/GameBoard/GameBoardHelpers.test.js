@@ -2,7 +2,10 @@ import {
   generateNewGameboardState,
   composeGameboardRow,
   getRow,
-  isRowFull 
+  isRowFull,
+  addRowToGameboard,
+  resetLetterByIndex,
+  charIndexExists
 } from "./GameBoardHelpers";
 
 const blankCharsRow = [
@@ -127,3 +130,42 @@ describe( 'isRowFull', ()=>{
 	}) 
 })
 
+
+describe( 'addRowToGameboard', ()=>{
+  const myGameboardState = generateNewGameboardState("hi")
+  myGameboardState.chars[0].letter = "h"
+  myGameboardState.chars[1].letter = "i"
+
+	it(`should add a row to the gameboard`, () => {
+    const newGameboardState = addRowToGameboard(myGameboardState)
+    expect(newGameboardState.chars[2]).toMatchObject({  key: 'row-1__slot-0', })
+    expect(newGameboardState.rows).toBe(2)
+	}) 
+
+})
+
+describe('resetLetterByIndex(gameboardState, index)', ()=>{
+  it("should reset the indicated letter", ()=>{
+    const myGameboardState = generateNewGameboardState("hi")
+    myGameboardState.chars[0].letter = "h"
+    myGameboardState.chars[0].status = 3
+
+    const newGameboardState = resetLetterByIndex(myGameboardState, 0)
+    expect(newGameboardState.chars[0].letter).toEqual('')
+    expect(newGameboardState.chars[0].status).toEqual(0)
+  })
+})
+
+describe('charIndexExists(gameboard, index)', ()=>{
+  const myGameboardState = generateNewGameboardState("hi")
+
+  it("should return true if the char exists", ()=>{
+    const result = charIndexExists(myGameboardState, 1)
+    expect(result).toBe(true)
+  })
+
+  it("should return false if the char doesn't exists", ()=>{
+    const result = charIndexExists(myGameboardState, 8)
+    expect(result).toBe(false)
+  })
+})

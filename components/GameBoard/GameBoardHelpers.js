@@ -1,9 +1,12 @@
-// exports
-/**
-    generateNewGameboardState
-    composeGameboardRow
-    getRow
-    isRowFull
+
+/** exports:
+              generateNewGameboardState,
+              composeGameboardRow,
+              getRow,
+              isRowFull,
+              addRowToGameboard,
+              resetLetterByIndex,
+              charIndexExists
 */
 
 /**
@@ -15,9 +18,9 @@
 export const generateNewGameboardState = (word, rows = 1, startingRow = 0) => {
   if(!word){ console.trace(`GenerateNewGameBoardState no word`); return }
   const slots = word.length
-  let chars = []
   const newGameboardState = { word, rows, slots}
   
+  let chars = []
   for(let i = startingRow; i < rows + startingRow ; i++){
     chars = chars.concat(composeGameboardRow(i, slots))
   }
@@ -70,4 +73,28 @@ export const isRowFull = (gameboardState, rowNumber) => {
     .filter( char => char.letter != '') // has a letter
   
   return gameboardState.slots === row.length
+}
+
+export const addRowToGameboard = (gameBoard) => {
+  let newGameboard = {...gameBoard}
+
+  const blankRow = composeGameboardRow(gameBoard.rows, gameBoard.slots)
+  newGameboard.chars = newGameboard.chars.concat(blankRow)
+  newGameboard.rows++
+  return newGameboard
+}
+
+export const resetLetterByIndex = (gameboard, i) => {
+    const letter = gameboard.chars[i]
+    letter.letter = ''
+    letter.status = 0
+    
+    const newChars =  [...gameboard.chars]  // an array    
+    newChars[i] = letter
+
+    return {...gameboard, chars: newChars }
+}
+
+export const charIndexExists = (gameboard, i) => {
+  return typeof(gameboard.chars[i]) === "undefined" ? false : true;
 }
