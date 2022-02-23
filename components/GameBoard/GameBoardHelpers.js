@@ -1,4 +1,10 @@
-
+// exports
+/**
+    generateNewGameboardState
+    composeGameboardRow
+    getRow
+    isRowFull
+*/
 
 /**
  * constructor for the gameboard state
@@ -13,7 +19,7 @@ export const generateNewGameboardState = (word, rows = 1, startingRow = 0) => {
   const newGameboardState = { word, rows, slots}
   
   for(let i = startingRow; i < rows + startingRow ; i++){
-    chars = chars.concat(composeGameboardRow(startingRow,slots))
+    chars = chars.concat(composeGameboardRow(i, slots))
   }
 
   newGameboardState.chars = chars;
@@ -44,4 +50,24 @@ export const composeGameboardRow = (rowNumber, slots) =>{
   }
 
   return row
+}
+
+/**
+ * Get a row!
+ * @param  {} gameboardState -- a gameboard state
+ * @param  {} rowNumber - the nth row
+ */
+export const getRow = (gameboardState, rowNumber) => {
+  return gameboardState.chars.filter( char => char.row === rowNumber)
+}
+/**
+ * Check if a row is full
+ * @param  {} gameboardState -- a gameboard state
+ * @param  {} rowNumber -- a row
+ */
+export const isRowFull = (gameboardState, rowNumber) => {
+  const row = getRow(gameboardState, rowNumber)
+    .filter( char => char.letter != '') // has a letter
+  
+  return gameboardState.slots === row.length
 }

@@ -1,4 +1,9 @@
-import { generateNewGameboardState, composeGameboardRow } from "./GameBoardHelpers";
+import {
+  generateNewGameboardState,
+  composeGameboardRow,
+  getRow,
+  isRowFull 
+} from "./GameBoardHelpers";
 
 const blankCharsRow = [
   {
@@ -19,19 +24,19 @@ const blankCharsRow = [
   }
 ]
 
-const thirdCharsRow = [
+const secondBlankCharsRow = [
   {
-    key: 'row-2__slot-0',
-    index: 4,
-    row: 2,
+    key: 'row-1__slot-0',
+    index: 2,
+    row: 1,
     slot: 0,
     letter: '',
     status: 0
   },
   {
-    key: 'row-2__slot-1',
-    index: 5,
-    row: 2,
+    key: 'row-1__slot-1',
+    index: 3,
+    row: 1,
     slot: 1,
     letter: '',
     status: 0
@@ -50,6 +55,17 @@ describe( 'generateNewGameboardState', ()=>{
       chars: blankCharsRow
     })
 	}) 
+
+  it(`should return a gameboard state with correct rows and slots`, () => {
+    const result = generateNewGameboardState("hi", 2)
+    // console.log({chars: result.chars})
+    expect(result).toMatchObject({
+      word: "hi",
+      rows: 2,
+      slots: 2,
+      chars: blankCharsRow.concat(secondBlankCharsRow)
+    })
+	}) 
 })
 
 
@@ -62,10 +78,52 @@ describe( 'composeGameboardRow', ()=>{
 	}) 
 
 
-  it(`should work for the nth row gameboard row`, () => {
-    const result = composeGameboardRow(2, 2)
+  it(`should work for the nth row gameboard row, index starting at zero`, () => {
+    const result = composeGameboardRow(1, 2)
     console.log(`composeGameboardRow(2,2) - ` + {result})
-    expect(result).toMatchObject(thirdCharsRow)
+    expect(result).toMatchObject(secondBlankCharsRow)
+	}) 
+})
+
+describe( 'getRow', ()=>{
+
+  const myGameboardState = generateNewGameboardState("hi", 3)
+
+	it(`should return the first row when asked`, () => {
+    const result = getRow(myGameboardState, 0)
+    expect(result).toMatchObject(blankCharsRow)
+	}) 
+
+
+	it(`should return [] if the row doesnt exist`, () => {
+    const result = getRow(myGameboardState, 9)
+    expect(result).toEqual([])
+	}) 
+
+
+  it(`should return the second row when asked`, () => {
+    const result = getRow(myGameboardState, 1)
+    expect(result).toMatchObject(secondBlankCharsRow)
+	}) 
+})
+
+
+
+describe( 'isRowFull', ()=>{
+  const myGameboardState = generateNewGameboardState("hi", 3)
+  myGameboardState.chars[0].letter = "h"
+  myGameboardState.chars[1].letter = "i"
+  myGameboardState.chars[2].letter = "i"
+
+	it(`should return true if row is full of letters`, () => {
+    const result = isRowFull(myGameboardState, 0)
+    expect(result).toBe(true)
+	}) 
+
+
+  it(`should return false if row has any empty letters`, () => {
+    const result = isRowFull(myGameboardState, 1)
+    expect(result).toBe(false)
 	}) 
 })
 

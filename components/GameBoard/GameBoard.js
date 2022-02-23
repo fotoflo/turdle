@@ -131,10 +131,6 @@ function GameBoard({word, showHints, ...props}){
       nextActiveLetter()
     }
 
-    const rowIsFull = (gameboardState, row) => {
-
-    }
-
     const addRowsToGameboardWhenLastRowIsFull = () => {
       // create and fill rows Array
       const rows = new Array(gameboardState.rows).fill([])
