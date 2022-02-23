@@ -6,6 +6,8 @@ import Keyboard from '../Keyboard';
 import HintPanel from '../HintPanel/HintPanel';
 import styled from 'styled-components';
 
+import { generateNewGameboardState, composeGameboardRow } from './GameBoardHelpers';
+
 function GameBoard({word, showHints, ...props}){
 
     useEffect( () => {
@@ -15,45 +17,11 @@ function GameBoard({word, showHints, ...props}){
       }
     })
 
-
-    const generateNewGameboardState = (rows = 1, startingRow = 0) => {
-      const slots = word.length
-      const chars = []
-      /// we want to be able to do chars.filter( char => char.key === "row-2__slot-1" )
-      /// and chars.filter( char => char.letter === "e" ) etc
-      // for (row in chars.map( char => chars.row) ) console.log(row)
-      //
-      // we also want to be able to generate the <Row><Slot /><Slot /><Slot /></Row> rows based on the count
-      const newGameboardState = { word, rows, slots, chars}
-
-      let index = startingRow * slots;
-
-      for(let i = startingRow; i < rows + startingRow ; i++){
-        for(let j = 0; j < slots; j++){
-          const key = `row-${i}__slot-${j}`
-          chars.push(
-            {
-              key,
-              index,
-              row : i,
-              slot : j,
-              letter : "",
-              status: 0
-            }
-          )
-          index++;
-        }
-      }
-
-      return newGameboardState
-    }
-
-    
     const [activeLetter, setActiveLetter] = useState("row-0__slot-0") // set of {0,1,2,3,4,5}
-    const [gameboardState, setGameboardState] = useState( generateNewGameboardState() )
+    const [gameboardState, setGameboardState] = useState( generateNewGameboardState(word) )
 
     useEffect( ()=>{
-      setGameboardState( generateNewGameboardState() )
+      setGameboardState( generateNewGameboardState(word) )
     },[word])
     
     function iterateStatus(number, pressedKey){
@@ -79,12 +47,13 @@ function GameBoard({word, showHints, ...props}){
     function indexOfActiveLetter(){
       return gameboardState.chars.filter( c => c.key === activeLetter)[0].index;
     }
+
     function nextActiveLetter(){
       const i = indexOfActiveLetter()
-      console.log(gameboardState.chars[i+1])
       if(typeof(gameboardState.chars[i+1]) === "undefined") return 
       setActiveLetter(gameboardState.chars[i+1].key)
     }
+
     function prevActiveLetter(){
       const i = indexOfActiveLetter()
       if(typeof(gameboardState.chars[i-1]) === "undefined" ) return 
@@ -95,6 +64,7 @@ function GameBoard({word, showHints, ...props}){
       if(typeof( gameboardState.chars[i-gameboardState.slots] ) === "undefined") return 
       setActiveLetter(gameboardState.chars[i-gameboardState.slots].key)
     }
+    
     function nextActiveRow(){
       const i = indexOfActiveLetter()
       if(typeof(gameboardState.chars[i+gameboardState.slots]) === "undefined") return 
@@ -161,6 +131,10 @@ function GameBoard({word, showHints, ...props}){
       nextActiveLetter()
     }
 
+    const rowIsFull = (gameboardState, row) => {
+
+    }
+
     const addRowsToGameboardWhenLastRowIsFull = () => {
       // create and fill rows Array
       const rows = new Array(gameboardState.rows).fill([])
@@ -173,16 +147,16 @@ function GameBoard({word, showHints, ...props}){
       if( rows[rows.length-1]
           .every( char => char.letter !== '') )
           {
-            addRowToGameboard()
+            addRowToGameboard(word)
           }
     }
 
 
-    function addRowToGameboard(){
+    function addRowToGameboard(word){
       let newGameboardState = Object.assign({}, gameboardState)
 
-      const blankRows = generateNewGameboardState(1, newGameboardState.rows)
-      newGameboardState.chars = newGameboardState.chars.concat(blankRows.chars)
+      const blankRow = composeGameboardRow(gameboardState.rows, gameboardState.slots)
+      newGameboardState.chars = newGameboardState.chars.concat(blankRow)
       newGameboardState.rows++
       setGameboardState(newGameboardState)
     }
