@@ -10,7 +10,8 @@ import {
   generateNewGameboardState,
   resetLetterByIndex,
   addRowToGameboard,
-  charIndexExists
+  charIndexExists,
+  rowIsFull
 } from './GameBoardHelpers';
 
 function GameBoard({word, showHints, ...props}){
@@ -114,42 +115,27 @@ function GameBoard({word, showHints, ...props}){
       }
       
       pressedKey = pressedKey.toLowerCase()
-
-      const newChars =  [...gameboardState.chars]  // an array    
-      const [newLetter] = gameboardState.chars.filter(c => c.key === activeLetter);
       
-      newLetter.letter = pressedKey
-      newLetter.status = iterateStatus( newLetter.status, pressedKey )  
+      let newGameboard = {...gameboardState};
+      const newChar = getActiveChar(newGameboard)
+      
+      newChar.letter = pressedKey
+      newChar.status = iterateStatus( newChar.status, pressedKey )  
       
       // set the new letter
-      newChars[newLetter.index] = newLetter
-      gameboardState.chars = newChars
-      
-      setGameboardState({...gameboardState, chars: newChars})
-      addRowsToGameboardWhenLastRowIsFull()
+      newGameboard.chars[newChar.index] = newChar
+     
+      if( rowIsFull(newGameboard, newGameboard.rows - 1 ) ){
+        newGameboard = addRowToGameboard(newGameboard)
+      }
+
+      setGameboardState({...newGameboard})
       nextActiveLetter()
     }
 
-    const addRowsToGameboardWhenLastRowIsFull = () => {
-      // create and fill rows Array
-      const rows = new Array(gameboardState.rows).fill([])
-      gameboardState.chars
-        .filter( char => char.letter ==='' )
-        .map( char => rows[char.row].push(char) )
-
-      // if every char in the last row has a letter
-      // add a new row
-      if( rows[rows.length-1]
-          .every( char => char.letter !== '') )
-          {
-            addRowToGameboardState(word)
-          }
-    }
-
-
-    function addRowToGameboardState(word){
-      const newGameboardState = addRowToGameboard(gameboardState)
-      setGameboardState(newGameboardState)
+    const getActiveChar = (gameboard) => {
+      const [activeChar] = gameboard.chars.filter(c => c.key === activeLetter);
+      return activeChar
     }
 
     return (

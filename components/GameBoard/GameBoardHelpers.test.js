@@ -2,7 +2,7 @@ import {
   generateNewGameboardState,
   composeGameboardRow,
   getRow,
-  isRowFull,
+  rowIsFull,
   addRowToGameboard,
   resetLetterByIndex,
   charIndexExists
@@ -112,20 +112,20 @@ describe( 'getRow', ()=>{
 
 
 
-describe( 'isRowFull', ()=>{
+describe( 'rowIsFull', ()=>{
   const myGameboardState = generateNewGameboardState("hi", 3)
   myGameboardState.chars[0].letter = "h"
   myGameboardState.chars[1].letter = "i"
   myGameboardState.chars[2].letter = "i"
 
 	it(`should return true if row is full of letters`, () => {
-    const result = isRowFull(myGameboardState, 0)
+    const result = rowIsFull(myGameboardState, 0)
     expect(result).toBe(true)
 	}) 
 
 
   it(`should return false if row has any empty letters`, () => {
-    const result = isRowFull(myGameboardState, 1)
+    const result = rowIsFull(myGameboardState, 1)
     expect(result).toBe(false)
 	}) 
 })

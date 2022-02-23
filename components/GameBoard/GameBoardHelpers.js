@@ -3,7 +3,7 @@
               generateNewGameboardState,
               composeGameboardRow,
               getRow,
-              isRowFull,
+              rowIsFull,
               addRowToGameboard,
               resetLetterByIndex,
               charIndexExists
@@ -68,7 +68,7 @@ export const getRow = (gameboardState, rowNumber) => {
  * @param  {} gameboardState -- a gameboard state
  * @param  {} rowNumber -- a row
  */
-export const isRowFull = (gameboardState, rowNumber) => {
+export const rowIsFull = (gameboardState, rowNumber) => {
   const row = getRow(gameboardState, rowNumber)
     .filter( char => char.letter != '') // has a letter
   
