@@ -99,35 +99,3 @@ export const resetLetterByIndex = (gameboard, i) => {
 export const charIndexExists = (gameboard, i) => {
   return typeof(gameboard.chars[i]) === "undefined" ? false : true;
 }
-
-export const setCharToLetter = (gameboard, char, letter) =>{
-  letter = letter.toLowerCase()
-  
-  const newChar = char;
-  newChar.letter = letter
-  newChar.status = iterateStatus( newChar.status, letter )  
-  gameboard.chars[newChar.index] = newChar;
-
-  return gameboard
-}
-
-export function iterateStatus(number, pressedKey){
-  // if hints are on, iterate through the statuses
-  if(showHints === true){
-    const max = 3;
-    return number < max ? number+1 : 0;
-  }else{
-    // check the statuses
-    const slot = activeLetter[ activeLetter.length - 1 ] // we onlys support 0-9 aka 10 letter words
-    if(word[slot] === pressedKey){
-        // they match, set status to 3, green
-        return 3
-    } else if( word.indexOf(pressedKey) !== -1 ) {
-      // the letter is in a dfferent slot, set status to 2, yellow
-        return 2
-    } else { // the letter is not in the word,  set status to 1, gray
-      return 1
-
-    }
-  }
-}
