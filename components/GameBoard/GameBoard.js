@@ -22,9 +22,17 @@ function GameBoard({word, showHints, ...props}){
         window.removeEventListener("keydown", keydownHandler);
       }
     })
-
+    
     const [activeLetter, setActiveLetter] = useState("row-0__slot-0") // set of {0,1,2,3,4,5}
     const [gameboardState, setGameboardState] = useState( generateNewGameboardState(word) )
+    
+
+    useEffect(()=>{
+      if( rowIsFull(gameboardState, gameboardState.rows - 1 ) ){
+        const newGameboard = addRowToGameboard(gameboardState)
+        setGameboardState({...newGameboard})
+      }
+    },[gameboardState])
 
     useEffect( ()=>{
       setGameboardState( generateNewGameboardState(word) )
@@ -114,23 +122,23 @@ function GameBoard({word, showHints, ...props}){
           break;
       }
       
-      pressedKey = pressedKey.toLowerCase()
-      
-      let newGameboard = {...gameboardState};
-      const newChar = getActiveChar(newGameboard)
-      
-      newChar.letter = pressedKey
-      newChar.status = iterateStatus( newChar.status, pressedKey )  
-      
-      // set the new letter
-      newGameboard.chars[newChar.index] = newChar
-     
-      if( rowIsFull(newGameboard, newGameboard.rows - 1 ) ){
-        newGameboard = addRowToGameboard(newGameboard)
-      }
+      const activeChar = getActiveChar(gameboardState)
+      const newGameboard = setCharToLetter(gameboardState, activeChar, pressedKey)
 
       setGameboardState({...newGameboard})
       nextActiveLetter()
+    }
+
+
+    const setCharToLetter = (gameboard, char, letter) =>{
+      letter = letter.toLowerCase()
+      
+      const newChar = char;
+      newChar.letter = letter
+      newChar.status = iterateStatus( newChar.status, letter )  
+      gameboard.chars[newChar.index] = newChar;
+
+      return gameboard
     }
 
     const getActiveChar = (gameboard) => {
