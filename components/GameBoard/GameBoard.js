@@ -11,10 +11,11 @@ import {
   resetLetterByIndex,
   addRowToGameboard,
   charIndexExists,
-  rowIsFull
+  rowIsFull,
+  getLastRowGreens
 } from './GameBoardHelpers';
 
-function GameBoard({word, showHints, ...props}){
+function GameBoard({word, showHints, setWordLength, ...props}){
 
     useEffect( () => {
       window.addEventListener("keydown", keydownHandler);
@@ -26,12 +27,18 @@ function GameBoard({word, showHints, ...props}){
     const [gameboardState, setGameboardState] = useState( generateNewGameboardState(word) )
 
     useEffect(()=>{ // add a row if full
-      if( rowIsFull(gameboardState, gameboardState.rows - 1 ) ){
-        const newGameboard = addRowToGameboard(gameboardState)
-        setGameboardState({
-          ...newGameboard,
-          activeLetter: `row-${newGameboard.rows-1}__slot-0`})
+      if( !rowIsFull(gameboardState, gameboardState.rows - 1 ) ) return
+
+      if( getLastRowGreens(gameboardState).length === gameboardState.slots){
+        alert(`YOU WIN! The word was ${word}`)
+        setWordLength(word.length + 1)
+        return
       }
+
+      const newGameboard = addRowToGameboard(gameboardState)
+      setGameboardState({
+        ...newGameboard,
+        activeLetter: `row-${newGameboard.rows-1}__slot-0`})
     },[gameboardState])
 
     useEffect( ()=>{
@@ -96,9 +103,9 @@ function GameBoard({word, showHints, ...props}){
     }
 
 
-    function keydownHandler( {key: pressedKey} ){
-
-      console.log(pressedKey, word)
+    function keydownHandler( {repeat, key: pressedKey} ){
+      if(repeat) return
+      console.log("hello", pressedKey, word)
 
       switch(true){
         case pressedKey === " ":
@@ -128,7 +135,6 @@ function GameBoard({word, showHints, ...props}){
       
       const activeChar = getActiveChar(gameboardState)
       const newGameboard = setCharToLetter(gameboardState, activeChar, pressedKey)
-
       setGameboardState({...newGameboard})
       nextActiveLetter()
     }

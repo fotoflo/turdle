@@ -83,6 +83,7 @@ function Index({
       <GameBoard 
           word={word}
           showHints={showHints}
+          setWordLength={setWordLength}
       />
     </ThemeProvider>
     </>

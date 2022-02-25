@@ -36,7 +36,7 @@ export default function App({ Component, pageProps }) {
         modalToggler={modalToggler} />
 
         {/* THIS IS THE INDEX PAGE!! */}
-      <Component 
+      <Component   // see index.js
         theme={theme}
         themeToggler={themeToggler}
         modalToggler={modalToggler}

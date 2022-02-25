@@ -77,13 +77,25 @@ export const rowIsFull = (gameboardState, rowNumber) => {
   return gameboardState.slots === row.length
 }
 
-export const addRowToGameboard = (gameBoard) => {
-  let newGameboard = {...gameBoard}
+export const addRowToGameboard = (gameboard) => {
+  let newGameboard = {...gameboard}
+  const blankRow = composeGameboardRow(gameboard.rows, gameboard.slots)
 
-  const blankRow = composeGameboardRow(gameBoard.rows, gameBoard.slots)
+  const newRow = getLastRowGreens(gameboard)
+    .map( char => { 
+      blankRow[char.slot].status = 3
+      blankRow[char.slot].letter = char.letter
+    })
+
   newGameboard.chars = newGameboard.chars.concat(blankRow)
   newGameboard.rows++
   return newGameboard
+}
+
+export const getLastRowGreens = (gameboard) => {
+  return gameboard.chars
+    .filter( char => char.row === gameboard.rows - 1 ) // get the last row
+    .filter( char => char.status == 3) // get the greens
 }
 
 export const resetLetterByIndex = (gameboard, i) => {
