@@ -25,10 +25,12 @@ function GameBoard({word, showHints, ...props}){
     
     const [gameboardState, setGameboardState] = useState( generateNewGameboardState(word) )
 
-    useEffect(()=>{
+    useEffect(()=>{ // add a row if full
       if( rowIsFull(gameboardState, gameboardState.rows - 1 ) ){
         const newGameboard = addRowToGameboard(gameboardState)
-        setGameboardState({...newGameboard})
+        setGameboardState({
+          ...newGameboard,
+          activeLetter: `row-${newGameboard.rows-1}__slot-0`})
       }
     },[gameboardState])
 
