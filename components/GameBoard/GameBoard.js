@@ -75,13 +75,13 @@ function GameBoard({word, showHints, ...props}){
     }
     function prevActiveRow(){
       const i = indexOfActiveLetter()
-      if(!charIndexExists(i - gameboardState.slots )) return 
+      if(!charIndexExists(gameboardState, i - gameboardState.slots )) return 
       setActiveLetter(gameboardState.chars[i-gameboardState.slots].key)
     }
     
     function nextActiveRow(){
       const i = indexOfActiveLetter()
-      if(charIndexExists(i+gameboardState.slots) === "undefined") return 
+      if(!charIndexExists(gameboardState, i + gameboardState.slots)) return 
       setActiveLetter(gameboardState.chars[i+gameboardState.slots].key)
     }
 
