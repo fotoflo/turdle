@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useRef} from 'react';
 import PropTypes from 'prop-types';
 import { Container } from 'react-bootstrap';
 import GameRow from './GameRow';
@@ -16,6 +16,8 @@ import {
 } from './GameBoardHelpers';
 
 function GameBoard({word, showHints, setWordLength, ...props}){
+    const scrollRef = useRef(null)
+    const executeScroll = () => scrollRef.current.scrollIntoView()    
 
     useEffect( () => {
       window.addEventListener("keydown", keydownHandler);
@@ -34,11 +36,13 @@ function GameBoard({word, showHints, setWordLength, ...props}){
         setWordLength(word.length + 1)
         return
       }
-
+      
       const newGameboard = addRowToGameboard(gameboardState)
       setGameboardState({
         ...newGameboard,
         activeLetter: `row-${newGameboard.rows-1}__slot-0`})
+        
+      executeScroll()
     },[gameboardState])
 
     useEffect( ()=>{
@@ -178,14 +182,19 @@ function GameBoard({word, showHints, setWordLength, ...props}){
           }
 
           <Keyboard 
+            scrollRef={scrollRef}
             gameboardState={gameboardState}
             keydownHandler={keydownHandler}
           />
+          <FooterScrollRef ref={scrollRef} />
       </GameBoardContainer>
     )
 }
 
 const GameBoardContainer = styled(Container)`
+`
+const FooterScrollRef = styled.div`
+  margin-top: 100px;
 `
 
 GameBoard.propTypes = {
