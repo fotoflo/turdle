@@ -23,9 +23,7 @@ function GameBoard({word, showHints, ...props}){
       }
     })
     
-    const [activeLetter, setActiveLetter] = useState("row-0__slot-0") // set of {0,1,2,3,4,5}
     const [gameboardState, setGameboardState] = useState( generateNewGameboardState(word) )
-    
 
     useEffect(()=>{
       if( rowIsFull(gameboardState, gameboardState.rows - 1 ) ){
@@ -45,8 +43,8 @@ function GameBoard({word, showHints, ...props}){
         return number < max ? number+1 : 0;
       }else{
         // check the statuses
-        const slot = activeLetter[ activeLetter.length - 1 ] // we onlys support 0-9 aka 10 letter words
-        if(word[slot] === pressedKey){
+        const wordSlot = gameboardState.activeLetter.split("-")[2] // get the last char of the key
+        if(word[wordSlot] === pressedKey){
             // they match, set status to 3, green
             return 3
         } else if( word.indexOf(pressedKey) !== -1 ) {
@@ -58,8 +56,12 @@ function GameBoard({word, showHints, ...props}){
       }
     }
 
+    const setActiveLetter = (key) => {
+      setGameboardState({...gameboardState, activeLetter: key})
+    }
+
     function indexOfActiveLetter(){
-      return gameboardState.chars.filter( c => c.key === activeLetter)[0].index;
+      return gameboardState.chars.filter( c => c.key === gameboardState.activeLetter)[0].index;
     }
 
     function nextActiveLetter(){
@@ -142,7 +144,7 @@ function GameBoard({word, showHints, ...props}){
     }
 
     const getActiveChar = (gameboard) => {
-      const [activeChar] = gameboard.chars.filter(c => c.key === activeLetter);
+      const [activeChar] = gameboard.chars.filter(c => c.key === gameboardState.activeLetter);
       return activeChar
     }
 
@@ -161,7 +163,6 @@ function GameBoard({word, showHints, ...props}){
                 return <GameRow 
                   key={`gameRow-${i}`}
                   gameboardState={gameboardState}
-                  activeLetter={activeLetter}
                   setActiveLetter={setActiveLetter}
                   gameRow={i}
                 i/>

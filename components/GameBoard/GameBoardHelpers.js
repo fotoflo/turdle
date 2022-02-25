@@ -19,7 +19,8 @@
 export const generateNewGameboardState = (word, rows = 1, startingRow = 0) => {
   if(!word){ console.trace(`GenerateNewGameBoardState no word`); return }
   const slots = word.length
-  const newGameboardState = { word, rows, slots}
+  const activeLetter = 'row-0__slot-0'
+  const newGameboardState = { activeLetter, word, rows, slots}
   
   let chars = []
   for(let i = startingRow; i < rows + startingRow ; i++){

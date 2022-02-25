@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components'
 
-function GameLetter({gameSlot, gameboardState, gameRow, activeLetter, setActiveLetter, ...props } ){
+function GameLetter({gameSlot, gameboardState, gameRow, setActiveLetter, ...props } ){
 
     const slotKey = `row-${gameRow}__slot-${gameSlot}`
     const slotIndex = ( gameRow * gameboardState.slots ) + gameSlot
@@ -12,7 +12,7 @@ function GameLetter({gameSlot, gameboardState, gameRow, activeLetter, setActiveL
         <SlotBox 
           onClick={ () => setActiveLetter(slotKey) }
           gameboardState={gameboardState}
-          activeLetter={activeLetter}
+          activeLetter={gameboardState.activeLetter}
           
           char={char}
 
@@ -45,7 +45,6 @@ const SlotBox = styled.div`
 GameLetter.propTypes = {
   gameSlot: PropTypes.number.isRequired,
   gameRow:  PropTypes.number.isRequired,
-  activeLetter: PropTypes.string.isRequired,
   setActiveLetter: PropTypes.func.isRequired,
   gameboardState: PropTypes.object.isRequired
 }
