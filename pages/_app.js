@@ -3,7 +3,6 @@ import styles from "../styles/Home.module.css";
 
 import "../styles/globals.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import NavBar from "../components/NavBar";
 import HelpModal from "../components/HelpModal"
 import MainHead from "../components/MainHead"
 

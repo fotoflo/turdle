@@ -77,6 +77,10 @@ export const rowIsFull = (gameboardState, rowNumber) => {
   return gameboardState.slots === row.length
 }
 
+export const rowIsNotFull = (gameboardState, rowNumber) => {
+  return !rowIsFull(gameboardState, rowNumber)
+}
+
 export const addRowToGameboard = (gameboard) => {
   let newGameboard = {...gameboard}
   const blankRow = composeGameboardRow(gameboard.rows, gameboard.slots)

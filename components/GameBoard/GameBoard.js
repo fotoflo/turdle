@@ -11,7 +11,7 @@ import {
   resetLetterByIndex,
   addRowToGameboard,
   charIndexExists,
-  rowIsFull,
+  rowIsNotFull,
   getLastRowGreens
 } from './GameBoardHelpers';
 
@@ -29,7 +29,7 @@ function GameBoard({word, showHints, setWordLength, ...props}){
     const [gameboardState, setGameboardState] = useState( generateNewGameboardState(word) )
 
     useEffect(()=>{ // add a row if full
-      if( !rowIsFull(gameboardState, gameboardState.rows - 1 ) ) return
+      if( rowIsNotFull(gameboardState, gameboardState.rows - 1 ) ) return
 
       if( didWinRound(gameboardState) ){
         wonRound()
@@ -59,9 +59,8 @@ function GameBoard({word, showHints, setWordLength, ...props}){
     
     function iterateStatus(number, pressedKey){
       // if hints are on, iterate through the statuses
-      if(showHints === true){
-        const max = 3;
-        return number < max ? number+1 : 0;
+      if(showHints){
+        return iterateWithinBounds(number, 0, 3)
       }else{
         // check the statuses
         const wordSlot = gameboardState.activeLetter.split("-")[2] // get the last char of the key
@@ -75,6 +74,10 @@ function GameBoard({word, showHints, setWordLength, ...props}){
           return 1
         }
       }
+    }
+
+    function iterateWithinBounds(number, min = 0, max = 3) {
+      return number < max ? number+1 : min;
     }
 
     const setActiveLetter = (key) => {
@@ -190,7 +193,6 @@ function GameBoard({word, showHints, setWordLength, ...props}){
           }
 
           <Keyboard 
-            scrollRef={scrollRef}
             gameboardState={gameboardState}
             keydownHandler={keydownHandler}
           />
