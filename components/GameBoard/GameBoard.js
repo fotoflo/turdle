@@ -31,9 +31,8 @@ function GameBoard({word, showHints, setWordLength, ...props}){
     useEffect(()=>{ // add a row if full
       if( !rowIsFull(gameboardState, gameboardState.rows - 1 ) ) return
 
-      if( getLastRowGreens(gameboardState).length === gameboardState.slots){
-        alert(`YOU WIN! The word was ${word}`)
-        setWordLength(word.length + 1)
+      if( didWinRound(gameboardState) ){
+        wonRound()
         return
       }
       
@@ -48,6 +47,15 @@ function GameBoard({word, showHints, setWordLength, ...props}){
     useEffect( ()=>{
       setGameboardState( generateNewGameboardState(word) )
     },[word])
+
+    function didWinRound(gameboardState){
+      return getLastRowGreens(gameboardState).length === gameboardState.slots 
+    }
+
+    function wonRound(){
+      alert(`YOU WIN! The word was ${word}`)
+      setWordLength(word.length + 1)
+    }
     
     function iterateStatus(number, pressedKey){
       // if hints are on, iterate through the statuses

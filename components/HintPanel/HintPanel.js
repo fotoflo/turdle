@@ -12,7 +12,7 @@ function HintPanel({gameboardState}){
     const [hintInfo, setHintInfo] = useState()
 
     useEffect( () => {
-      const [hintInfo, hints] = getHints(wordList, gameboardState.chars, 50)
+      const [hintInfo, hints] = getHints(wordList, gameboardState.chars, 150)
       setHints(hints)
       setHintInfo(hintInfo)
     }, [gameboardState])
@@ -34,7 +34,7 @@ const InfoBox = styled.div`
   font-size: 12px;
   overflow: none;
   margin-bottom: 12px;
-  height: 8rem;
+  height: 12rem;
   padding: 5px 10px;
 `
 
