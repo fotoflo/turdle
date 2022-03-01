@@ -13,6 +13,8 @@ import {
   filterWordList
 } from './HintHelpers';
 
+import { TEST_WORD_ALEX } from "./HintHelpers.testdata.js"
+
 import '@testing-library/jest-dom';
 
 // describe('inSet', () => {
@@ -104,43 +106,10 @@ describe( 'filterWordList', ()=>{
 
 	it(`should return a list of words have the right char in the right slot`, () => {
     const wordlist = the_wordlist;
-    const chars = [
-      {
-          "key": "row-0__slot-0",
-          "index": 0,
-          "row": 0,
-          "slot": 0,
-          "letter": "a",
-          "status": 3
-      },
-      {
-          "key": "row-0__slot-1",
-          "index": 1,
-          "row": 0,
-          "slot": 1,
-          "letter": "l",
-          "status": 3
-      },
-      {
-          "key": "row-0__slot-2",
-          "index": 2,
-          "row": 0,
-          "slot": 2,
-          "letter": "i",
-          "status": 3
-      },
-      {
-          "key": "row-0__slot-3",
-          "index": 3,
-          "row": 0,
-          "slot": 3,
-          "letter": "v",
-          "status": 3
-      }
-  ]
+    const chars = TEST_WORD_ALEX;
 
     const result = filterWordList(wordlist, chars)
     console.log("RESULT:", result)
-    expect( result ).toEqual( [ 'alive' ] )
+    expect( result ).toEqual( [ 'alex' ] )
 	}) 
 })
