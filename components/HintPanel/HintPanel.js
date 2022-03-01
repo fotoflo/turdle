@@ -2,17 +2,17 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components'
 import { Col, Row } from 'react-bootstrap';
-import wordList from '../../dictonaries/wordle-possible-answers.json'
 import { getHints } from './HintHelpers'
+import { MAX_HINTS } from '../../next.config';
 // import {FaSignOutAlt} from 'react-icons/fa'
 
-function HintPanel({gameboardState}){
+function HintPanel({gameboardState, wordList}){
 
     const [hints, setHints] = useState()
     const [hintInfo, setHintInfo] = useState()
 
     useEffect( () => {
-      const [hintInfo, hints] = getHints(wordList, gameboardState.chars, 150)
+      const [hintInfo, hints] = getHints(wordList, gameboardState.chars, MAX_HINTS)
       setHints(hints)
       setHintInfo(hintInfo)
     }, [gameboardState])

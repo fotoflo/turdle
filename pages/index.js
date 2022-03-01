@@ -91,6 +91,7 @@ function Index({
       />
       <GameBoard 
           word={word}
+          wordList={wordList}
           showHints={showHints}
           setWordLength={setWordLength}
       />

@@ -15,7 +15,7 @@ import {
   getLastRowGreens
 } from './GameBoardHelpers';
 
-function GameBoard({word, showHints, setWordLength, ...props}){
+function GameBoard({word, wordList, showHints, setWordLength, ...props}){
     const scrollRef = useRef(null)
     const executeScroll = () => scrollRef.current.scrollIntoView()    
 
@@ -191,7 +191,8 @@ function GameBoard({word, showHints, setWordLength, ...props}){
       <GameBoardContainer id="GameBoardContainer">
           {/* {word} */}
           { showHints === true &&
-            <HintPanel 
+            <HintPanel
+              wordList={wordList} 
               gameboardState={gameboardState}
             />  
           }
