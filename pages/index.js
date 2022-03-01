@@ -74,8 +74,6 @@ function Index({
   }
 
 
-
-
   return (
     <>
     <Head>

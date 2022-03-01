@@ -171,6 +171,18 @@ function GameBoard({word, showHints, setWordLength, ...props}){
       return activeChar
     }
 
+    const getGameRows = () => {
+      return Array(gameboardState.rows).fill(0).map(
+        (e,i)=>{
+          return <GameRow 
+            key={`gameRow-${i}`}
+            gameboardState={gameboardState}
+            setActiveLetter={setActiveLetter}
+            gameRow={i}
+          i/>
+        })
+    }
+
     return (
       <GameBoardContainer id="GameBoardContainer">
           {/* {word} */}
@@ -181,15 +193,7 @@ function GameBoard({word, showHints, setWordLength, ...props}){
           }
           
           { 
-            Array(gameboardState.rows).fill(0).map(
-              (e,i)=>{
-                return <GameRow 
-                  key={`gameRow-${i}`}
-                  gameboardState={gameboardState}
-                  setActiveLetter={setActiveLetter}
-                  gameRow={i}
-                i/>
-              })
+            getGameRows()
           }
 
           <Keyboard 
