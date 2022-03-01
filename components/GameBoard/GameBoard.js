@@ -57,22 +57,26 @@ function GameBoard({word, showHints, setWordLength, ...props}){
       setWordLength(word.length + 1)
     }
     
-    function iterateStatus(number, pressedKey){
+    function iterateStatus(previousStatus, pressedKey){
       // if hints are on, iterate through the statuses
       if(showHints){
-        return iterateWithinBounds(number, 0, 3)
+        return iterateWithinBounds(previousStatus, 0, 3)
       }else{
         // check the statuses
-        const wordSlot = gameboardState.activeLetter.split("-")[2] // get the last char of the key
-        if(word[wordSlot] === pressedKey){
-            // they match, set status to 3, green
-            return 3
-        } else if( word.indexOf(pressedKey) !== -1 ) {
-          // the letter is in a dfferent slot, set status to 2, yellow
-            return 2
-        } else { // the letter is not in the word,  set status to 1, gray
-          return 1
-        }
+        return getLetterStatusForCurrentSlot(pressedKey)
+      }
+    }
+
+    function getLetterStatusForCurrentSlot(pressedKey){
+      const wordSlot = gameboardState.activeLetter.split("-")[2] // get the last char of the key
+      if(word[wordSlot] === pressedKey){
+          // they match, set status to 3, green
+          return 3
+      } else if( word.indexOf(pressedKey) !== -1 ) {
+        // the letter is in a dfferent slot, set status to 2, yellow
+          return 2
+      } else { // the letter is not in the word,  set status to 1, gray
+        return 1
       }
     }
 
