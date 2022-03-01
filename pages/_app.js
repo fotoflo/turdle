@@ -40,6 +40,7 @@ export default function App({ Component, pageProps }) {
         themeToggler={themeToggler}
         modalToggler={modalToggler}
         showHints={showHints}
+        setShowHints={setShowHints}
         hintToggler={hintToggler}
         {...pageProps} 
         />

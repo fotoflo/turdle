@@ -28,6 +28,7 @@ function Index({
   themeToggler,
   modalToggler,
   showHints,
+  setShowHints,
   hintToggler
 }) {
   
@@ -93,6 +94,7 @@ function Index({
           word={word}
           wordList={wordList}
           showHints={showHints}
+          setShowHints={setShowHints}
           setWordLength={setWordLength}
       />
     </ThemeProvider>

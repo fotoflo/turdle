@@ -15,7 +15,7 @@ import {
   getLastRowGreens
 } from './GameBoardHelpers';
 
-function GameBoard({word, wordList, showHints, setWordLength, ...props}){
+function GameBoard({word, wordList, showHints, setShowHints, setWordLength, ...props}){
     const scrollRef = useRef(null)
     const executeScroll = () => scrollRef.current.scrollIntoView()    
 
@@ -59,12 +59,12 @@ function GameBoard({word, wordList, showHints, setWordLength, ...props}){
     
     function iterateStatus(previousStatus, pressedKey){
       // if hints are on, iterate through the statuses
-      if(showHints){
-        return iterateWithinBounds(previousStatus, 0, 3)
-      }else{
+      // if(showHints){
+      //   return iterateWithinBounds(previousStatus, 0, 3)
+      // }else{
         // check the statuses
         return getLetterStatusForCurrentSlot(pressedKey)
-      }
+      // }
     }
 
     function getLetterStatusForCurrentSlot(pressedKey){
@@ -151,7 +151,6 @@ function GameBoard({word, wordList, showHints, setWordLength, ...props}){
         default:
           break;
       }
-      
       const activeChar = getActiveChar(gameboardState)
       const newGameboard = setCharToLetter(gameboardState, activeChar, pressedKey)
       setGameboardState({...newGameboard})
