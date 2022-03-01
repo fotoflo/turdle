@@ -4,10 +4,12 @@ import Head from "next/head";
 // import { Col, Row, Button } from 'react-bootstrap';
 // import {FaSignOutAlt} from 'react-icons/fa'
 
+import { GA_ID } from "../next.config";
+
 function MainHead({props}) {
   return (
     <Head>
-      <meta charset="utf-8" />
+      <meta charSet="utf-8" />
       <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <meta name="theme-color" content="#000000" />
@@ -34,7 +36,7 @@ function MainHead({props}) {
       {/* <!-- Global site tag (gtag.js) - Google Analytics --> */}
       <script
         async
-        src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
+        src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
       />
       <script
         dangerouslySetInnerHTML={{
@@ -42,7 +44,7 @@ function MainHead({props}) {
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
-          gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}', {
+          gtag('config', '${GA_ID}', {
             page_path: window.location.pathname,
           });
         `,

@@ -2,7 +2,7 @@
   "name": "wordcheater",
   "private": true,
   "scripts": {
-    "dev": "source .env.local && next dev",
+    "dev": "next dev",
     "build": "source .env.prodbuild && next build && next export && rm -rf ../docs && mv ./out ../docs",
     "start": "next start",
     "lint": "next lint",

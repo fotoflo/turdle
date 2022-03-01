@@ -10,10 +10,15 @@ import { lightTheme, darkTheme, GlobalStyles } from "../components/Themes";
 import GameBoard from '../components/GameBoard/GameBoard';
 import NavBar from '../components/NavBar';
 
-const DEFAULT_WORD_LENGTH = 3;
-const MIN_WORD_LENGTH = 3;
-const MAX_WORD_LENGTH = 11; // dicts go up to 16
-const WORDLIST_BASEURL = 'http://localhost:3000/api/wordlist';
+import { 
+  BASE_URL,
+  MIN_WORD_LENGTH,
+  MAX_WORD_LENGTH,
+  DEFAULT_WORD_LENGTH
+} from "../next.config";
+
+const WORDLIST_BASEURL = `${BASE_URL}/api/wordlist`;
+console.log("WORDLIST BASEURL: ", WORDLIST_BASEURL)
 const fetcher = (...args) => fetch(...args).then(res => res.json());
 
 // wordlist comes from getServerSideProps
@@ -44,7 +49,13 @@ function Index({
     setWord(theWord)
   }, [wordList])
   
-  if(error) return <div>failed to load wordlist</div>
+  if(error) return(
+    <div className="error">
+      <p className="error-message">Error: failed to load wordlist</p>
+      <p>Detail: {JSON.stringify(error)}</p>
+    </div>
+  )
+
   if(!wordList) return <div>loading wordlist...</div>
 
   const wordLengthToggler = () => {

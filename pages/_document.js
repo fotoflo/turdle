@@ -1,4 +1,5 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document'
+import { GA_ID } from '../next.config'
 
 class MyDocument extends Document {
   static async getInitialProps(ctx){
@@ -29,7 +30,7 @@ class MyDocument extends Document {
                 {/* <!-- Global site tag (gtag.js) - Google Analytics --> */}
 
                 <script async
-                  src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ACTIVE}`}
+                  src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
                 />
 
                 <script
@@ -38,7 +39,7 @@ class MyDocument extends Document {
                   window.dataLayer = window.dataLayer || [];
                   function gtag(){dataLayer.push(arguments);}
                   gtag('js', new Date());
-                  gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ACTIVE}', {
+                  gtag('config', '${GA_ID}', {
                     page_path: window.location.pathname,
                   });
                 `,

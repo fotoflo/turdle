@@ -6,6 +6,14 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
     user-select:none;
 }
+.error {
+  user-select:contain;
+  color: red
+}
+.error-message {
+  user-select:all;
+  color: red
+}
 
 a {
   color: inherit;

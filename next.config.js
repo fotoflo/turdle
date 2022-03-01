@@ -1,3 +1,8 @@
 module.exports = {
   reactStrictMode: true,
+  MIN_WORD_LENGTH: 3,
+  MAX_WORD_LENGTH: 11,
+  DEFAULT_WORD_LENGTH: 3,
+  BASE_URL: process.env.NEXT_PUBLIC_WORDCHEATER_BASE_URL,
+  GA_ID: process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ACTIVE
 }
