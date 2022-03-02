@@ -31,7 +31,7 @@ function Index({
   
   
   const [word, setWord] = useState("hello");
-  const [showWord, setShowWord] = useState(true);
+  const [showWord, setShowWord] = useState(false);
   const [wordLength, setWordLength] = useState(DEFAULT_WORD_LENGTH);
   const wordlistUrl = `${WORDLIST_BASEURL}?wordlength=${wordLength}`
 

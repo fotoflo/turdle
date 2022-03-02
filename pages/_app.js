@@ -9,7 +9,7 @@ import { darkTheme, GlobalStyles, lightTheme } from "../components/Themes";
 import { ThemeProvider } from 'styled-components'
 
 export default function App({ Component, pageProps }) {
-  const [theme, setTheme] = useState("dark");
+  const [theme, setTheme] = useState("light");
   const [showModal, setShowModal] = useState(false);
   const [showHints, setShowHints] = useState(true); // runs at server render
 
