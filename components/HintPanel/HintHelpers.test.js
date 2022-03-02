@@ -17,14 +17,6 @@ import { TEST_WORD_ALEX } from "./HintHelpers.testdata.js"
 
 import '@testing-library/jest-dom';
 
-// describe('inSet', () => {
-//   render(<HintPanel />);
-//   const titleElement = screen.getByText(/Hints/i);
-//   expect(titleElement).toBeInTheDocument();
-// });
-
-
-
 describe( 'Array.prototype.findWordsWithChars', ()=>{
   const chars = "xe";
   const wordlist = ['xenon', 'rewax', 'roger', 'bob', 'echo', 'xio']
@@ -102,15 +94,23 @@ describe( 'getLetterSlotPairsFromCharsArray(gameboardState.chars)', ()=>{
 })
   
 
-describe( 'filterWordList', ()=>{
+// describe( 'filterWordList', ()=>{
 
-	it(`should return a list of words have the right char in the right slot`, () => {
-    const wordlist = the_wordlist;
-    const chars = TEST_WORD_ALEX;
+// 	it(`should return a list of words have the right char in the right slot`, () => {
+//     const wordlist = the_wordlist;
+//     const chars = TEST_WORD_ALEX;
 
-    const result = filterWordList(wordlist, chars)
     console.log("RESULT:", result)
-    expect( result ).toEqual( [ 'alex' ] )
-	}) 
-})
+//     const result = filterWordList(wordlist, chars)
+//     console.log("RESULT:", result)
+//     expect( result ).toEqual( [ 'alex' ] )
+// 	})
+
+//   it('should work if there are two letters not in a slot', ()=>{
+  
+//     const result = filterWordList(wordlist, chars)
+//       console.log("RESULT:", result)
+//     expect( result ).toEqual( [ 'alex' ] )
+//   })
+// })
  

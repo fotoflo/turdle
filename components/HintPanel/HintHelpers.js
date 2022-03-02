@@ -19,14 +19,12 @@ Array.prototype.findWordsWithCharsButNotInSlot = function (letterSlotPairs){
   if( letterSlotPairs.length === 0 ) return this
   if( Object.keys(letterSlotPairs).length === 0 ) return this
 
-  const charsString = letterSlotPairs.map(pair => pair.letter).join()
-
-  return this.findWordsWithChars(charsString)
-    .filter( word => {
-    return letterSlotPairs.every( (pair) => {
-        return word.charAt(pair.slot) !== pair.letter 
-      })
-    })
+  return this.filter( word => {
+    const pairs = letterSlotPairs
+      .filter( char => word.indexOf(char.letter) !== -1 ) 
+      .filter( char => word.indexOf(char.letter) !== char.slot )
+    return pairs.length === 0 ? false: true;
+  })
 }
 
 
@@ -86,22 +84,20 @@ export const getHints = (wordList, chars, maxHints) =>{
 
 export const filterWordList = (wordList, chars) => {
   
-  const inSlotList = getLetterSlotPairsByStatusFromCharsArray(chars, 3)
 
+  const inSlotList = getLetterSlotPairsByStatusFromCharsArray(chars, 3)
   const excludedList =  getLetterSlotPairsByStatusFromCharsArray(chars, 1)
   const excludedCharString = excludedList.map( c => c.letter ).join("")
-
   const includedList =  getLetterSlotPairsByStatusFromCharsArray(chars, 2)
   // [{letter: "h", slot:0},{letter: "i", slot:1}] -> "hi"
 
-
-
+  
+  
   console.log(`****** FILTERING ******`)
   console.log(`finding words with with letter in slot: ${JSON.stringify(inSlotList)}`)
   console.log(`finding words excluding: ${JSON.stringify(excludedCharString)}`)
   console.log(`finding words including: ${JSON.stringify(includedList)}`)
-
-  // debugger
+  
 
   const newWordList = wordList
     .findWordsWithLettersInSlots(inSlotList)
