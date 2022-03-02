@@ -60,14 +60,6 @@ export const getLetterSlotPairsByStatusFromCharsArray = (chars, status) =>{
     .map( c => { return { letter: c.letter, slot: c.slot }})
 }
 
-// const formatWordListAsHints = (wordList, maxLength) =>{
-
-//   const elipses = wordList.length > maxLength ? "..." : "";
-  
-//   return [`Showing ${ maxLength < wordList.length  ? maxLength : wordList.length } of ${wordList.length}: `,
-//   wordList.slice(0,maxLength).join(" ") + elipses]
-
-// }
 
 const formatWordListAsHints = (wordList, maxHints) =>{
 
