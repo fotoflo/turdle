@@ -12,11 +12,6 @@ import { FaLightbulb, FaRegQuestionCircle } from 'react-icons/fa';
 // import {FaSignOutAlt} from 'react-icons/fa'
 
 function NavBar({ theme, modalToggler, hintToggler, themeToggler, wordLength, wordLengthToggler }) {
-
-
-
-
-
  
 
   return (

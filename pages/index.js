@@ -3,10 +3,6 @@ import Head from 'next/head'
 
 import useSWR from 'swr'
 
-import { ThemeProvider } from "styled-components";
-
-import { lightTheme, darkTheme, GlobalStyles } from "../components/Themes";
-
 import GameBoard from '../components/GameBoard/GameBoard';
 import NavBar from '../components/NavBar';
 import {WordComponent} from '../components/WordComponent';
@@ -81,8 +77,6 @@ function Index({
     <Head>
       <title>WordCheater - The Wordle Solver</title>
     </Head>
-    <GlobalStyles theme={theme}/>
-    <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
     <NavBar
         theme={theme}
         themeToggler={themeToggler}
@@ -104,7 +98,6 @@ function Index({
           setShowHints={setShowHints}
           setWordLength={setWordLength}
       />
-    </ThemeProvider>
     </>
   );
 }

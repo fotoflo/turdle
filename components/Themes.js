@@ -2,7 +2,7 @@ import { createGlobalStyle } from "styled-components";
 // from https://www.youtube.com/watch?v=G00V4tRx1ME
 
 export const lightTheme = {
-  body: "#fff",
+  background: "#fff",
   fontColor: "#000",
   InfoBGColor: 'ivory',
   0: "white",
@@ -12,7 +12,7 @@ export const lightTheme = {
 };
 
 export const darkTheme = {
-  body: "#000",
+  background: "#000",
   fontColor: "#fff",
   InfoBGColor: '#240026',
   0: "black",
@@ -23,7 +23,8 @@ export const darkTheme = {
 
 export const GlobalStyles = createGlobalStyle`
 	body {
-		background-color: ${(props) => props.theme.body};
+		background-color: ${ props => props.theme.background };
+    color: ${ props => props.theme.fontColor };
     caret-color: transparent;
 	}
 `;

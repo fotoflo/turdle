@@ -5,9 +5,10 @@ import "../styles/globals.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import HelpModal from "../components/HelpModal"
 import MainHead from "../components/MainHead"
+import { darkTheme, GlobalStyles, lightTheme } from "../components/Themes";
 
 export default function App({ Component, pageProps }) {
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState("dark");
   const [showModal, setShowModal] = useState(false);
   const [showHints, setShowHints] = useState(true); // runs at server render
 
@@ -29,6 +30,7 @@ export default function App({ Component, pageProps }) {
   return (
     <div className={styles.container}>
       <MainHead />
+      <GlobalStyles theme={ theme == "light" ? lightTheme : darkTheme } />
       <HelpModal 
         modalToggler={modalToggler} />
 

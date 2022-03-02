@@ -45,7 +45,7 @@ const HiddenCheckbox = styled.input.attrs({ type: 'checkbox' })`
 const StyledCheckbox = styled.div`
   width: 16px;
   height: 16px;
-  background: ${props => props.checked ? darkTheme.body : lightTheme.body };
+  background: ${props => props.checked ? darkTheme.background : lightTheme.background };
   border-radius: 3px;
 `
 
