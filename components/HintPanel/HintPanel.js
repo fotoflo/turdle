@@ -15,8 +15,8 @@ function HintPanel({gameboardState, wordList, showHints}){
     const [hintboxHeight, setHintboxHeight] = useState(0)
 
     useEffect( () => {
-      const [hintInfo, hints] = getHints(wordList, gameboardState.chars, MAX_HINTS)
-      setHints(hints)
+      const {hintInfo, hintList} = getHints(wordList, gameboardState.chars, MAX_HINTS)
+      setHints(hintList)
       setHintInfo(hintInfo)
     }, [gameboardState])
 
@@ -32,19 +32,20 @@ function HintPanel({gameboardState, wordList, showHints}){
     return (
       <Row >
         <Col> 
-        <InfoBox hints={hints} hintboxHeight={hintboxHeight}>
-            <p ref={hintboxRef}><strong>Hints {hintInfo}: </strong>{hints}</p>
-        </InfoBox>
+        <InfoPanel hints={hints} hintboxHeight={hintboxHeight}>
+            <p ref={hintboxRef}><strong>{hintInfo} </strong>{hints}</p>
+        </InfoPanel>
         </Col>
       </Row>
     )
   }
   
-const InfoBox = styled.div`
+const InfoPanel = styled.div`
   border: 1px solid grey;
   background-color: ${props => props.theme.InfoBGColor};
   font-size: 12px;
   overflow: none;
+  margin-top: 12px;
   margin-bottom: 12px;
   height: ${ props => props.hintboxHeight + 15}px;
   padding: 5px 10px;

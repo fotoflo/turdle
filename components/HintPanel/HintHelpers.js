@@ -60,38 +60,36 @@ export const getLetterSlotPairsByStatusFromCharsArray = (chars, status) =>{
     .map( c => { return { letter: c.letter, slot: c.slot }})
 }
 
-const formatWordListAsHints = (wordList, maxLength) =>{
-
-  const elipses = wordList.length > maxLength ? "..." : "";
-  
-  return [`${ maxLength < wordList.length  ? maxLength : wordList.length }/${wordList.length}: `,
-  wordList.slice(0,maxLength).join(" ") + elipses]
-
-}
-
 // const formatWordListAsHints = (wordList, maxLength) =>{
 
 //   const elipses = wordList.length > maxLength ? "..." : "";
-
-
-//   wordList = wordList.map( word => {
-//     const url = `https://www.dictionary.com/browse/${word}`
-//     return <a target="_blank" href={url}>{word}</a> 
-//   })
-
-//   const wordListSpan =  <span>{ props => wordList.slice(0,maxLength) + elipses}</span>
   
-//   debugger
+//   return [`Showing ${ maxLength < wordList.length  ? maxLength : wordList.length } of ${wordList.length}: `,
+//   wordList.slice(0,maxLength).join(" ") + elipses]
 
-//   const lengthInfo =  maxLength < wordList.length  ? maxLength : `${wordList.length }/${wordList.length}`
-  
-//   return [lengthInfo, wordListSpan] 
 // }
 
+const formatWordListAsHints = (wordList, maxHints) =>{
 
-export const getHints = (wordList, chars, count) =>{
+  const requiresElipses = wordList.length > maxHints
+  const hintList = wordList.slice(0,maxHints).join(" ")
+
+  if(requiresElipses){
+    return {
+      hintInfo: `Showing ${maxHints} of ${wordList.length} hints:`, 
+      hintList: `${hintList}...`
+    }
+  }
+
+  return {
+    hintInfo: `${wordList.length} hints:`,
+    hintList: hintList
+  }
+}
+
+export const getHints = (wordList, chars, maxHints) =>{
   const hintList = filterWordList(wordList, chars) 
-  return formatWordListAsHints(hintList, count)
+  return formatWordListAsHints(hintList, maxHints)
 }
 
 export const filterWordList = (wordList, chars) => {

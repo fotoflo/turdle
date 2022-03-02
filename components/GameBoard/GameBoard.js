@@ -188,19 +188,17 @@ function GameBoard({word, wordList, showHints, setShowHints, setWordLength, ...p
 
     return (
       <GameBoardContainer id="GameBoardContainer">
-
-          <HintPanel
-            showHints={showHints}
-            wordList={wordList} 
-            gameboardState={gameboardState}
-          />  
-          
           {  GameRows() }
 
           <Keyboard 
             gameboardState={gameboardState}
             keydownHandler={keydownHandler}
           />
+          <HintPanel
+            showHints={showHints}
+            wordList={wordList} 
+            gameboardState={gameboardState}
+          />  
           <FooterScrollRef ref={scrollRef} />
       </GameBoardContainer>
     )
