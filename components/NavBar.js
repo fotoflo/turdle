@@ -28,7 +28,7 @@ function NavBar({ theme, modalToggler, hintToggler, themeToggler, wordLength, wo
         <span onClick={wordLengthToggler}>{wordLength}</span>
         <ThemeToggleSwitch defaultValue={true} toggleFn={themeToggler} />
         <HintToggler onClick={hintToggler}>
-          <FaLightbulb />
+          <FaLightbulb/>
         </HintToggler>
       </Container>
     </StyledNavbar>
@@ -38,6 +38,7 @@ function NavBar({ theme, modalToggler, hintToggler, themeToggler, wordLength, wo
 
 const HintToggler = styled.div`
   color: ${ props => props.theme.fontColor};
+  padding-bottom: 2px;
 `;
 
 const StyledNavbar = styled(Navbar)`
