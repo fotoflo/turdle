@@ -111,6 +111,8 @@ export const filterWordList = (wordList, chars) => {
   console.log(`finding words excluding: ${JSON.stringify(excludedCharString)}`)
   console.log(`finding words including: ${JSON.stringify(includedList)}`)
 
+  // debugger
+
   const newWordList = wordList
     .findWordsWithLettersInSlots(inSlotList)
     .findWordsWithCharsButNotInSlot(includedList)

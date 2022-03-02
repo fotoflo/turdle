@@ -174,7 +174,7 @@ function GameBoard({word, wordList, showHints, setShowHints, setWordLength, ...p
       return activeChar
     }
 
-    const getGameRows = () => {
+    const GameRows = () => {
       return Array(gameboardState.rows).fill(0).map(
         (e,i)=>{
           return <GameRow 
@@ -188,17 +188,14 @@ function GameBoard({word, wordList, showHints, setShowHints, setWordLength, ...p
 
     return (
       <GameBoardContainer id="GameBoardContainer">
-          {/* {word} */}
-          { showHints === true &&
-            <HintPanel
-              wordList={wordList} 
-              gameboardState={gameboardState}
-            />  
-          }
+
+          <HintPanel
+            showHints={showHints}
+            wordList={wordList} 
+            gameboardState={gameboardState}
+          />  
           
-          { 
-            getGameRows()
-          }
+          {  GameRows() }
 
           <Keyboard 
             gameboardState={gameboardState}

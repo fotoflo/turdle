@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styles from "../styles/Home.module.css";
 
 import "../styles/globals.css";
@@ -6,12 +6,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import HelpModal from "../components/HelpModal"
 import MainHead from "../components/MainHead"
 
-import { getWordList } from "../appHelpers";
-
 export default function App({ Component, pageProps }) {
   const [theme, setTheme] = useState("light");
   const [showModal, setShowModal] = useState(false);
-  const [showHints, setShowHints] = useState(false); // runs at server render
+  const [showHints, setShowHints] = useState(true); // runs at server render
 
   const modalToggler = () => {
     showModal === true ? setShowModal(false): setShowModal(true)

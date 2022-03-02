@@ -113,3 +113,9 @@ describe( 'filterWordList', ()=>{
     expect( result ).toEqual( [ 'alex' ] )
 	}) 
 })
+
+function generateChars(word, class){
+  return word.map( (char) => {
+    
+  })
+}

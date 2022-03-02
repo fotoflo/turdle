@@ -9,6 +9,7 @@ import { lightTheme, darkTheme, GlobalStyles } from "../components/Themes";
 
 import GameBoard from '../components/GameBoard/GameBoard';
 import NavBar from '../components/NavBar';
+import {WordComponent} from '../components/WordComponent';
 
 import { 
   BASE_URL,
@@ -34,6 +35,7 @@ function Index({
   
   
   const [word, setWord] = useState("hello");
+  const [showWord, setShowWord] = useState(true);
   const [wordLength, setWordLength] = useState(DEFAULT_WORD_LENGTH);
   const wordlistUrl = `${WORDLIST_BASEURL}?wordlength=${wordLength}`
 
@@ -74,7 +76,6 @@ function Index({
     return theWord
   }
 
-
   return (
     <>
     <Head>
@@ -90,6 +91,12 @@ function Index({
         wordLength={wordLength}
         wordLengthToggler={wordLengthToggler}
       />
+      
+      <WordComponent
+        showWord={showWord}
+        word={word}
+      />
+
       <GameBoard 
           word={word}
           wordList={wordList}
