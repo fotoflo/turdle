@@ -187,7 +187,7 @@ function GameBoard({word, wordList, showHints, setShowHints, setWordLength, ...p
     }
 
     return (
-      <GameBoardContainer id="GameBoardContainer">
+      <GameboardContainer data-testid="GameboardContainer" id="GameboardContainer">
           {  GameRows() }
 
           <Keyboard 
@@ -200,11 +200,11 @@ function GameBoard({word, wordList, showHints, setShowHints, setWordLength, ...p
             gameboardState={gameboardState}
           />  
           <FooterScrollRef ref={scrollRef} />
-      </GameBoardContainer>
+      </GameboardContainer>
     )
 }
 
-const GameBoardContainer = styled(Container)`
+const GameboardContainer = styled(Container)`
 `
 const FooterScrollRef = styled.div`
   margin-top: 100px;

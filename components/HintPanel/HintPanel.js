@@ -21,8 +21,7 @@ function HintPanel({gameboardState, wordList, showHints}){
     }, [gameboardState])
 
     useEffect(() => {
-      const h = hintboxRef.current.clientHeight;
-      console.log(h)
+      if(!hintboxRef.current) return 
       setHintboxHeight(hintboxRef.current.clientHeight)
     }, [hints])
     
