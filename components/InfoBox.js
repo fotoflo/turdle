@@ -1,10 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
 
-function InfoBox(props){
-
+function InfoBox({chidlren}){
     return (
-      <Box>{props.children}</Box>
+      <Box>{children}</Box>
     )
 }
 

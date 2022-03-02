@@ -37,11 +37,11 @@ function NavBar({ theme, modalToggler, hintToggler, themeToggler, wordLength, wo
 
 
 const HintToggler = styled.div`
-  color: ${(props) => props.theme.fontColor};
+  color: ${ props => props.theme.fontColor};
 `;
 
 const StyledNavbar = styled(Navbar)`
-  border-bottom: 1px solid ${(props) => props.theme.fontColor};
+  border-bottom: 1px solid ${ props => props.theme.fontColor};
   left: 50%;
   transform: translatex(-50%);
   width:80%;

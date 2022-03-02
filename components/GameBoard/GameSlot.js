@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components'
 
+
 function GameLetter({gameSlot, gameboardState, gameRow, setActiveLetter, ...props } ){
 
     const slotKey = `row-${gameRow}__slot-${gameSlot}`
@@ -13,7 +14,6 @@ function GameLetter({gameSlot, gameboardState, gameRow, setActiveLetter, ...prop
           onClick={ () => setActiveLetter(slotKey) }
           gameboardState={gameboardState}
           activeLetter={gameboardState.activeLetter}
-          
           char={char}
 
           gameSlot={gameSlot}
@@ -30,10 +30,10 @@ function GameLetter({gameSlot, gameboardState, gameRow, setActiveLetter, ...prop
 }
 
 const SlotBox = styled.div`
-  border: ${(props) => { return props.slotKey === props.activeLetter ? 3 : 1 }}px
-      solid ${(props) => { return props.slotKey === props.activeLetter ? "red" : "grey" }
+  border: ${props => props.slotKey === props.activeLetter ? 3 : 1 }px
+      solid ${ props => props.slotKey === props.activeLetter ? "red" : "grey" }
     };
-  background-color: ${ (props) =>  props.theme[props.char.status]   };
+  background-color: ${ props => props.theme[props.char.status] };
   height: 100%;
   width: 100%;
   font-size: 3rem;

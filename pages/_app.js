@@ -6,6 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import HelpModal from "../components/HelpModal"
 import MainHead from "../components/MainHead"
 import { darkTheme, GlobalStyles, lightTheme } from "../components/Themes";
+import { ThemeProvider } from 'styled-components'
 
 export default function App({ Component, pageProps }) {
   const [theme, setTheme] = useState("dark");
@@ -35,16 +36,18 @@ export default function App({ Component, pageProps }) {
         modalToggler={modalToggler} />
 
         {/* THIS IS THE INDEX PAGE!! */}
-      <Component   // see index.js
-        theme={theme}
-        themeToggler={themeToggler}
-        modalToggler={modalToggler}
-        showHints={showHints}
-        setShowHints={setShowHints}
-        hintToggler={hintToggler}
-        {...pageProps} 
-        />
-        {/* THIS IS THE INDEX PAGE!! */}
+      <ThemeProvider theme={ theme == "light" ? lightTheme : darkTheme }>
+        <Component   // see index.js
+          theme={theme}
+          themeToggler={themeToggler}
+          modalToggler={modalToggler}
+          showHints={showHints}
+          setShowHints={setShowHints}
+          hintToggler={hintToggler}
+          {...pageProps} 
+          />
+          {/* THIS IS THE INDEX PAGE!! */}
+      </ThemeProvider>
 
     </div>
   );
