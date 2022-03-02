@@ -6,8 +6,7 @@ import styled from 'styled-components';
 function Keyboard({...props}){
 
     return (
-      <KeyboardRow>
-        <KeyboardContainer>
+        <KeyboardContainer data-testid="KeyboardContainer">
           <KeyRow id="keyboardrow1">
             <KeyboardLetter {...props} label="q"/>
             <KeyboardLetter {...props} label="w" />
@@ -43,17 +42,11 @@ function Keyboard({...props}){
             <KeyboardLetter {...props} label="⌫" />
           </KeyRow>
         </KeyboardContainer>
-      </KeyboardRow>
     )
 }
 
 const KeyboardContainer = styled.div`
   flex-wrap: nowrap;
-`
-
-
- // contains the whole keyboard
-const KeyboardRow = styled.div`
 `
 
 //contains a row of keys

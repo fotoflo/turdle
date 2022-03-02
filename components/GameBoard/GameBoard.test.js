@@ -2,7 +2,7 @@ import {render, screen} from '@testing-library/react'
 import '@testing-library/jest-dom'
 import GameBoard from './GameBoard'
 
-test.only('it renders', ()=>{
+it('renders', ()=>{
   const word = "hello"
   const wordList = ["hello","tests"]
   const showHints = false
@@ -18,4 +18,7 @@ test.only('it renders', ()=>{
   />)
   const gameboardContainer = screen.getByTestId("GameboardContainer")
   expect(gameboardContainer).toBeInTheDocument()
+
+  const keyboardContainer = screen.getByTestId("KeyboardContainer")
+  expect(keyboardContainer).toBeInTheDocument()
 })
