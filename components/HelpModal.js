@@ -2,11 +2,11 @@ import React from 'react';
 
 import { Button, Modal } from 'react-bootstrap';
 
-const HelpModal = ({showModal, modalToggler}) => {
+const HelpModal = ({showHelpModal, helpModalToggler}) => {
 
   return (
     <>
-      <Modal show={showModal} onHide={modalToggler}>
+      <Modal show={showHelpModal} onHide={helpModalToggler}>
         <Modal.Header closeButton>
           <Modal.Title>WordCheater Help</Modal.Title>
         </Modal.Header>
@@ -17,7 +17,7 @@ const HelpModal = ({showModal, modalToggler}) => {
         <Modal.Body>Grey letters are not in the word</Modal.Body>
         <Modal.Body>White letters ignored (to fix)</Modal.Body>
         <Modal.Footer>
-          <Button variant="primary" onClick={modalToggler}>
+          <Button variant="primary" onClick={helpModalToggler}>
             Ok
           </Button>
         </Modal.Footer>

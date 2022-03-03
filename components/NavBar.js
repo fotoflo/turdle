@@ -11,13 +11,20 @@ import { FaLightbulb, FaRegQuestionCircle } from 'react-icons/fa';
 
 // import {FaSignOutAlt} from 'react-icons/fa'
 
-function NavBar({ theme, modalToggler, hintToggler, themeToggler, wordLength, wordLengthToggler }) {
+function NavBar({
+  theme,
+  helpModalToggler,
+  hintToggler,
+  themeToggler,
+  wordLength,
+  wordLengthToggler 
+}) {
  
 
   return (
     <StyledNavbar variant={theme} className="justify-content-between">
       <Container>
-        <Navbar.Brand onClick={modalToggler}>
+        <Navbar.Brand onClick={helpModalToggler}>
           <FaRegQuestionCircle />
         </Navbar.Brand>
       </Container>

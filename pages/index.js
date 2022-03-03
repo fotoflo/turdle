@@ -23,7 +23,7 @@ const fetcher = (...args) => fetch(...args).then(res => res.json());
 function Index({
   theme,
   themeToggler,
-  modalToggler,
+  helpModalToggler,
   showHints,
   setShowHints,
   hintToggler
@@ -80,7 +80,7 @@ function Index({
     <NavBar
         theme={theme}
         themeToggler={themeToggler}
-        modalToggler={modalToggler}
+        helpModalToggler={helpModalToggler}
         hintToggler={hintToggler}
         wordLength={wordLength}
         wordLengthToggler={wordLengthToggler}
@@ -103,22 +103,24 @@ function Index({
 }
 
 
-// // Return the Wordlist
-// export async function getServerSideProps() { 
-//   // Call an external API endpoint to get posts.
-//   // You can use any data fetching library
+// Return the Wordlist
+export async function getServerSideProps() { 
+  // Call an external API endpoint to get posts.
+  // You can use any data fetching library
 
-//   const res = await fetch(`http://localhost:3000/api/wordlist?wordlength=${wordLength}`)
-//   const wordList = await res.json()
+  const SWRkey = `/api/wordlist?wordlength=${DEFAULT_WORD_LENGTH}`
+  const url = `${BASE_URL}${SWRkey}`
+  
+  console.log("URL " + url)
+  const res = await fetch(url)
+  const wordList = await res.json()
 
-//   console.log(' getStaticProps - wordList.length: ', wordList.length)
-//   // By returning { props: { wordList } }, the component
-//   // will receive `wordList` as a prop at build time
-//   return {
-//     props: {
-//       wordList,
-//     },
-//   }
-// }
+  console.log(' getStaticProps - wordList.length: ', wordList.length)
+  // By returning { props: { wordList } }, the component
+  // will receive `wordList` as a prop at build time
+  const props = { fallback: {}}
+  props.fallback[SWRkey] = wordList
+  return { props }
+}
 
 export default Index;

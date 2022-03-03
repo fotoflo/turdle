@@ -1,4 +1,5 @@
 import { useState } from "react";
+
 import styles from "../styles/Home.module.css";
 
 import "../styles/globals.css";
@@ -10,11 +11,11 @@ import { ThemeProvider } from 'styled-components'
 
 export default function App({ Component, pageProps }) {
   const [theme, setTheme] = useState("light");
-  const [showModal, setShowModal] = useState(false);
-  const [showHints, setShowHints] = useState(true); // runs at server render
+  const [showHelpModal, setShowHelpModal] = useState(false);
+  const [showHints, setShowHints] = useState(true); 
 
-  const modalToggler = () => {
-    showModal === true ? setShowModal(false): setShowModal(true)
+  const helpModalToggler = () => {
+    showHelpModal === true ? setShowHelpModal(false): setShowHelpModal(true)
   };
 
   const hintToggler = () => {
@@ -33,14 +34,17 @@ export default function App({ Component, pageProps }) {
       <MainHead />
       <GlobalStyles theme={ theme == "light" ? lightTheme : darkTheme } />
       <HelpModal 
-        modalToggler={modalToggler} />
+      helpModalToggler={helpModalToggler} 
+        showHelpModal={showHelpModal}
+      />
 
         {/* THIS IS THE INDEX PAGE!! */}
       <ThemeProvider theme={ theme == "light" ? lightTheme : darkTheme }>
         <Component   // see index.js
           theme={theme}
           themeToggler={themeToggler}
-          modalToggler={modalToggler}
+          helpModalToggler={helpModalToggler}
+          showHelpModal={showHelpModal}
           showHints={showHints}
           setShowHints={setShowHints}
           hintToggler={hintToggler}

@@ -16,7 +16,7 @@ import {
 } from './GameBoardHelpers';
 
 function GameBoard({word, wordList, showHints, setShowHints, setWordLength, ...props}){
-    const scrollRef = useRef(null)
+const scrollRef = useRef(null)
     const executeScroll = () => scrollRef.current.scrollIntoView()    
 
     useEffect( () => {
