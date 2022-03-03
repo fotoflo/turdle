@@ -1,6 +1,7 @@
 // import { render, screen } from '@testing-library/react';
 // import HintPanel from './HintPanel';
-import the_wordlist from '../../dictonaries/5-letter-words.json'
+import '@testing-library/jest-dom';
+import THREE_LETTER_WORDLIST from '../../dictonaries/3-letter-words.json'
 
 import {
 
@@ -13,9 +14,8 @@ import {
   filterWordList
 } from './HintHelpers';
 
-import { TEST_WORD_ALEX } from "./HintHelpers.testdata.js"
+import { TEST_WORD_TWO, TEST_WORD_TXO } from "./HintHelpers.testdata.js"
 
-import '@testing-library/jest-dom';
 
 describe( 'Array.prototype.findWordsWithChars', ()=>{
   const chars = "xe";
@@ -94,23 +94,21 @@ describe( 'getLetterSlotPairsFromCharsArray(gameboardState.chars)', ()=>{
 })
   
 
-// describe( 'filterWordList', ()=>{
+describe( 'filterWordList', ()=>{
 
-// 	it(`should return a list of words have the right char in the right slot`, () => {
-//     const wordlist = the_wordlist;
-//     const chars = TEST_WORD_ALEX;
+	it(`should return a list of words have the right char in the right slot`, () => {
+    const chars = TEST_WORD_TWO;
 
+    const result = filterWordList(THREE_LETTER_WORDLIST, chars)
     console.log("RESULT:", result)
-//     const result = filterWordList(wordlist, chars)
-//     console.log("RESULT:", result)
-//     expect( result ).toEqual( [ 'alex' ] )
-// 	})
+    expect( result ).toEqual( [ 'two' ] )
+	})
 
-//   it('should work if there are two letters not in a slot', ()=>{
-  
-//     const result = filterWordList(wordlist, chars)
-//       console.log("RESULT:", result)
-//     expect( result ).toEqual( [ 'alex' ] )
-//   })
-// })
+  it('should work if there are two letters not in a slot', ()=>{
+    const chars = TEST_WORD_TXO;
+    const result = filterWordList(THREE_LETTER_WORDLIST, chars)
+      console.log("RESULT:", result)
+    expect( result ).toEqual( [ 'two', 'too' ] )
+  })
+})
  
