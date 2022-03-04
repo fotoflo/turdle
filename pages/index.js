@@ -1,3 +1,4 @@
+// page appearing at ://wordcheater.app/ 
 import React, { useEffect, useState } from "react";
 import Head from 'next/head'
 
@@ -11,7 +12,8 @@ import {
   BASE_URL,
   MIN_WORD_LENGTH,
   MAX_WORD_LENGTH,
-  DEFAULT_WORD_LENGTH
+  DEFAULT_WORD_LENGTH,
+  IS_DEV_ENV
 } from "../next.config";
 
 const WORDLIST_BASEURL = `${BASE_URL}/api/wordlist`;
@@ -31,7 +33,8 @@ function Index({
   
   
   const [word, setWord] = useState("hello");
-  const [showWord, setShowWord] = useState(false);
+  const [showWord] = useState(IS_DEV_ENV);
+  console.log("IS_DEV_ENV", IS_DEV_ENV, typeof(IS_DEV_ENV))
   const [wordLength, setWordLength] = useState(DEFAULT_WORD_LENGTH);
   const wordlistUrl = `${WORDLIST_BASEURL}?wordlength=${wordLength}`
 
