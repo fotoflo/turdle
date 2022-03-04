@@ -18,7 +18,6 @@ import {
 
 const WORDLIST_BASEURL = `${BASE_URL}/api/wordlist`;
 console.log("WORDLIST BASEURL: ", WORDLIST_BASEURL)
-const fetcher = (...args) => fetch(...args).then(res => res.json());
 
 // wordlist comes from getServerSideProps
 // theme, showHints, setShowhings comes from _app.js
@@ -106,19 +105,22 @@ function Index({
 }
 
 
-// Return the Wordlist
-export async function getServerSideProps() { 
-  // Call an external API endpoint to get posts.
-  // You can use any data fetching library
+const fetcher = (...args) => fetch(...args).then(res => res.json());
 
+const useWordList = async () => {
   const SWRkey = `/api/wordlist?wordlength=${DEFAULT_WORD_LENGTH}`
-  const url = `${BASE_URL}${SWRkey}`
-  
-  console.log("URL " + url)
-  const res = await fetch(url)
-  const wordList = await res.json()
+  const res = await fetch(`${BASE_URL}${SWRkey}`)
+  return { 
+   SWRkey: SWRkey,
+   wordList: await res.json()
+  }
+}
 
-  console.log(' getStaticProps - wordList.length: ', wordList.length)
+// Send the wordList to props
+export async function getServerSideProps() { 
+  const {wordList, SWRkey} = await useWordList()
+  console.info('getStaticProps GOT WORDLIST - wordList.length: ', wordList.length)
+
   // By returning { props: { wordList } }, the component
   // will receive `wordList` as a prop at build time
   const props = { fallback: {}}
