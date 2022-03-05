@@ -21,22 +21,29 @@ console.log("WORDLIST BASEURL: ", WORDLIST_BASEURL)
 
 // wordlist comes from getServerSideProps
 // theme, showHints, setShowhings comes from _app.js
+
+// MAIN COMPONENT DEF
 function Index({
   theme,
   themeToggler,
   helpModalToggler,
   showHints,
   setShowHints,
-  hintToggler
+  hintToggler,
+  staticWordlist
 }) {
   
   
   const [word, setWord] = useState("hello");
   const [showWord] = useState(DEFAULT_SHOW_WORD);
   const [wordLength, setWordLength] = useState(DEFAULT_WORD_LENGTH);
+  
   const wordlistUrl = `${WORDLIST_BASEURL}?wordlength=${wordLength}`
 
-  const { data: wordList, error } = useSWR(wordlistUrl, fetcher)
+  const { data: wordList, error } = useSWR(wordlistUrl, fetcher, { 
+    fallbackData: staticWordlist,
+    revalidateIfStale: true // set to false for testing
+  })
   
   
   useEffect(()=>{
@@ -106,24 +113,14 @@ function Index({
 
 const fetcher = (...args) => fetch(...args).then(res => res.json());
 
-const useWordList = async () => {
-  const SWRkey = `/api/wordlist?wordlength=${DEFAULT_WORD_LENGTH}`
-  const res = await fetch(`${BASE_URL}${SWRkey}`)
-  return { 
-   SWRkey: SWRkey,
-   wordList: await res.json()
-  }
-}
-
 // Send the wordList to props
 export async function getServerSideProps() { 
-  const {wordList, SWRkey} = await useWordList()
-  console.info('getStaticProps GOT WORDLIST - wordList.length: ', wordList.length)
+  const res = await fetch(`${WORDLIST_BASEURL}?wordlength=${DEFAULT_WORD_LENGTH}`)
+  const staticWordlist = await res.json()
 
   // By returning { props: { wordList } }, the component
   // will receive `wordList` as a prop at build time
-  const props = { fallback: {}}
-  props.fallback[SWRkey] = wordList
+  const props = { staticWordlist}
   return { props }
 }
 
