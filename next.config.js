@@ -6,5 +6,5 @@ module.exports = {
   MAX_HINTS: 100,
   BASE_URL: process.env.NEXT_PUBLIC_WORDCHEATER_BASE_URL,
   GA_ID: process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ACTIVE,
-  IS_DEV_ENV: process.env.NEXT_PUBLIC_IS_DEV_ENV 
+  IS_DEV_ENV: process.env.NEXT_PUBLIC_IS_DEV_ENV === 'true'
 }
