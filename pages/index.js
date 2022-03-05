@@ -13,7 +13,7 @@ import {
   MIN_WORD_LENGTH,
   MAX_WORD_LENGTH,
   DEFAULT_WORD_LENGTH,
-  IS_DEV_ENV
+  DEFAULT_SHOW_WORD
 } from "../next.config";
 
 const WORDLIST_BASEURL = `${BASE_URL}/api/wordlist`;
@@ -32,8 +32,7 @@ function Index({
   
   
   const [word, setWord] = useState("hello");
-  const [showWord] = useState(IS_DEV_ENV);
-  console.log("IS_DEV_ENV", IS_DEV_ENV, typeof(IS_DEV_ENV))
+  const [showWord] = useState(DEFAULT_SHOW_WORD);
   const [wordLength, setWordLength] = useState(DEFAULT_WORD_LENGTH);
   const wordlistUrl = `${WORDLIST_BASEURL}?wordlength=${wordLength}`
 
