@@ -15,7 +15,7 @@ function HintPanel({gameboardState, wordList, showHints}){
     const [hintboxHeight, setHintboxHeight] = useState(0)
 
     useEffect( () => {
-      const {hintInfo, hintList} = getHints(wordList, gameboardState.chars, MAX_HINTS)
+      const {hintInfo, hintList} = getHints(wordList, gameboardState.chars)
       setHints(hintList)
       setHintInfo(hintInfo)
     }, [gameboardState])

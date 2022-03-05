@@ -1,5 +1,7 @@
 /*eslint-disable no-extend-native */
 
+import { MAX_HINTS } from "../../next.config"
+
 Array.prototype.findWordsWithChars = function(chars){
   let regexStr = ''
   chars.split("").forEach( char => regexStr += `(?=.*${char})` )
@@ -59,14 +61,14 @@ export const getLetterSlotPairsByStatusFromCharsArray = (chars, status) =>{
 }
 
 
-const formatWordListAsHints = (wordList, maxHints) =>{
+const formatWordListAsHints = (wordList) =>{
 
-  const requiresElipses = wordList.length > maxHints
-  const hintList = wordList.slice(0,maxHints).join(" ")
+  const requiresElipses = wordList.length > MAX_HINTS
+  const hintList = wordList.slice(0,MAX_HINTS).join(" ")
 
   if(requiresElipses){
     return {
-      hintInfo: `Showing ${maxHints} of ${wordList.length} hints:`, 
+      hintInfo: `Showing ${MAX_HINTS} of ${wordList.length} hints:`, 
       hintList: `${hintList}...`
     }
   }
@@ -77,9 +79,9 @@ const formatWordListAsHints = (wordList, maxHints) =>{
   }
 }
 
-export const getHints = (wordList, chars, maxHints) =>{
+export const getHints = (wordList, chars) =>{
   const hintList = filterWordList(wordList, chars) 
-  return formatWordListAsHints(hintList, maxHints)
+  return formatWordListAsHints(hintList)
 }
 
 export const filterWordList = (wordList, chars) => {

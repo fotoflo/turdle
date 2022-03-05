@@ -14,6 +14,7 @@ import {
   rowIsNotFull,
   getLastRowGreens
 } from './GameBoardHelpers';
+import { MAX_WORD_LENGTH, MIN_WORD_LENGTH } from '../../next.config';
 
 function GameBoard({word, wordList, showHints, setShowHints, setWordLength, ...props}){
 const scrollRef = useRef(null)
@@ -54,7 +55,11 @@ const scrollRef = useRef(null)
 
     function wonRound(){
       alert(`YOU WIN! The word was ${word}`)
-      setWordLength(word.length + 1)
+      setWordLength( getNextWordLength(word) )
+    }
+
+    function getNextWordLength(word){
+      return word.length + 1 < MAX_WORD_LENGTH ? word.length + 1 : MIN_WORD_LENGTH;
     }
     
     function iterateStatus(previousStatus, pressedKey){
