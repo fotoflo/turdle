@@ -42,7 +42,7 @@ function Index({
 
   const { data: wordList, error } = useSWR(wordlistUrl, fetcher, { 
     fallbackData: staticWordlist,
-    revalidateIfStale: true // set to false for testing
+    revalidateIfStale: false // set to false for testing
   })
   
   
@@ -113,10 +113,24 @@ function Index({
 
 const fetcher = (...args) => fetch(...args).then(res => res.json());
 
+const fetchWordlist = async () => {
+  const url = `${WORDLIST_BASEURL}?wordlength=${DEFAULT_WORD_LENGTH}`
+  const res = await fetch(url)
+  
+  if(!res.ok){
+    throw new Error(`${context.resolvedUrl} getStaticProps could not fetch ${url}`)
+  }
+
+  return await res.json()
+}
+
 // Send the wordList to props
-export async function getServerSideProps() { 
-  const res = await fetch(`${WORDLIST_BASEURL}?wordlength=${DEFAULT_WORD_LENGTH}`)
-  const staticWordlist = await res.json()
+export async function getServerSideProps(context) { 
+
+  const staticWordlist = await fetchWordlist(context)
+    .catch( err => {
+      return { notFound: true }
+    })
 
   // By returning { props: { wordList } }, the component
   // will receive `wordList` as a prop at build time
