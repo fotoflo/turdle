@@ -8,11 +8,12 @@ import HelpModal from "../components/HelpModal"
 import MainHead from "../components/MainHead"
 import { darkTheme, GlobalStyles, lightTheme } from "../components/Themes";
 import { ThemeProvider } from 'styled-components'
+import { DEFAULT_SHOW_HINTS } from "../next.config";
 
 export default function App({ Component, pageProps }) {
   const [theme, setTheme] = useState("light");
   const [showHelpModal, setShowHelpModal] = useState(false);
-  const [showHints, setShowHints] = useState(true); 
+  const [showHints, setShowHints] = useState(DEFAULT_SHOW_HINTS); 
 
   const helpModalToggler = () => {
     showHelpModal === true ? setShowHelpModal(false): setShowHelpModal(true)
