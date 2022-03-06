@@ -1,4 +1,4 @@
-/// route at http://localhost:3000/api/wordlist?wordlength=5
+/// route at {host}/api/wordlist?wordlength=5
 
 const fsp = require('fs').promises
 

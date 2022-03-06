@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "source .env.prodbuild && next build && next export && rm -rf ../docs && mv ./out ../docs",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "test": "jest --watch"
