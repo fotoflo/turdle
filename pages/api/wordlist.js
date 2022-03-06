@@ -2,13 +2,14 @@
 
 const fsp = require('fs').promises
 
+
 export default async function handler(req, res) {
   const wordlength = req.query.wordlength
   
   try {
     if(!wordlength) throw "no wordlength"
 
-    const file_data = await fsp.readFile(`dictonaries/${wordlength}-letter-words.json`)
+    const file_data = await fsp.readFile(process.cwd() + `/dictonaries/${wordlength}-letter-words.json`, 'utf8')
     // looks from the root of the project
 
     const json_data = JSON.parse(file_data)
