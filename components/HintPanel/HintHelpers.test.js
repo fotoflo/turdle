@@ -21,7 +21,7 @@ import { TEST_WORD_TWO, TEST_WORD_TXO } from "./HintHelpers.testdata.js"
 
 describe('Wordlist.filter', ()=>{
   it('should filter an array', ()=>{
-    const wordlist = new Wordlist('hello', 'rhubarb')
+    const wordlist = new Wordlist('test', 'rhubarb')
     const result = wordlist.filter(word => word === 'rhubarb')
 
     expect(result.length).toEqual(1)

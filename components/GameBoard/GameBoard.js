@@ -129,7 +129,7 @@ const scrollRef = useRef(null)
 
     function keydownHandler( {repeat, key: pressedKey} ){
       if(repeat) return
-      console.log("hello", pressedKey, word)
+      console.log("keydownHandler", pressedKey, word)
 
       switch(true){
         case pressedKey === " ":

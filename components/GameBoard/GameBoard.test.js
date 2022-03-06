@@ -4,8 +4,8 @@ import GameBoard from "./GameBoard";
 
 describe("GameBoard Componenent", () => {
   it("renders", () => {
-    const word = "hello";
-    const wordList = ["hello", "tests"];
+    const word = "test";
+    const wordList = ["test", "tests"];
     const showHints = false;
     const setShowHints = () => {};
     const setWordLength = () => {};

@@ -34,6 +34,12 @@ function Index({
   staticWordlist
 }) {
   
+  const clientSideFetcher = async (...args) => {
+    const res = await fetch(...args)
+    const data = await res.json()
+    console.log(`clientSideFetcher feched ${data.length} words`)
+    return new Wordlist(...data)
+  }
   
   const [word, setWord] = useState("hello");
   const [showWord] = useState(DEFAULT_SHOW_WORD);
@@ -41,21 +47,20 @@ function Index({
   
   const wordlistUrl = `${WORDLIST_BASEURL}?wordlength=${wordLength}`
 
-  const { data: wordList, error } = useSWR(wordlistUrl, wordlistFetcher, { 
+  const { data: wordList, error } = useSWR(wordlistUrl, clientSideFetcher, { 
     fallbackData: staticWordlist,
-    revalidateIfStale: false // set to false for testing
+    revalidateIfStale: true // set to false for testing
   })
-  
   
   useEffect(()=>{
     if(!wordList){
-      setWord("hello")
+      setWord("no word list")
       return
     }
     const theWord = generateRandomWord()
-    console.log(`the word is ${theWord}`)
+    console.log(`the word is ${theWord}, wordlist.length = ${wordList.length}`)
     setWord(theWord)
-  }, [wordList])
+  }, [wordList.length]) // a little hacky but a faster compare
   
   if(error) return(
     <div className="error">
@@ -112,13 +117,7 @@ function Index({
 }
 
 
-const wordlistFetcher = async (...args) => {
-  const res = await fetch(...args)
-  const json = await res.json()
-  return new Wordlist(...json)
-}
-
-const fetchWordlist = async () => {
+const staticFetcher = async () => {
   const url = `${WORDLIST_BASEURL}?wordlength=${DEFAULT_WORD_LENGTH}`
   const res = await fetch(url)
   
@@ -126,18 +125,19 @@ const fetchWordlist = async () => {
     throw new Error(`${context.resolvedUrl} getStaticProps could not fetch ${url}`)
   }
 
-  return await res.json()
+  const data = await res.json()
+  console.log(`staticFetcher fetched ${data.length} words`)
+
+  return new Wordlist(...data) 
 }
 
 // Send the wordList to props
 export async function getServerSideProps(context) { 
 
-  const wordlist = await fetchWordlist(context)
+  const staticWordlist = await staticFetcher(context)
     .catch( err => {
       return { notFound: true }
     })
-
-  const staticWordlist = new Wordlist(wordlist)
 
   // By returning { props: { wordList } }, the component
   // will receive `wordList` as a prop at build time
