@@ -2,13 +2,6 @@
 
 import { MAX_HINTS } from "../../next.config"
 
-Array.prototype.findWordsWithChars = function(chars){
-  let regexStr = ''
-  chars.split("").forEach( char => regexStr += `(?=.*${char})` )
-  // const charsRegex = new RegExp(/(?=.*x)(?=.*e)\w/, 'g');
-  const charsRegex = new RegExp(`${regexStr}\\w`, 'g')
-  return this.filter(  word => word.match(charsRegex)  )
-}
 
 Array.prototype.findWordsWithoutChars = function (chars){
   const charsRegex = new RegExp(`[${chars}]`)

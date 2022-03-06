@@ -3,9 +3,11 @@
 import '@testing-library/jest-dom';
 import THREE_LETTER_WORDLIST from '../../dictonaries/3-letter-words.json'
 
-import {
+import { 
+  Wordlist 
+} from '../GameBoard/Classes/Wordlist';
 
-  //Array.prototype.findWordsWithChars,
+import {
   //Array.prototype.findWordsWithoutChars,
   //Array.prototype.findWordsWithLettersInSlots,
   //Array.prototype.findWordsWithoutLettersInSlots
@@ -17,14 +19,16 @@ import {
 import { TEST_WORD_TWO, TEST_WORD_TXO } from "./HintHelpers.testdata.js"
 
 
-describe( 'Array.prototype.findWordsWithChars', ()=>{
+describe( 'Wordlist.findWordsWithChars', ()=>{
   const chars = "xe";
-  const wordlist = ['xenon', 'rewax', 'roger', 'bob', 'echo', 'xio']
+  const wordlist = new Wordlist('xenon', 'rewax', 'roger', 'bob', 'echo', 'xio')
 
 	it(`should return a list of words that have the chars`, () => {
     const result = wordlist.findWordsWithChars(chars)
-    console.log(result)
-    expect( result.sort() ).toEqual( [ 'xenon', 'rewax' ].sort() )
+    console.log({result})
+
+    expect( [...result].sort() )
+      .toEqual( ['xenon', 'rewax'].sort() )
 	}) 
 })
 
@@ -112,3 +116,13 @@ describe( 'filterWordList', ()=>{
   })
 })
  
+describe('Wordlist.filter', ()=>{
+  it('should filter an array', ()=>{
+    const wordlist = new Wordlist('hello', 'rhubarb')
+    const result = wordlist.filter(word => word === 'rhubarb')
+
+    expect(result.length).toEqual(1)
+    expect(result[0]).toEqual("rhubarb")
+    expect(result instanceof Wordlist).toBe(true)
+  })
+})
