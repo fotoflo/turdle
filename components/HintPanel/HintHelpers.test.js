@@ -8,16 +8,27 @@ import {
 } from '../GameBoard/Classes/Wordlist';
 
 import {
-  //Array.prototype.findWordsWithoutChars,
-  //Array.prototype.findWordsWithLettersInSlots,
-  //Array.prototype.findWordsWithoutLettersInSlots
-  //Array.prototype.findWordsWithCharsButNotInSlot,
+  //Wordlist.filter,
+  //Wordlist.findWordsWithoutChars,
+  //Wordlist.findWordsWithLettersInSlots,
+  //Wordlist.findWordsWithoutLettersInSlots
+  //Wordlist.findWordsWithCharsButNotInSlot,
   getLetterSlotPairsByStatusFromCharsArray,
   filterWordList
 } from './HintHelpers';
 
 import { TEST_WORD_TWO, TEST_WORD_TXO } from "./HintHelpers.testdata.js"
 
+describe('Wordlist.filter', ()=>{
+  it('should filter an array', ()=>{
+    const wordlist = new Wordlist('hello', 'rhubarb')
+    const result = wordlist.filter(word => word === 'rhubarb')
+
+    expect(result.length).toEqual(1)
+    expect(result[0]).toEqual("rhubarb")
+    expect(result instanceof Wordlist).toBe(true)
+  })
+})
 
 describe( 'Wordlist.findWordsWithChars', ()=>{
   const chars = "xe";
@@ -32,23 +43,23 @@ describe( 'Wordlist.findWordsWithChars', ()=>{
 	}) 
 })
 
-describe( 'findWordsWithoutChars', ()=>{
+describe( 'Wordlist.findWordsWithoutChars', ()=>{
   const chars = "xr";
-  const wordlist = ['xenon', 'rewax', 'roger', 'bob', 'echo', 'xio']
+  const wordlist = new Wordlist('xenon', 'rewax', 'roger', 'bob', 'echo', 'xio')
 
 	it(`should return a list of words that dont have the chars`, () => {
     let result = wordlist.findWordsWithoutChars( chars)
-    expect( result.sort() ).toEqual( [ 'echo', 'bob' ].sort() )
+    expect( [...result].sort() ).toEqual( [ 'echo', 'bob' ].sort() )
 	}) 
 })
 
-describe( 'Array.prototype.findWordsWithLettersInSlots', ()=>{
+describe( 'Wordlist.findWordsWithLettersInSlots', ()=>{
   const letterSlotPairs = [{letter: "x", slot: 0}, {letter: "y", slot: 1}];
-  const wordlist = ['xenon', 'rewax', 'roger', 'bob', 'xylophone']
+  const wordlist = new Wordlist('xenon', 'rewax', 'roger', 'bob', 'xylophone')
 
 	it(`should return a list of words have the right Letter in the right slot`, () => {
     const result = wordlist.findWordsWithLettersInSlots(letterSlotPairs)
-    expect( result.sort() ).toEqual( [ 'xylophone' ].sort() )
+    expect( [...result].sort() ).toEqual( [ 'xylophone' ].sort() )
 	}) 
 
   it(`should return the whole list if there are no slot pairs`, () => {
@@ -57,28 +68,28 @@ describe( 'Array.prototype.findWordsWithLettersInSlots', ()=>{
 	}) 
 })
 
-describe( 'Array.prototype.findWordsWithCharsButNotInSlot', ()=>{
+describe.only( 'Wordlist.findWordsWithCharsButNotInSlot', ()=>{
   const letterSlotPairs = [{letter: "a", slot: 1}];
-  const wordlist = ['japan','happy','thank','gamma','tampa','manga']
+  const wordlist = new Wordlist('japan','happy','thank','gamma','tampa','manga')
 
 	it(`should return a list of words have the right Letter in the right slot`, () => {
     const result = wordlist.findWordsWithCharsButNotInSlot(letterSlotPairs)
-    expect( result).toEqual( [ 'thank' ])
+    expect([...result]).toEqual( [ 'thank' ])
 	}) 
 
   it(`should return the whole list if there are no slot pairs`, () => {
     const result = wordlist.findWordsWithLettersInSlots({})
-    expect( result.sort() ).toEqual( wordlist.sort() )
+    expect( [...result].sort() ).toEqual( [...wordlist].sort() )
 	}) 
 })
 
-describe( 'Array.prototype.findWordsWithoutCharsInSlots', ()=>{
+describe( 'Wordlist.findWordsWithoutCharsInSlots', ()=>{
 const charSlotPair = {char: "x", slot: 0}
-const wordlist = ['xenon', 'rewax', 'roger', 'bob']
+const wordlist = new Wordlist('xenon', 'rewax', 'roger', 'bob')
 
 	it(`should return a list of words have the right char in the right slot`, () => {
     const result = wordlist.findWordsWithoutCharsInSlots(charSlotPair)
-    expect( result.sort() ).toEqual( [  'rewax', 'roger', 'bob' ].sort() )
+    expect( [...result].sort() ).toEqual( ['rewax', 'roger', 'bob' ].sort() )
 	}) 
 })
 
@@ -102,27 +113,18 @@ describe( 'filterWordList', ()=>{
 
 	it(`should return a list of words have the right char in the right slot`, () => {
     const chars = TEST_WORD_TWO;
+    const wordlist = new Wordlist(...THREE_LETTER_WORDLIST)
 
-    const result = filterWordList(THREE_LETTER_WORDLIST, chars)
+    const result = filterWordList(wordlist, chars)
     console.log("RESULT:", result)
     expect( result ).toEqual( [ 'two' ] )
 	})
 
   it('should work if there are two letters not in a slot', ()=>{
     const chars = TEST_WORD_TXO;
-    const result = filterWordList(THREE_LETTER_WORDLIST, chars)
+    const wordlist = new Wordlist(...THREE_LETTER_WORDLIST)
+    const result = filterWordList(wordlist, chars)
       console.log("RESULT:", result)
     expect( result ).toEqual( [ 'two', 'too' ] )
-  })
-})
- 
-describe('Wordlist.filter', ()=>{
-  it('should filter an array', ()=>{
-    const wordlist = new Wordlist('hello', 'rhubarb')
-    const result = wordlist.filter(word => word === 'rhubarb')
-
-    expect(result.length).toEqual(1)
-    expect(result[0]).toEqual("rhubarb")
-    expect(result instanceof Wordlist).toBe(true)
   })
 })

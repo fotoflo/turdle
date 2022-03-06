@@ -2,27 +2,6 @@
 
 import { MAX_HINTS } from "../../next.config"
 
-
-Array.prototype.findWordsWithoutChars = function (chars){
-  const charsRegex = new RegExp(`[${chars}]`)
-  return this.filter(  word => !word.match(charsRegex) )
-}
-
-Array.prototype.findWordsWithCharsButNotInSlot = function (letterSlotPairs){
-  /// has the letter, but not in the slot
-  // arrow has w, but not in slot 1
-  if( letterSlotPairs.length === 0 ) return this
-  if( Object.keys(letterSlotPairs).length === 0 ) return this
-
-  return this.filter( word => {
-    const pairs = letterSlotPairs
-      .filter( char => word.indexOf(char.letter) !== -1 ) 
-      .filter( char => word.indexOf(char.letter) !== char.slot )
-    return pairs.length === 0 ? false: true;
-  })
-}
-
-
 Array.prototype.findWordsWithLettersInSlots = function (letterSlotPairs){
   if( letterSlotPairs.length === 0 ) return this
   if( Object.keys(letterSlotPairs).length === 0 ) return this
@@ -33,13 +12,6 @@ Array.prototype.findWordsWithLettersInSlots = function (letterSlotPairs){
     })
   })
 }
-
-Array.prototype.findWordsWithoutCharsInSlots = function (charSlotPair){
-  //  charSlotPairs: {char: r, slot: 4}
-  return this  // wordlist = ['xenon', 'rewax', 'roger', 'bob']
-    .filter(  word => word[charSlotPair.slot] !== charSlotPair.char ) 
-}
-
 
 export const getKeyValueFromPair = (pair) => {
   const char = Object.keys(pair)[0]
@@ -92,10 +64,8 @@ export const filterWordList = (wordList, chars) => {
   console.log(`finding words including: ${JSON.stringify(includedList)}`)
   
 
-  const newWordList = wordList
+  return wordList
     .findWordsWithLettersInSlots(inSlotList)
     .findWordsWithCharsButNotInSlot(includedList)
     .findWordsWithoutChars(excludedCharString)
-
-  return newWordList
 }
