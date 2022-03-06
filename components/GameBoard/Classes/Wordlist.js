@@ -7,7 +7,7 @@ export class Wordlist extends Array{
     return super.filter(...args)
   }
 
-  findWordsWithCharsw(chars){
+  findWordsWithChars(chars){
     let regexStr = ''
     chars.split("").forEach( char => regexStr += `(?=.*${char})` )
     // const charsRegex = new RegExp(/(?=.*x)(?=.*e)\w/, 'g');
@@ -37,6 +37,17 @@ export class Wordlist extends Array{
         .filter( char => word.indexOf(char.letter) !== -1 ) 
         .filter( char => word.indexOf(char.letter) !== char.slot )
       return pairs.length === 0 ? false: true;
+    })
+  }
+
+  findWordsWithLettersInSlots(letterSlotPairs){
+    if( letterSlotPairs.length === 0 ) return this
+    if( Object.keys(letterSlotPairs).length === 0 ) return this
+  
+    return this.filter( word => {
+      return letterSlotPairs.every( (pair) => {
+        return word.charAt(pair.slot) === pair.letter 
+      })
     })
   }
 }

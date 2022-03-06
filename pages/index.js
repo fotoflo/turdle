@@ -15,6 +15,7 @@ import {
   DEFAULT_WORD_LENGTH,
   DEFAULT_SHOW_WORD
 } from "../next.config";
+import { Wordlist } from "../components/GameBoard/Classes/Wordlist";
 
 const WORDLIST_BASEURL = `${BASE_URL}/api/wordlist`;
 console.log("WORDLIST BASEURL: ", WORDLIST_BASEURL)
@@ -40,7 +41,7 @@ function Index({
   
   const wordlistUrl = `${WORDLIST_BASEURL}?wordlength=${wordLength}`
 
-  const { data: wordList, error } = useSWR(wordlistUrl, fetcher, { 
+  const { data: wordList, error } = useSWR(wordlistUrl, wordlistFetcher, { 
     fallbackData: staticWordlist,
     revalidateIfStale: false // set to false for testing
   })
@@ -111,7 +112,11 @@ function Index({
 }
 
 
-const fetcher = (...args) => fetch(...args).then(res => res.json());
+const wordlistFetcher = async (...args) => {
+  const res = await fetch(...args)
+  const json = await res.json()
+  return new Wordlist(...json)
+}
 
 const fetchWordlist = async () => {
   const url = `${WORDLIST_BASEURL}?wordlength=${DEFAULT_WORD_LENGTH}`
@@ -127,10 +132,12 @@ const fetchWordlist = async () => {
 // Send the wordList to props
 export async function getServerSideProps(context) { 
 
-  const staticWordlist = await fetchWordlist(context)
+  const wordlist = await fetchWordlist(context)
     .catch( err => {
       return { notFound: true }
     })
+
+  const staticWordlist = new Wordlist(wordlist)
 
   // By returning { props: { wordList } }, the component
   // will receive `wordList` as a prop at build time

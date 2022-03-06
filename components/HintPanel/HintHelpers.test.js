@@ -68,7 +68,7 @@ describe( 'Wordlist.findWordsWithLettersInSlots', ()=>{
 	}) 
 })
 
-describe.only( 'Wordlist.findWordsWithCharsButNotInSlot', ()=>{
+describe( 'Wordlist.findWordsWithCharsButNotInSlot', ()=>{
   const letterSlotPairs = [{letter: "a", slot: 1}];
   const wordlist = new Wordlist('japan','happy','thank','gamma','tampa','manga')
 

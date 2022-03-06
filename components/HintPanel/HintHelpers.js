@@ -1,17 +1,7 @@
 /*eslint-disable no-extend-native */
 
 import { MAX_HINTS } from "../../next.config"
-
-Array.prototype.findWordsWithLettersInSlots = function (letterSlotPairs){
-  if( letterSlotPairs.length === 0 ) return this
-  if( Object.keys(letterSlotPairs).length === 0 ) return this
-
-  return this.filter( word => {
-    return letterSlotPairs.every( (pair) => {
-      return word.charAt(pair.slot) === pair.letter 
-    })
-  })
-}
+import { Wordlist } from "../GameBoard/Classes/Wordlist"
 
 export const getKeyValueFromPair = (pair) => {
   const char = Object.keys(pair)[0]
@@ -45,12 +35,12 @@ const formatWordListAsHints = (wordList) =>{
 }
 
 export const getHints = (wordList, chars) =>{
-  const hintList = filterWordList(wordList, chars) 
+  const wordlist = new Wordlist(...wordList)
+  const hintList = filterWordList(wordlist, chars) 
   return formatWordListAsHints(hintList)
 }
 
 export const filterWordList = (wordList, chars) => {
-  
 
   const inSlotList = getLetterSlotPairsByStatusFromCharsArray(chars, 3)
   const excludedList =  getLetterSlotPairsByStatusFromCharsArray(chars, 1)
