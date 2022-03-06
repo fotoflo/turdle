@@ -9,9 +9,7 @@ export default async function handler(req, res) {
   try {
     if(!wordlength) throw "no wordlength"
 
-    const file_data = await fsp.readFile(process.cwd() + `/dictonaries/${wordlength}-letter-words.json`, 'utf8')
-    // looks from the root of the project
-
+    const file_data = await fsp.readFile(process.cwd() + `/static/dictonaries/${wordlength}-letter-words.json`, 'utf8')
     const json_data = JSON.parse(file_data)
     res.status(200).json(json_data)
   }
