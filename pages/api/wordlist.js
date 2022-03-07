@@ -9,10 +9,10 @@ export default async function handler(req, res) {
   try {
     if(!wordlength) throw "no wordlength"
 
-    const filepath = path.resolve(process.cwd() + `/public/static/dictonaries/${wordlength}-letter-words.json`)
+    const filepath = path.resolve(process.cwd() + `/public/dictonaries/${wordlength}-letter-words.json`)
     const file_data = await fsp.readFile(filepath , 'utf8')
     const json_data = JSON.parse(file_data)
-    
+
     res.status(200).json(json_data)
   }
   catch (error) {
