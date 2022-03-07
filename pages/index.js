@@ -61,7 +61,7 @@ function Index({
     const theWord = generateRandomWord()
     console.log(`the word is ${theWord}, wordlist.length = ${wordList.length}`)
     setWord(theWord)
-  }, [wordList.length]) // a little hacky but a faster compare
+  }, [wordList]) // a little hacky but a faster compare
   
   if(error) return(
     <div className="error">

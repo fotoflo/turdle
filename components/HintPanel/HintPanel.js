@@ -18,7 +18,7 @@ function HintPanel({gameboardState, wordList, showHints}){
       const {hintInfo, hintList} = getHints(wordList, gameboardState.chars)
       setHints(hintList)
       setHintInfo(hintInfo)
-    }, [gameboardState])
+    }, [gameboardState, wordList])
 
     useEffect(() => {
       if(!hintboxRef.current) return 
