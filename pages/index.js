@@ -48,7 +48,7 @@ function Index({
   const wordlistUrl = `${WORDLIST_BASEURL}?wordlength=${wordLength}`
   console.log("wordlistUrl", wordlistUrl)
 
-  const { data: wordList, error } = useSWR(wordlistUrl, clientSideFetcher, { 
+  const { data: wordList } = useSWR(wordlistUrl, clientSideFetcher, { 
     fallbackData: staticWordlist,
     revalidateIfStale: true // set to false for testing
   })
@@ -63,14 +63,14 @@ function Index({
     setWord(theWord)
   }, [wordList]) // a little hacky but a faster compare
   
-  if(error) return(
-    <div className="error">
-      <p className="error-message">Error: failed to load wordlist</p>
-      <p>Detail: useSWR error - {JSON.stringify(error)}</p>
-    </div>
-  )
+  // if(error) return(
+  //   <div className="error">
+  //     <p className="error-message">Error: failed to load wordlist</p>
+  //     <p>Detail: useSWR error - {JSON.stringify(error)}</p>
+  //   </div>
+  // )
 
-  if(!wordList) return <div>loading wordlist...</div>
+  // if(!wordList) return <div>loading wordlist...</div>
 
   const wordLengthToggler = () => {
     wordLength < MAX_WORD_LENGTH ?
