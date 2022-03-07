@@ -48,6 +48,7 @@ const scrollRef = useRef(null)
     useEffect( ()=>{
       setGameboardState( generateNewGameboardState(word) )
     },[word])
+    
 
     function didWinRound(gameboardState){
       return getLastRowGreens(gameboardState).length === gameboardState.slots 
