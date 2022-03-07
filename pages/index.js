@@ -65,7 +65,7 @@ function Index({
   if(error) return(
     <div className="error">
       <p className="error-message">Error: failed to load wordlist</p>
-      <p>Detail: {JSON.stringify(error)}</p>
+      <p>Detail: useSWR error - {JSON.stringify(error)}</p>
     </div>
   )
 
