@@ -46,6 +46,7 @@ function Index({
   const [wordLength, setWordLength] = useState(DEFAULT_WORD_LENGTH);
   
   const wordlistUrl = `${WORDLIST_BASEURL}?wordlength=${wordLength}`
+  console.log("wordlistUrl", wordlistUrl)
 
   const { data: wordList, error } = useSWR(wordlistUrl, clientSideFetcher, { 
     fallbackData: staticWordlist,
