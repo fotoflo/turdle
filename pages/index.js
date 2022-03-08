@@ -48,20 +48,20 @@ function Index({
   const wordlistUrl = `${WORDLIST_BASEURL}?wordlength=${wordLength}`
   console.log("wordlistUrl", wordlistUrl)
 
-  const { data: wordList } = useSWR(wordlistUrl, clientSideFetcher, { 
+  const { data: wordlist } = useSWR(wordlistUrl, clientSideFetcher, { 
     fallbackData: staticWordlist,
     revalidateIfStale: true // set to false for testing
   })
   
   useEffect(()=>{
-    if(!wordList){
+    if(!wordlist){
       setWord("no word list")
       return
     }
     const theWord = generateRandomWord()
-    console.log(`the word is ${theWord}, wordlist.length = ${wordList.length}`)
+    console.log(`the word is ${theWord}, wordlist.length = ${wordlist.length}`)
     setWord(theWord)
-  }, [wordList]) // a little hacky but a faster compare
+  }, [wordlist]) // a little hacky but a faster compare
   
   // if(error) return(
   //   <div className="error">
@@ -81,9 +81,9 @@ function Index({
 
   const generateRandomWord = () => {
     const min = 0;
-    const max =  wordList.length -1;
+    const max =  wordlist.length -1;
     const rand =  Math.floor(Math.random() * (max - min + 1) + min)
-    const theWord = wordList[rand]
+    const theWord = wordlist[rand]
     return theWord
   }
 
@@ -108,7 +108,7 @@ function Index({
 
       <GameBoard 
           word={word}
-          wordList={wordList}
+          wordList={wordlist}
           showHints={showHints}
           setShowHints={setShowHints}
           setWordLength={setWordLength}

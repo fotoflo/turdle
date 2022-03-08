@@ -46,9 +46,10 @@ const scrollRef = useRef(null)
     },[gameboardState])
 
     useEffect( ()=>{
+      console.log(`word updated, ${word}`)
       setGameboardState( generateNewGameboardState(word) )
     },[word])
-    
+
 
     function didWinRound(gameboardState){
       return getLastRowGreens(gameboardState).length === gameboardState.slots 
@@ -56,10 +57,10 @@ const scrollRef = useRef(null)
 
     function wonRound(){
       alert(`YOU WIN! The word was ${word}`)
-      setWordLength( getNextWordLength(word) )
+      setWordLength( getLengthOfNextWord(word) )
     }
 
-    function getNextWordLength(word){
+    function getLengthOfNextWord(word){
       return word.length + 1 < MAX_WORD_LENGTH ? word.length + 1 : MIN_WORD_LENGTH;
     }
     
