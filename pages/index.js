@@ -34,21 +34,23 @@ function Index({
   staticWordlist
 }) {
   
+  const [word, setWord] = useState("hello");
+  const [showWord] = useState(DEFAULT_SHOW_WORD);
+  const [wordLength, setWordLength] = useState(DEFAULT_WORD_LENGTH);  
+  
+  const WORDLIST_API_PATH = '/api/wordlist'
+  const WORDLIST_API_URL = `${BASE_URL}${WORDLIST_API_PATH}`;
+  const WORDLIST_GET_PARAMS = `?wordlength=${wordLength}`
+  const WORDLIST_FULL_URL = `${WORDLIST_API_URL}${WORDLIST_GET_PARAMS}`
+
   const clientSideFetcher = async (...args) => {
     const res = await fetch(...args)
     const data = await res.json()
     console.log(`clientSideFetcher feched ${data.length} words`)
     return new Wordlist(...data)
   }
-  
-  const [word, setWord] = useState("hello");
-  const [showWord] = useState(DEFAULT_SHOW_WORD);
-  const [wordLength, setWordLength] = useState(DEFAULT_WORD_LENGTH);
-  
-  const wordlistUrl = `${WORDLIST_BASEURL}?wordlength=${wordLength}`
-  console.log("wordlistUrl", wordlistUrl)
-
-  const { data: wordlist } = useSWR(wordlistUrl, clientSideFetcher, { 
+    
+  const { data: wordlist } = useSWR(WORDLIST_FULL_URL, clientSideFetcher, { 
     fallbackData: staticWordlist,
     revalidateIfStale: true // set to false for testing
   })
