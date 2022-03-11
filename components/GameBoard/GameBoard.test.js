@@ -1,11 +1,12 @@
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import GameBoard from "./GameBoard";
+import { Wordlist } from "./Classes/Wordlist";
 
 describe("GameBoard Componenent", () => {
   it("renders", () => {
     const word = "test";
-    const wordList = ["test", "tests"];
+    const wordList = new Wordlist("test", "tests");
     const showHints = false;
     const setShowHints = () => {};
     const setWordLength = () => {};

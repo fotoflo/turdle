@@ -1,7 +1,7 @@
 // import { render, screen } from '@testing-library/react';
 // import HintPanel from './HintPanel';
 import '@testing-library/jest-dom';
-import THREE_LETTER_WORDLIST from '../../dictonaries/3-letter-words.json'
+import THREE_LETTER_WORDLIST from '../../public/dictonaries/3-letter-words.json'
 
 import { 
   Wordlist 

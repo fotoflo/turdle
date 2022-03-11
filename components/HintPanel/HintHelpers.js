@@ -1,5 +1,3 @@
-/*eslint-disable no-extend-native */
-
 import { MAX_HINTS } from "../../next.config"
 import { Wordlist } from "../GameBoard/Classes/Wordlist"
 
@@ -35,6 +33,8 @@ const formatWordListAsHints = (wordList) =>{
 }
 
 export const getHints = (wordList, chars) =>{
+  if(JSON.stringify(wordList) === '{}') return {}
+  console.log("getHints wordList", wordList)
   const wordlist = new Wordlist(...wordList)
   const hintList = filterWordList(wordlist, chars) 
   return formatWordListAsHints(hintList)
