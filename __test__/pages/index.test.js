@@ -3,17 +3,14 @@
 import next from 'next'
 next({});
 
-import { Wordlist } from '../components/GameBoard/Classes/Wordlist';
+import { Wordlist } from '../../components/GameBoard/Classes/Wordlist';
 
-import {getServerSideProps, staticFetcher} from '../pages/index'
-import {BASE_URL} from '../next.config';
+import {getServerSideProps, staticFetcher} from '../../pages/index'
+import {BASE_URL} from '../../next.config';
 
 describe('env loads in jest', ()=>{
-  // console.log("node env: ", process.env.NODE_ENV)
-  // console.log('BASE_URL:', process.env.NEXT_PUBLIC_WORDCHEATER_BASE_URL)
-  // console.log("config.BASE_URL: ", BASE_URL)
-  expect(process.env.NODE_ENV).toBeDefined()
-  expect(BASE_URL).toBeDefined()
+  expect(process.env.NODE_ENV).toEqual('test')
+  expect(BASE_URL).toEqual('http://localhost:3000')
 })
 
 describe("index.js - the home page", ()=>{
