@@ -10,13 +10,16 @@ import {WordComponent} from '../components/WordComponent';
 
 import { 
   BASE_URL,
+  WORDLIST_API_PATH,
   MIN_WORD_LENGTH,
   MAX_WORD_LENGTH,
   DEFAULT_WORD_LENGTH,
   DEFAULT_SHOW_WORD
 } from "../next.config";
+
 import { Wordlist } from "../components/GameBoard/Classes/Wordlist";
 
+console.log({BASE_URL})
 const WORDLIST_BASEURL = `${BASE_URL}/api/wordlist`;
 console.log("WORDLIST BASEURL: ", WORDLIST_BASEURL)
 
@@ -31,39 +34,32 @@ function Index({
   showHints,
   setShowHints,
   hintToggler,
-  staticWordlist
+  fallback
 }) {
   
   const [word, setWord] = useState("hello");
   const [showWord] = useState(DEFAULT_SHOW_WORD);
   const [wordLength, setWordLength] = useState(DEFAULT_WORD_LENGTH);  
-  
-  const WORDLIST_API_PATH = '/api/wordlist'
-  const WORDLIST_API_URL = `${BASE_URL}${WORDLIST_API_PATH}`;
-  const WORDLIST_GET_PARAMS = `?wordlength=${wordLength}`
-  const WORDLIST_FULL_URL = `${WORDLIST_API_URL}${WORDLIST_GET_PARAMS}`
 
-  const clientSideFetcher = async (...args) => {
-    const res = await fetch(...args)
+  const clientSideFetcher = async () => {
+    const res = await fetch(`/api/wordlist?wordlength=${wordLength}`)
     const data = await res.json()
-    console.log(`clientSideFetcher feched ${data.length} words`)
+    console.log(`clientSideFetcher feched ${data.length} ${data[0].length} letter words`)
     return new Wordlist(...data)
   }
     
-  const { data: wordlist } = useSWR(WORDLIST_FULL_URL, clientSideFetcher, { 
-    fallbackData: staticWordlist,
+  const { data: wordlist, mutate } = useSWR('/api/wordlist', clientSideFetcher, { 
+    fallbackData: fallback['/api/wordlist'],
     revalidateIfStale: true // set to false for testing
   })
   
   useEffect(()=>{
-    if(!wordlist){
-      setWord("no word list")
-      return
-    }
+    mutate()
     const theWord = generateRandomWord()
-    console.log(`the word is ${theWord}, wordlist.length = ${wordlist.length}`)
+    console.log(`the word is ${theWord}`
+     + `wordlength = ${wordLength} wordlist.length = ${wordlist.length}`)
     setWord(theWord)
-  }, [wordlist]) // a little hacky but a faster compare
+  }, [wordLength])
   
   // if(error) return(
   //   <div className="error">
@@ -75,6 +71,7 @@ function Index({
   // if(!wordList) return <div>loading wordlist...</div>
 
   const wordLengthToggler = () => {
+    console.log('wordLengthToggler')
     wordLength < MAX_WORD_LENGTH ?
        setWordLength( wordLength + 1) :
        setWordLength( MIN_WORD_LENGTH ) ;
@@ -106,6 +103,7 @@ function Index({
       <WordComponent
         showWord={showWord}
         word={word}
+        wordlist={wordlist}
       />
 
       <GameBoard 
@@ -113,15 +111,16 @@ function Index({
           wordList={wordlist}
           showHints={showHints}
           setShowHints={setShowHints}
-          setWordLength={setWordLength}
+          wordLengthToggler={wordLengthToggler}
       />
     </>
   );
 }
 
 
-const staticFetcher = async () => {
+export async function staticFetcher() {
   const url = `${WORDLIST_BASEURL}?wordlength=${DEFAULT_WORD_LENGTH}`
+  console.log({url})
   const res = await fetch(url)
   
   if(!res.ok){
@@ -144,7 +143,11 @@ export async function getServerSideProps(context) {
 
   // By returning { props: { wordList } }, the component
   // will receive `wordList` as a prop at build time
-  const props = { staticWordlist}
+  const props = { 
+    fallback: {
+      [WORDLIST_API_PATH] : staticWordlist
+    }
+  }
   return { props }
 }
 

@@ -16,8 +16,16 @@ import {
 } from './GameBoardHelpers';
 import { MAX_WORD_LENGTH, MIN_WORD_LENGTH } from '../../next.config';
 
-function GameBoard({word, wordList, showHints, setShowHints, setWordLength, ...props}){
-const scrollRef = useRef(null)
+function GameBoard({
+  word,
+  wordList,
+  showHints,
+  setShowHints,
+  wordLengthToggler,
+  ...props
+}){
+
+    const scrollRef = useRef(null)
     const executeScroll = () => scrollRef.current.scrollIntoView()    
 
     useEffect( () => {
@@ -57,7 +65,7 @@ const scrollRef = useRef(null)
 
     function wonRound(){
       alert(`YOU WIN! The word was ${word}`)
-      setWordLength( getLengthOfNextWord(word) )
+      wordLengthToggler()
     }
 
     function getLengthOfNextWord(word){

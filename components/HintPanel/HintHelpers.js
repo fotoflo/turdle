@@ -34,7 +34,7 @@ const formatWordListAsHints = (wordList) =>{
 
 export const getHints = (wordList, chars) =>{
   if(JSON.stringify(wordList) === '{}') return {}
-  console.log("getHints wordList", wordList)
+  console.log(`getHints ${wordList[0].length} letter words:`, wordList.length)
   const wordlist = new Wordlist(...wordList)
   const hintList = filterWordList(wordlist, chars) 
   return formatWordListAsHints(hintList)
