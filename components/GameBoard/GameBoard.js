@@ -22,6 +22,8 @@ function GameBoard({
   showHints,
   setShowHints,
   wordLengthToggler,
+  level, 
+  setLevel,
   ...props
 }){
 
@@ -66,6 +68,7 @@ function GameBoard({
     function wonRound(){
       alert(`YOU WIN! The word was ${word}`)
       wordLengthToggler()
+      setLevel( level + 1)
     }
 
     function getLengthOfNextWord(word){

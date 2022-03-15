@@ -10,11 +10,10 @@ import {WordComponent} from '../components/WordComponent';
 
 import { 
   BASE_URL,
-  WORDLIST_API_PATH,
   MIN_WORD_LENGTH,
   MAX_WORD_LENGTH,
   DEFAULT_WORD_LENGTH,
-  DEFAULT_SHOW_WORD
+  DEFAULT_SHOW_DEBUG
 } from "../next.config";
 
 import { Wordlist } from "../components/GameBoard/Classes/Wordlist";
@@ -37,9 +36,10 @@ function Index({
   fallback
 }) {
   
-  const [word, setWord] = useState(" ");
-  const [showWord] = useState(DEFAULT_SHOW_WORD);
+ 
+  const [showWord] = useState(DEFAULT_SHOW_DEBUG);
   const [wordLength, setWordLength] = useState(DEFAULT_WORD_LENGTH);  
+  const [level, setLevel] = useState(0);  
 
   const clientSideFetcher = async () => {
     const res = await fetch(`/api/wordlist?wordlength=${wordLength}`)
@@ -47,22 +47,28 @@ function Index({
     console.log(`### clientSideFetcher feched ${data.length} ${data[0].length} letter words`)
     return new Wordlist(...data)
   }
-    
-  const { data: wordlist, mutate } = useSWR('/api/wordlist', clientSideFetcher, { 
+  
+  const key = level === 0 ? null : '/api/wordlist';
+
+  const { data: wordlist, mutate } = useSWR(
+      key,
+      clientSideFetcher, { 
     fallbackData: fallback['/api/wordlist'],
     revalidateIfStale: false, 
     revalidateOnMount: false,
     revalidateOnFocus: false
   })
+
+  const [word, setWord] = useState( generateRandomWord() );
   
   useEffect(()=>{
     mutate()
-  }, [wordLength])
-
+  }, [level])
+  
   useEffect(()=>{
+    setWord( generateRandomWord() )
     console.log("### wordlist changed")
-    // setWord( generateRandomWord() )
-  },[wordlist])
+  },[wordlist.length])
   
   // if(error) return(
   //   <div className="error">
@@ -73,7 +79,7 @@ function Index({
 
   // if(!wordList) return <div>loading wordlist...</div>
 
-  const wordLengthToggler = () => {
+  function wordLengthToggler(){
     console.log('wordLengthToggler')
     wordLength < MAX_WORD_LENGTH ?
        setWordLength( wordLength + 1) :
@@ -81,7 +87,7 @@ function Index({
   }
   
 
-  const generateRandomWord = () => {
+  function generateRandomWord() {
     const min = 0;
     const max =  wordlist.length -1;
     const rand =  Math.floor(Math.random() * (max - min + 1) + min)
@@ -107,6 +113,7 @@ function Index({
         showWord={showWord}
         word={word}
         wordlist={wordlist}
+        level={level}
       />
 
       <GameBoard 
@@ -115,6 +122,8 @@ function Index({
           showHints={showHints}
           setShowHints={setShowHints}
           wordLengthToggler={wordLengthToggler}
+          level={level}
+          setLevel={setLevel}
       />
     </>
   );
@@ -147,7 +156,7 @@ export async function getStaticProps(context) {
   // will receive `wordList` as a prop at build time
   const props = { 
     fallback: {
-      '/api/wordlist' : ["foo"]
+      '/api/wordlist' : staticWordlist
     }
   }
   return { props }

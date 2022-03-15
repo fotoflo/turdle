@@ -6,11 +6,11 @@ module.exports = {
   reactStrictMode: true,
   GA_ID: process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ACTIVE,
   MIN_WORD_LENGTH: 3,
-  MAX_WORD_LENGTH: 11,
+  MAX_WORD_LENGTH: 8,
   DEFAULT_WORD_LENGTH: 3,
   MAX_HINTS: 100,
   DEFAULT_SHOW_HINTS: true,
-  DEFAULT_SHOW_WORD: process.env.NEXT_PUBLIC_BUILD_SHOW_WORD === 'true',
+  DEFAULT_SHOW_DEBUG: process.env.NEXT_PUBLIC_BUILD_SHOW_WORD === 'true',
   BASE_URL: process.env.NEXT_PUBLIC_WORDCHEATER_BASE_URL,
   WORDLIST_API_PATH: '/api/wordlist'
 }
