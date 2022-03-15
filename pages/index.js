@@ -37,29 +37,32 @@ function Index({
   fallback
 }) {
   
-  const [word, setWord] = useState("hello");
+  const [word, setWord] = useState(" ");
   const [showWord] = useState(DEFAULT_SHOW_WORD);
   const [wordLength, setWordLength] = useState(DEFAULT_WORD_LENGTH);  
 
   const clientSideFetcher = async () => {
     const res = await fetch(`/api/wordlist?wordlength=${wordLength}`)
     const data = await res.json()
-    console.log(`clientSideFetcher feched ${data.length} ${data[0].length} letter words`)
+    console.log(`### clientSideFetcher feched ${data.length} ${data[0].length} letter words`)
     return new Wordlist(...data)
   }
     
   const { data: wordlist, mutate } = useSWR('/api/wordlist', clientSideFetcher, { 
     fallbackData: fallback['/api/wordlist'],
-    revalidateIfStale: true // set to false for testing
+    revalidateIfStale: false, 
+    revalidateOnMount: false,
+    revalidateOnFocus: false
   })
   
   useEffect(()=>{
     mutate()
-    const theWord = generateRandomWord()
-    console.log(`the word is ${theWord}`
-     + `wordlength = ${wordLength} wordlist.length = ${wordlist.length}`)
-    setWord(theWord)
   }, [wordLength])
+
+  useEffect(()=>{
+    console.log("### wordlist changed")
+    // setWord( generateRandomWord() )
+  },[wordlist])
   
   // if(error) return(
   //   <div className="error">
@@ -120,7 +123,6 @@ function Index({
 
 export async function staticFetcher() {
   const url = `${WORDLIST_BASEURL}?wordlength=${DEFAULT_WORD_LENGTH}`
-  console.log({url})
   const res = await fetch(url)
   
   if(!res.ok){
@@ -128,13 +130,13 @@ export async function staticFetcher() {
   }
 
   const data = await res.json()
-  console.log(`staticFetcher fetched ${data.length} words`)
+  console.log(`### staticFetcher fetched ${data.length} words`)
 
   return new Wordlist(...data) 
 }
 
 // Send the wordList to props
-export async function getServerSideProps(context) { 
+export async function getStaticProps(context) { 
 
   const staticWordlist = await staticFetcher(context)
     .catch( err => {
@@ -145,7 +147,7 @@ export async function getServerSideProps(context) {
   // will receive `wordList` as a prop at build time
   const props = { 
     fallback: {
-      [WORDLIST_API_PATH] : staticWordlist
+      '/api/wordlist' : ["foo"]
     }
   }
   return { props }
