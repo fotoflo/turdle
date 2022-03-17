@@ -5,7 +5,7 @@ next({});
 
 import { Wordlist } from '../../components/GameBoard/Classes/Wordlist';
 
-import {getServerSideProps, staticFetcher} from '../../pages/index'
+import {getStaticProps, staticFetcher} from '../../pages/index'
 import {BASE_URL} from '../../next.config';
 
 describe('env loads in jest', ()=>{
@@ -14,7 +14,7 @@ describe('env loads in jest', ()=>{
 })
 
 describe("index.js - the home page", ()=>{
-  console.log(`getServerSideProps`)
+  console.log(`getStaticProps`)
 
   describe('staticFetcher', ()=>{
     it('should return a new Wordlist object', async()=>{
@@ -25,13 +25,13 @@ describe("index.js - the home page", ()=>{
     })
   })
   
-  describe('getServerSideProps', ()=>{
+  describe('getStaticProps', ()=>{
     it('should return a props object', async ()=>{
-      const result = await getServerSideProps({})
+      const result = await getStaticProps({})
       expect(result).toBeDefined()
     })
     it('Should have a fallback key with a Wordlist Object', async ()=>{
-      const result = await getServerSideProps({})
+      const result = await getStaticProps({})
       expect(
         result.props.fallback['/api/wordlist'] instanceof Wordlist
       ).toBe(true)
