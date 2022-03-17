@@ -27,24 +27,6 @@ class MyDocument extends Document {
                   work correctly both with client-side routing and a non-root public URL.
                   Learn how to configure a non-root public URL by running `npm run build`.
                 --> */}
-                {/* <!-- Global site tag (gtag.js) - Google Analytics --> */}
-
-                <script async
-                  src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
-                />
-
-                <script
-                  dangerouslySetInnerHTML={{
-                    __html: `
-                  window.dataLayer = window.dataLayer || [];
-                  function gtag(){dataLayer.push(arguments);}
-                  gtag('js', new Date());
-                  gtag('config', '${GA_ID}', {
-                    page_path: window.location.pathname,
-                  });
-                `,
-                  }}
-                />
               </Head>
               <body>
                 <Main />

@@ -1,5 +1,6 @@
 import React from "react";
 import Head from "next/head";
+import Script from "next/script";
 
 // import { Col, Row, Button } from 'react-bootstrap';
 // import {FaSignOutAlt} from 'react-icons/fa'
@@ -34,11 +35,11 @@ function MainHead({props}) {
     --> */}
       <title>WordCheater - The Wordle Solver</title>
       {/* <!-- Global site tag (gtag.js) - Google Analytics --> */}
-      <script
+      <Script
         async
         src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
       />
-      <script
+      <Script
         dangerouslySetInnerHTML={{
           __html: `
           window.dataLayer = window.dataLayer || [];
