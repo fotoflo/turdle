@@ -1,11 +1,5 @@
 import React from "react";
 import Head from "next/head";
-import Script from "next/script";
-
-// import { Col, Row, Button } from 'react-bootstrap';
-// import {FaSignOutAlt} from 'react-icons/fa'
-
-import { GA_ID } from "../next.config";
 
 function MainHead({props}) {
   return (
@@ -35,22 +29,6 @@ function MainHead({props}) {
     --> */}
       <title>WordCheater - The Wordle Solver</title>
       {/* <!-- Global site tag (gtag.js) - Google Analytics --> */}
-      <Script
-        async
-        src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
-      />
-      <Script
-        dangerouslySetInnerHTML={{
-          __html: `
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', '${GA_ID}', {
-            page_path: window.location.pathname,
-          });
-        `,
-        }}
-      />
 
       <meta property="og:title" content="WordCheater - The Wordle Solver, and much more" />
       <meta property="og:image" content="" />

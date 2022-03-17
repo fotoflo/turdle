@@ -6,6 +6,7 @@ import "../styles/globals.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import HelpModal from "../components/HelpModal"
 import MainHead from "../components/MainHead"
+import MainScript from "../components/MainScript"
 import { darkTheme, GlobalStyles, lightTheme } from "../components/Themes";
 import { ThemeProvider } from 'styled-components'
 import { DEFAULT_SHOW_HINTS } from "../next.config";
@@ -33,6 +34,8 @@ export default function App({ Component, pageProps }) {
   return (
     <div className={styles.container}>
       <MainHead />
+      <MainScript />
+
       <GlobalStyles theme={ theme == "light" ? lightTheme : darkTheme } />
       <HelpModal 
       helpModalToggler={helpModalToggler} 

@@ -1,5 +1,4 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document'
-import { GA_ID } from '../next.config'
 
 class MyDocument extends Document {
   static async getInitialProps(ctx){
