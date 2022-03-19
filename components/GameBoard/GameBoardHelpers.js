@@ -31,6 +31,17 @@ export const generateNewGameboardState = (word, rows = 1, startingRow = 0) => {
 
   return newGameboardState
 }
+
+export const getActiveChar = (gameboardState) => {
+  const [activeChar] = gameboardState.chars.filter(c => c.key === gameboardState.activeLetter);
+  return activeChar
+}
+
+export const activeCharIsBlank = (gameboardState) => {
+  const char = getActiveChar(gameboardState)
+  return char.letter == '' ? true : false;
+} 
+
 /**
  * Create a new gameboard state
  * @param  {} rowNumber - start at this row

@@ -8,11 +8,13 @@ import styled from 'styled-components';
 
 import {
   generateNewGameboardState,
+  activeCharIsBlank,
   resetLetterByIndex,
   addRowToGameboard,
   charIndexExists,
   rowIsNotFull,
-  getLastRowGreens
+  getLastRowGreens,
+  getActiveChar
 } from './GameBoardHelpers';
 import { MAX_WORD_LENGTH, MIN_WORD_LENGTH } from '../../next.config';
 
@@ -162,6 +164,10 @@ function GameBoard({
         case pressedKey === "Backspace":
         case pressedKey === "Delete":
         case pressedKey === "⌫":
+          if( activeCharIsBlank(gameboardState) ){
+            prevActiveLetter() 
+            return
+          }
           resetActiveLetter()
           return;
         case !pressedKey.match(/^[a-zA-Z]{1}$/):
@@ -175,7 +181,6 @@ function GameBoard({
       nextActiveLetter()
     }
 
-
     const setCharToLetter = (gameboard, char, letter) =>{
       letter = letter.toLowerCase()
       
@@ -185,11 +190,6 @@ function GameBoard({
       gameboard.chars[newChar.index] = newChar;
 
       return gameboard
-    }
-
-    const getActiveChar = (gameboard) => {
-      const [activeChar] = gameboard.chars.filter(c => c.key === gameboardState.activeLetter);
-      return activeChar
     }
 
     const GameRows = () => {
