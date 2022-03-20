@@ -36,6 +36,14 @@ export const getActiveChar = (gameboardState) => {
   return activeChar
 }
 
+export const getActiveCharStatus = (gameboardState) => {
+  return getActiveChar(gameboardState).status
+}
+
+export const getActiveCharLetter = (gameboardState) => {
+  return getActiveChar(gameboardState).letter
+}
+
 export const activeCharIsBlank = (gameboardState) => {
   const char = getActiveChar(gameboardState)
   return char.letter === '' ? true : false;
