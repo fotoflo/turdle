@@ -173,12 +173,12 @@ describe('charIndexExists(gameboard, index)', ()=>{
   })
 })
 
-describe.only('activeCharIsBlank(gameboard)', ()=>{
+describe('activeCharIsBlank(gameboard)', ()=>{
   const myGameboardState = generateNewGameboardState("hi")
   myGameboardState.chars[0].letter = 'h'
   myGameboardState.chars[0].status = 3
   
-  xit("should return false if the char has a letter", ()=>{
+  it("should return false if the char has a letter", ()=>{
     assert(myGameboardState.activeChar == 'row-0__slot-0')
     const result = activeCharIsBlank(myGameboardState)
     expect(result).toBe(false)

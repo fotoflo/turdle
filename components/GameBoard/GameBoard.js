@@ -118,7 +118,7 @@ function GameBoard({
       setActiveChar(gameboardState.chars[i+1].key)
     }
 
-    function prevactiveChar(){
+    function prevActiveChar(){
       const i = indexOfactiveChar()
       if(!charIndexExists(gameboardState, i-1)) return 
       setActiveChar(gameboardState.chars[i-1].key)
@@ -153,7 +153,7 @@ function GameBoard({
           nextactiveChar()
           return;
         case pressedKey === "ArrowLeft":
-          prevactiveChar()
+          prevActiveChar()
           return;
         case pressedKey === "ArrowDown":
           nextActiveRow()
@@ -165,7 +165,7 @@ function GameBoard({
         case pressedKey === "Delete":
         case pressedKey === "⌫":
           if( activeCharIsBlank(gameboardState) ){
-            prevactiveChar() 
+            prevActiveChar() 
             return
           }
           resetActiveChar()
