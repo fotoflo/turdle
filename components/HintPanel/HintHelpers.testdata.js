@@ -3,11 +3,6 @@
 // word TWO - ALL status 3 - NOTATION will be T3_W3_O3
 // T3_X1_O3 for [{letter T Status 3}, {Letter X status 1}, {Letter O Status 3}]
 
-export {
-    TEST_WORD_TWO, // T3_W3_O3
-    TEST_WORD_TXO  // T3_X1_O3
-}
-
 const TEST_WORD_TWO =[
     {
       "key": "row-0__slot-0",
@@ -61,3 +56,9 @@ const TEST_WORD_TXO =[
         "status": 3
     }
   ]
+  
+
+export {
+    TEST_WORD_TWO, // T3_W3_O3
+    TEST_WORD_TXO  // T3_X1_O3
+}
