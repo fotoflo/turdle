@@ -7,7 +7,7 @@ import {
   addRowToGameboard,
   resetLetterByIndex,
   charIndexExists,
-  activeLetterIsBlank
+  activeCharIsBlank
 } from "./GameBoardHelpers";
 
 const blankCharsRow = [
@@ -173,20 +173,20 @@ describe('charIndexExists(gameboard, index)', ()=>{
   })
 })
 
-describe.only('activeLetterIsBlank(gameboard)', ()=>{
+describe.only('activeCharIsBlank(gameboard)', ()=>{
   const myGameboardState = generateNewGameboardState("hi")
   myGameboardState.chars[0].letter = 'h'
   myGameboardState.chars[0].status = 3
   
   xit("should return false if the char has a letter", ()=>{
-    assert(myGameboardState.activeLetter == 'row-0__slot-0')
-    const result = activeLetterIsBlank(myGameboardState)
+    assert(myGameboardState.activeChar == 'row-0__slot-0')
+    const result = activeCharIsBlank(myGameboardState)
     expect(result).toBe(false)
   })
 
   it("should return true if the char doesn't have a letter", ()=>{
-    myGameboardState.activeLetter = 'row-0__slot-1'
-    const result = activeLetterIsBlank(myGameboardState)
+    myGameboardState.activeChar = 'row-0__slot-1'
+    const result = activeCharIsBlank(myGameboardState)
     expect(result).toBe(true)
   })
 })

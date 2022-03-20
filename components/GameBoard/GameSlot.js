@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components'
 
 
-function GameLetter({gameSlot, gameboardState, gameRow, setActiveLetter, ...props } ){
+function GameLetter({gameSlot, gameboardState, gameRow, setActiveChar, ...props } ){
 
     const slotKey = `row-${gameRow}__slot-${gameSlot}`
     const slotIndex = ( gameRow * gameboardState.slots ) + gameSlot
@@ -11,9 +11,9 @@ function GameLetter({gameSlot, gameboardState, gameRow, setActiveLetter, ...prop
 
     return (
         <SlotBox 
-          onClick={ () => setActiveLetter(slotKey) }
+          onClick={ () => setActiveChar(slotKey) }
           gameboardState={gameboardState}
-          activeLetter={gameboardState.activeLetter}
+          activeChar={gameboardState.activeChar}
           char={char}
 
           gameSlot={gameSlot}
@@ -30,8 +30,8 @@ function GameLetter({gameSlot, gameboardState, gameRow, setActiveLetter, ...prop
 }
 
 const SlotBox = styled.div`
-  border: ${props => props.slotKey === props.activeLetter ? 3 : 1 }px
-      solid ${ props => props.slotKey === props.activeLetter ? "red" : "grey" }
+  border: ${props => props.slotKey === props.activeChar ? 3 : 1 }px
+      solid ${ props => props.slotKey === props.activeChar ? "red" : "grey" }
     };
   background-color: ${ props => props.theme[props.char.status] };
   height: 100%;
@@ -45,7 +45,7 @@ const SlotBox = styled.div`
 GameLetter.propTypes = {
   gameSlot: PropTypes.number.isRequired,
   gameRow:  PropTypes.number.isRequired,
-  setActiveLetter: PropTypes.func.isRequired,
+  setActiveChar: PropTypes.func.isRequired,
   gameboardState: PropTypes.object.isRequired
 }
 

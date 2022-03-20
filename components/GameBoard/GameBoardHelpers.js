@@ -19,8 +19,7 @@
 export const generateNewGameboardState = (word, rows = 1, startingRow = 0) => {
   if(!word){ console.trace(`GenerateNewGameBoardState no word`); return }
   const slots = word.length
-  const activeLetter = 'row-0__slot-0'
-  const newGameboardState = { activeLetter, word, rows, slots}
+  const newGameboardState = { activeChar: 'row-0__slot-0', word, rows, slots}
   
   let chars = []
   for(let i = startingRow; i < rows + startingRow ; i++){
@@ -33,11 +32,11 @@ export const generateNewGameboardState = (word, rows = 1, startingRow = 0) => {
 }
 
 export const getActiveChar = (gameboardState) => {
-  const [activeChar] = gameboardState.chars.filter(c => c.key === gameboardState.activeLetter);
+  const [activeChar] = gameboardState.chars.filter(c => c.key === gameboardState.activeChar);
   return activeChar
 }
 
-export const activeLetterIsBlank = (gameboardState) => {
+export const activeCharIsBlank = (gameboardState) => {
   const char = getActiveChar(gameboardState)
   return char.letter === '' ? true : false;
 } 

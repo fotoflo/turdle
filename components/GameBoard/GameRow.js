@@ -37,7 +37,7 @@ const SlotRow = styled.div`
 `
 
 GameRow.propTypes = {
-  setActiveLetter: PropTypes.func.isRequired,
+  setActiveChar: PropTypes.func.isRequired,
 }
 
 export default GameRow

@@ -52,7 +52,7 @@ function GameBoard({
       const newGameboard = addRowToGameboard(gameboardState)
       setGameboardState({
         ...newGameboard,
-        activeLetter: `row-${newGameboard.rows-1}__slot-0`})
+        activeChar: `row-${newGameboard.rows-1}__slot-0`})
         
       executeScroll()
     },[gameboardState])
@@ -88,7 +88,7 @@ function GameBoard({
     }
 
     function getLetterStatusForCurrentSlot(pressedKey){
-      const wordSlot = gameboardState.activeLetter.split("-")[2] // get the last char of the key
+      const wordSlot = gameboardState.activeChar.split("-")[2] // get the last char of the key
       if(word[wordSlot] === pressedKey){
           // they match, set status to 3, green
           return 3
@@ -104,39 +104,39 @@ function GameBoard({
       return number < max ? number+1 : min;
     }
 
-    const setActiveLetter = (key) => {
-      setGameboardState({...gameboardState, activeLetter: key})
+    const setActiveChar = (key) => {
+      setGameboardState({...gameboardState, activeChar: key})
     }
 
-    function indexOfActiveLetter(){
-      return gameboardState.chars.filter( c => c.key === gameboardState.activeLetter)[0].index;
+    function indexOfactiveChar(){
+      return gameboardState.chars.filter( c => c.key === gameboardState.activeChar)[0].index;
     }
 
-    function nextActiveLetter(){
-      const i = indexOfActiveLetter()
+    function nextactiveChar(){
+      const i = indexOfactiveChar()
       if(!charIndexExists(gameboardState, i+1)) return 
-      setActiveLetter(gameboardState.chars[i+1].key)
+      setActiveChar(gameboardState.chars[i+1].key)
     }
 
-    function prevActiveLetter(){
-      const i = indexOfActiveLetter()
+    function prevactiveChar(){
+      const i = indexOfactiveChar()
       if(!charIndexExists(gameboardState, i-1)) return 
-      setActiveLetter(gameboardState.chars[i-1].key)
+      setActiveChar(gameboardState.chars[i-1].key)
     }
     function prevActiveRow(){
-      const i = indexOfActiveLetter()
+      const i = indexOfactiveChar()
       if(!charIndexExists(gameboardState, i - gameboardState.slots )) return 
-      setActiveLetter(gameboardState.chars[i-gameboardState.slots].key)
+      setActiveChar(gameboardState.chars[i-gameboardState.slots].key)
     }
     
     function nextActiveRow(){
-      const i = indexOfActiveLetter()
+      const i = indexOfactiveChar()
       if(!charIndexExists(gameboardState, i + gameboardState.slots)) return 
-      setActiveLetter(gameboardState.chars[i+gameboardState.slots].key)
+      setActiveChar(gameboardState.chars[i+gameboardState.slots].key)
     }
 
-    function resetActiveLetter(){
-      const i = indexOfActiveLetter()
+    function resetActiveChar(){
+      const i = indexOfactiveChar()
       const newGameboardState = resetLetterByIndex(gameboardState, i)
       setGameboardState(newGameboardState)
     }
@@ -150,10 +150,10 @@ function GameBoard({
         case pressedKey === " ":
         case pressedKey === "Tab":
         case pressedKey === "ArrowRight" :
-          nextActiveLetter()
+          nextactiveChar()
           return;
         case pressedKey === "ArrowLeft":
-          prevActiveLetter()
+          prevactiveChar()
           return;
         case pressedKey === "ArrowDown":
           nextActiveRow()
@@ -165,10 +165,10 @@ function GameBoard({
         case pressedKey === "Delete":
         case pressedKey === "⌫":
           if( activeCharIsBlank(gameboardState) ){
-            prevActiveLetter() 
+            prevactiveChar() 
             return
           }
-          resetActiveLetter()
+          resetActiveChar()
           return;
         case !pressedKey.match(/^[a-zA-Z]{1}$/):
           return;
@@ -178,7 +178,7 @@ function GameBoard({
       const activeChar = getActiveChar(gameboardState)
       const newGameboard = setCharToLetter(gameboardState, activeChar, pressedKey)
       setGameboardState({...newGameboard})
-      nextActiveLetter()
+      nextactiveChar()
     }
 
     const setCharToLetter = (gameboard, char, letter) =>{
@@ -198,7 +198,7 @@ function GameBoard({
           return <GameRow 
             key={`gameRow-${i}`}
             gameboardState={gameboardState}
-            setActiveLetter={setActiveLetter}
+            setActiveChar={setActiveChar}
             gameRow={i}
           i/>
         })
