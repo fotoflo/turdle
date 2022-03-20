@@ -37,9 +37,9 @@ export const getActiveChar = (gameboardState) => {
   return activeChar
 }
 
-export const activeCharIsBlank = (gameboardState) => {
+export const activeLetterIsBlank = (gameboardState) => {
   const char = getActiveChar(gameboardState)
-  return char.letter == '' ? true : false;
+  return char.letter === '' ? true : false;
 } 
 
 /**

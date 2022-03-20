@@ -1,3 +1,4 @@
+const assert = require('assert')
 import {
   generateNewGameboardState,
   composeGameboardRow,
@@ -5,7 +6,8 @@ import {
   rowIsFull,
   addRowToGameboard,
   resetLetterByIndex,
-  charIndexExists
+  charIndexExists,
+  activeLetterIsBlank
 } from "./GameBoardHelpers";
 
 const blankCharsRow = [
@@ -156,6 +158,7 @@ describe('resetLetterByIndex(gameboardState, index)', ()=>{
   })
 })
 
+
 describe('charIndexExists(gameboard, index)', ()=>{
   const myGameboardState = generateNewGameboardState("hi")
 
@@ -167,5 +170,23 @@ describe('charIndexExists(gameboard, index)', ()=>{
   it("should return false if the char doesn't exists", ()=>{
     const result = charIndexExists(myGameboardState, 8)
     expect(result).toBe(false)
+  })
+})
+
+describe.only('activeLetterIsBlank(gameboard)', ()=>{
+  const myGameboardState = generateNewGameboardState("hi")
+  myGameboardState.chars[0].letter = 'h'
+  myGameboardState.chars[0].status = 3
+  
+  xit("should return false if the char has a letter", ()=>{
+    assert(myGameboardState.activeLetter == 'row-0__slot-0')
+    const result = activeLetterIsBlank(myGameboardState)
+    expect(result).toBe(false)
+  })
+
+  it("should return true if the char doesn't have a letter", ()=>{
+    myGameboardState.activeLetter = 'row-0__slot-1'
+    const result = activeLetterIsBlank(myGameboardState)
+    expect(result).toBe(true)
   })
 })
