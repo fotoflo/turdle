@@ -9,7 +9,8 @@ import styled from 'styled-components';
 function GameRow({gameRow, gameboardState, ...props}){
 
     return (
-        <SlotRow id={`row-${gameRow}`}>
+        <SlotRow id={`row-${gameRow}`}
+          data-testid={`row-${gameRow}`}>
           { 
             Array(gameboardState.slots).fill(0).map(
               (e,j)=>{

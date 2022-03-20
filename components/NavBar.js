@@ -32,7 +32,9 @@ function NavBar({
         <Navbar.Brand href="#home">WordCheater</Navbar.Brand>
       </Container>
       <Container className="justify-content-end">
-        <span onClick={wordLengthToggler}>{wordLength}</span>
+        <span 
+          data-testid={'navWordLength' }
+          onClick={wordLengthToggler}>{wordLength}</span>
         <ThemeToggleSwitch defaultValue={true} toggleFn={themeToggler} />
         <HintToggler onClick={hintToggler}>
           <FaLightbulb/>
