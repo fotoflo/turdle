@@ -20,4 +20,11 @@ context("Home Page", ()=>{
       .children().should('have.length', 4)
   })
 
+  it("the word should be on the page", ()=>{
+    cy.get('[data-testid="word-h1"]')
+      .should($H1 => {
+        expect($H1.text().length).to.equal(3)
+      })
+  })
+
 })
