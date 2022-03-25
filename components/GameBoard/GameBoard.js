@@ -72,10 +72,6 @@ function GameBoard({
       wordLengthToggler()
       setLevel( level + 1)
     }
-
-    function getLengthOfNextWord(word){
-      return word.length + 1 < MAX_WORD_LENGTH ? word.length + 1 : MIN_WORD_LENGTH;
-    }
     
     function iterateStatus(previousStatus, pressedKey){
       // if hints are on, iterate through the statuses
@@ -99,11 +95,7 @@ function GameBoard({
         return 1
       }
     }
-
-    function iterateWithinBounds(number, min = 0, max = 3) {
-      return number < max ? number+1 : min;
-    }
-
+    
     const setActiveChar = (key) => {
       setGameboardState({...gameboardState, activeChar: key})
     }
