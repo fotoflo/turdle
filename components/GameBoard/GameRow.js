@@ -1,19 +1,29 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import PropTypes from 'prop-types';
 
 import GameSlot from './GameSlot'
 import styled from 'styled-components';
+import useSize from '../useSize';
 
 // import {FaSignOutAlt} from 'react-icons/fa'
 
 function GameRow({gameRow, gameboardState, ...props}){
 
-    const squareSide = `${100}px`
+
+  const targetRef = useRef();
+  const {width} = useSize(targetRef)
+  const margin = 10
+  const squareSide = `${( width / (gameboardState.slots) - margin ) }px`
+  console.log({squareSide})
+  
+
+  console.log(`width: ${width}, squareSide: ${squareSide}, margin: ${margin}`)
 
     return (
         <SlotRow id={`row-${gameRow}`}
           data-testid={`row-${gameRow}`}
           squareSide={squareSide}
+          ref={targetRef}
           >
           { 
             Array(gameboardState.slots).fill(0).map(
@@ -25,6 +35,7 @@ function GameRow({gameRow, gameboardState, ...props}){
                   gameRow={gameRow}
                   gameSlot={j}
                   squareSide={squareSide}
+                  margin={margin}
                   {...props} 
                 />
               })
@@ -36,10 +47,10 @@ function GameRow({gameRow, gameboardState, ...props}){
 
 const SlotRow = styled.div`
   display: flex;
-  justifyContent: center;
+  justifyContent: bottom;
   height: ${props => props.squareSide};
-  line-height: 55px;
-  font-size: 3rem;
+  line-height: ${props => props.squareSide};
+  font-size: ${props => props.squareSide};
   text-align: center;
   margin-bottom: 20px;
 `
