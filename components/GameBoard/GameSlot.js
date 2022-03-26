@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components'
 
 
-function GameLetter({gameSlot, gameboardState, gameRow, setActiveChar, ...props } ){
+function GameLetter({gameSlot, gameboardState, gameRow, setActiveChar, squareSide, ...props } ){
 
     const slotKey = `row-${gameRow}__slot-${gameSlot}`
     const slotIndex = ( gameRow * gameboardState.slots ) + gameSlot
@@ -15,6 +15,7 @@ function GameLetter({gameSlot, gameboardState, gameRow, setActiveChar, ...props 
           gameboardState={gameboardState}
           activeChar={gameboardState.activeChar}
           char={char}
+          squareSide={squareSide}
 
           gameSlot={gameSlot}
           gameRow={gameRow}
@@ -35,9 +36,7 @@ const SlotBox = styled.div`
     };
   background-color: ${ props => props.theme[props.char.status] };
   height: 100%;
-  width: 100%;
-  font-size: 3rem;
-  text-align: center;
+  width: ${props => props.squareSide};
   margin: 10px;
 `
     

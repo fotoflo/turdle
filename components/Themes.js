@@ -8,9 +8,9 @@ export const lightTheme = {
   fontColor: "#000",
   InfoBGColor: 'ivory',
   0: "white",  // White, Blank
-  1: "#FDA8EF", // not in word, yellow
-  2: "#FFFD0B", // wrong slot
-  3: "#35E52D" // correct slot
+  1: "#FFF3FF", // not in word, grey
+  2: "#FFFD0B", // wrong slot, yellow
+  3: "#35E52D" // correct slot, gren
 };
 
 export const darkTheme = {
@@ -18,9 +18,9 @@ export const darkTheme = {
   fontColor: "#fff",
   InfoBGColor: '#240026',
   0: "black",   // black, Blank
-  1: "#FDA8EF", // not in word, yellow
-  2: "#FFFD0B", // wrong slot
-  3: "#35E52D" // correct slot
+  1: "#FFF3FF", // not in word, grey
+  2: "#FFFD0B", // wrong slot, yellow
+  3: "#35E52D" // correct slot, gren
 };
 
 export const GlobalStyles = createGlobalStyle`
