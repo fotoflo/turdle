@@ -1,11 +1,3 @@
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-    user-select:none;
-}
 .error {
   user-select:contain;
   color: red
@@ -25,8 +17,6 @@ a {
 }
 
 body {
-  min-width: 330px;
-  max-width: 500px;
   margin: auto !important;
   flex-wrap: nowrap;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
