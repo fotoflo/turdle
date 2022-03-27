@@ -33,8 +33,7 @@ function GameLetter({gameSlot, gameboardState, gameRow, setActiveChar, squareSid
 
 const SlotBox = styled.div`
   border: ${props => props.slotKey === props.activeChar ? 3 : 1 }px
-      solid ${ props => props.slotKey === props.activeChar ? "red" : "grey" }
-    };
+   solid ${ props => props.slotKey === props.activeChar ? "red" : "grey" };
   background-color: ${ props => props.theme[props.char.status] };
   height: 100%;
   width: ${props => props.squareSide};

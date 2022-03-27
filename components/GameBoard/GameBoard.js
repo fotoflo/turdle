@@ -104,7 +104,7 @@ function GameBoard({
       return gameboardState.chars.filter( c => c.key === gameboardState.activeChar)[0].index;
     }
 
-    function nextactiveChar(){
+    function nextActiveChar(){
       const i = indexOfactiveChar()
       if(!charIndexExists(gameboardState, i+1)) return 
       setActiveChar(gameboardState.chars[i+1].key)
@@ -142,7 +142,7 @@ function GameBoard({
         case pressedKey === " ":
         case pressedKey === "Tab":
         case pressedKey === "ArrowRight" :
-          nextactiveChar()
+          nextActiveChar()
           return;
         case pressedKey === "ArrowLeft":
           prevActiveChar()
@@ -170,7 +170,7 @@ function GameBoard({
       const activeChar = getActiveChar(gameboardState)
       const newGameboard = setCharToLetter(gameboardState, activeChar, pressedKey)
       setGameboardState({...newGameboard})
-      nextactiveChar()
+      nextActiveChar()
     }
 
     const setCharToLetter = (gameboard, char, letter) =>{
