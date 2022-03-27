@@ -10,6 +10,7 @@ function useSize(targetRef) {
   };
 
   const [size, setSize] = useState(getSize);
+  if(typeof window === 'undefined') return size 
 
   const handleResize = () => {
     setSize(getSize());
@@ -19,6 +20,7 @@ function useSize(targetRef) {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
 
   useLayoutEffect(() => {
     handleResize();
