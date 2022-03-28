@@ -3,10 +3,8 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components'
 
 
-function Prompt({word, level}){
+function Prompt({word, level, gameboardState}){
     if (level != 0) return null
-
-
 
     return (
       <Text>Guess the {word.length} letter word</Text>

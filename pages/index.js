@@ -17,7 +17,6 @@ import {
 } from "../next.config";
 
 import { Wordlist } from "../components/GameBoard/Classes/Wordlist";
-import Prompt from "../components/Prompt";
 
 console.log({BASE_URL})
 const WORDLIST_BASEURL = `${BASE_URL}/api/wordlist`;
@@ -115,8 +114,6 @@ function Index({
         wordlist={wordlist}
         level={level}
       />
-
-      <Prompt word={word} level={level} />
 
       <GameBoard 
           word={word}

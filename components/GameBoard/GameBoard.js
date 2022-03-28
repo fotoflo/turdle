@@ -7,6 +7,8 @@ import Keyboard from '../Keyboard';
 import HintPanel from '../HintPanel/HintPanel';
 import styled from 'styled-components';
 
+import Prompt from './Prompt'
+
 import {
   generateNewGameboardState,
   activeCharIsBlank,
@@ -198,6 +200,9 @@ function GameBoard({
 
     return (
       <GameboardContainer data-testid="GameboardContainer" id="GameboardContainer">
+          
+          <Prompt word={word} level={level} gameboardState={gameboardState}/>
+
           {  GameRows() }
 
           <Keyboard 
