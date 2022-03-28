@@ -20,6 +20,8 @@ import {
   getActiveChar
 } from './GameBoardHelpers';
 
+import useGameboard from './Classes/useGameboard'
+
 function GameBoard({
   word,
   wordList,
@@ -41,7 +43,7 @@ function GameBoard({
       }
     })
     
-    const [gameboardState, setGameboardState] = useState( generateNewGameboardState(word) )
+    const [gameboardState, setGameboardState] = new useGameboard( generateNewGameboardState(word) )
 
     useEffect(()=>{ // add a row if full
       if( rowIsNotFull(gameboardState, gameboardState.rows - 1 ) ) return
