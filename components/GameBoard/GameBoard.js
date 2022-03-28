@@ -1,4 +1,5 @@
 import React, {useEffect, useState, useRef} from 'react';
+
 import PropTypes from 'prop-types';
 import { Container } from 'react-bootstrap';
 import GameRow from './GameRow';
@@ -16,7 +17,6 @@ import {
   getLastRowGreens,
   getActiveChar
 } from './GameBoardHelpers';
-import { MAX_WORD_LENGTH, MIN_WORD_LENGTH } from '../../next.config';
 
 function GameBoard({
   word,

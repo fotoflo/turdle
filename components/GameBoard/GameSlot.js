@@ -36,7 +36,7 @@ const SlotBox = styled.div`
    solid ${ props => props.slotKey === props.activeChar ? "red" : "grey" };
   background-color: ${ props => props.theme[props.char.status] };
   height: 100%;
-  width: ${props => props.squareSide};
+  width: ${props => props.squareSide}px;
   margin: ${props => props.margin}px;
 `
     

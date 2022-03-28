@@ -13,11 +13,11 @@ function GameRow({gameRow, gameboardState, ...props}){
   const targetRef = useRef();
   const {width} = useSize(targetRef)
   const margin = 10
-  const squareSide = `${( width / (gameboardState.slots) - margin ) }px`
+  const squareSide = parseInt(`${( width / (gameboardState.slots) - margin ) }`)
   console.log({squareSide})
   
 
-  console.log(`width: ${width}, squareSide: ${squareSide}, margin: ${margin}`)
+  console.log(`width: ${width}, squareSide: ${squareSide}px, margin: ${margin}`)
 
     return (
         <SlotRow id={`row-${gameRow}`}
@@ -48,9 +48,9 @@ function GameRow({gameRow, gameboardState, ...props}){
 const SlotRow = styled.div`
   display: flex;
   justifyContent: bottom;
-  height: ${props => props.squareSide};
-  line-height: ${props => props.squareSide};
-  font-size: ${props => props.squareSide};
+  height: ${props => props.squareSide}px;
+  line-height: ${props => props.squareSide - 10 }px;
+  font-size: ${props => props.squareSide}px;
   text-align: center;
   margin-bottom: 20px;
 `
