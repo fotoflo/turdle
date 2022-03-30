@@ -13,7 +13,7 @@ function GameRow({gameRow, gameboardState, ...props}){
   const targetRef = useRef();
   const {width} = useSize(targetRef)
   const margin = 10
-  const squareSide = parseInt(`${( width / (gameboardState.slots) - margin ) }`)
+  const squareSide = parseInt(`${( width / (gameboardState.slots) - margin )/1.5 }`)
   console.log({squareSide})
   
 
@@ -47,7 +47,9 @@ function GameRow({gameRow, gameboardState, ...props}){
 
 const SlotRow = styled.div`
   display: flex;
-  justifyContent: bottom;
+  flex-direction: row;
+  gap: 10px;
+  justify-content: center;
   height: ${props => props.squareSide}px;
   line-height: ${props => props.squareSide - 10 }px;
   font-size: ${props => props.squareSide}px;
