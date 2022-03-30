@@ -1,7 +1,5 @@
 const assert = require('assert')
 import {
-  generateNewGameboardState,
-  composeGameboardRow,
   getRow,
   rowIsFull,
   addRowToGameboard,
@@ -11,6 +9,12 @@ import {
   getActiveCharStatus,
   getActiveCharLetter
 } from "./GameBoardHelpers";
+
+import {
+  generateNewGameboardState,
+  composeGameboardRow
+} from './Classes/useGameboard'
+
 
 const blankCharsRow = [
   {

@@ -10,7 +10,6 @@ import styled from 'styled-components';
 import Prompt from './Prompt'
 
 import {
-  generateNewGameboardState,
   activeCharIsBlank,
   resetLetterByIndex,
   addRowToGameboard,
@@ -20,7 +19,7 @@ import {
   getActiveChar
 } from './GameBoardHelpers';
 
-import useGameboard from './Classes/useGameboard'
+import useGameboard, { generateNewGameboardState } from './Classes/useGameboard'
 
 function GameBoard({
   word,
@@ -43,7 +42,7 @@ function GameBoard({
       }
     })
     
-    const [gameboardState, setGameboardState] = new useGameboard( generateNewGameboardState(word) )
+    const [gameboardState, setGameboardState] = new useGameboard( )
 
     useEffect(()=>{ // add a row if full
       if( rowIsNotFull(gameboardState, gameboardState.rows - 1 ) ) return

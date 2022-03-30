@@ -1,6 +1,5 @@
 
 /** exports:
-              generateNewGameboardState,
               composeGameboardRow,
               getRow,
               rowIsFull,
@@ -10,26 +9,7 @@
               setCharToLetter
 */
 
-/**
- * constructor for the gameboard state
- * @param  {} word - a seed word, to know the length
- * @param  {} rows - the number of rows to create
- * @param  {} startingRow=0 
- */
-export const generateNewGameboardState = (word, rows = 1, startingRow = 0) => {
-  if(!word){ console.trace(`GenerateNewGameBoardState no word`); return }
-  const slots = word.length
-  const newGameboardState = { activeChar: 'row-0__slot-0', word, rows, slots}
-  
-  let chars = []
-  for(let i = startingRow; i < rows + startingRow ; i++){
-    chars = chars.concat(composeGameboardRow(i, slots))
-  }
-
-  newGameboardState.chars = chars;
-
-  return newGameboardState
-}
+import useGameboard, {composeGameboardRow} from './classes/useGameboard'
 
 export const getActiveChar = (gameboardState) => {
   const [activeChar] = gameboardState.chars.filter(c => c.key === gameboardState.activeChar);
@@ -48,32 +28,6 @@ export const activeCharIsBlank = (gameboardState) => {
   const char = getActiveChar(gameboardState)
   return char.letter === '' ? true : false;
 } 
-
-/**
- * Create a new gameboard state
- * @param  {} rowNumber - start at this row
- * @param  {} slots - row has this many slots
- */
-export const composeGameboardRow = (rowNumber, slots) =>{
-  const row = []
-  let index = rowNumber * slots;
-  for(let i = 0; i < slots; i++){
-    const key = `row-${rowNumber}__slot-${i}`
-    row.push(
-      {
-        key,
-        index,
-        row : rowNumber,
-        slot : i,
-        letter : "",
-        status: 0
-      }
-    )
-    index++;
-  }
-
-  return row
-}
 
 /**
  * Get a row!
@@ -101,6 +55,7 @@ export const rowIsNotFull = (gameboardState, rowNumber) => {
 
 export const addRowToGameboard = (gameboard) => {
   let newGameboard = {...gameboard}
+  Object.setPrototypeOf( newGameboard, useGameboard.prototype );
   const blankRow = composeGameboardRow(gameboard.rows, gameboard.slots)
 
   const newRow = getLastRowGreens(gameboard)

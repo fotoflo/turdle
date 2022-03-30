@@ -19,7 +19,7 @@ const Text = styled.p`
 
 Prompt.propTypes = {
   word: PropTypes.string.isRequired,
-  level: PropTypes.number.isRequired,
+  // level: PropTypes.number.isRequired,
 }
 
 export default Prompt
