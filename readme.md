@@ -33,3 +33,5 @@ Alternitively run `Vercel --prod`
 # run test suite
 `npm run test`
 
+# commiting code 
+note that this runs the `.git/hooks/pre-commit` hook

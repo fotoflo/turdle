@@ -9,3 +9,4 @@ This directory contains
   - cannot put tests in the /pages dir or else NEXT will render them
   - moved compoents to /components so they would test nicely
 
+/__test__/playwright/*.spec.mjs  - the e2e tests
