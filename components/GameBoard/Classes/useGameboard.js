@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-export default class Gameboard {
+export class Gameboard {
   constructor(word = "word", rows = 1, startingRow = 0){
     if(!word){ console.trace(`gameboard requires a word`); return }
     
@@ -14,8 +14,12 @@ export default class Gameboard {
       this.chars = this.chars.concat(composeGameboardRow(i, this.slots))
     }
  
-    return useState(this)
+    return this
   }
+}
+
+export default function useGameboard(){
+  return useState(new Gameboard())
 }
 
 /**
