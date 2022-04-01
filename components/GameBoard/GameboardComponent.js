@@ -39,7 +39,8 @@ function GameboardComponent({
       alert(`YOU WIN! The word was ${word}`)
       wordLengthToggler()
       setLevel( level + 1)
-    }, [setLevel, wordLengthToggler, word, level] )
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [word] )
 
     useEffect( () => {
       window.addEventListener("keydown", keydownHandler);
@@ -64,12 +65,14 @@ function GameboardComponent({
         activeChar: `row-${newGameboard.rows-1}__slot-0`})
         
       executeScroll()
-    },[gameboardState, setGameboardState, wonRound])
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[gameboardState])
 
     useEffect( ()=>{
       console.log(`word updated, ${word}`)
       setGameboardState( generateNewGameboardState(word) )
-    },[word, setGameboardState])
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[level])
 
 
     function didWinRound(gameboardState){
