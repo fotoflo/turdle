@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import GameboardComponent from "./GameBGameboardComponentoard";
+import GameboardComponent from "./GameboardComponent";
 import { Wordlist } from "./Classes/Wordlist";
 
 describe("GameboardComponent", () => {
