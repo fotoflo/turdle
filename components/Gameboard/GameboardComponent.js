@@ -51,6 +51,14 @@ function GameboardComponent({
     
     const [gameboardState, setGameboardState] = new useGameboard( )
 
+    const getFirstEmptyCharKeyOfGameboard = (gameboardState) => {
+      const lastRow = gameboardState.rows - 1;
+      const regex = new RegExp(`row-${lastRow}`)
+      return gameboardState.chars
+        .filter( char => char.key.match(regex) )
+        .filter( char => char.status != 3 )[0].key
+    }
+
     useEffect(()=>{ // add a row if full
       if( rowIsNotFull(gameboardState, gameboardState.rows - 1 ) ) return
 
@@ -60,10 +68,12 @@ function GameboardComponent({
       }
       
       const newGameboard = addRowToGameboard(gameboardState)
+
+      const key = getFirstEmptyCharKeyOfGameboard(newGameboard)
       
       setGameboardState({
         ...newGameboard,
-        activeChar: `row-${newGameboard.rows-1}__slot-0`})
+        activeChar: key})
         
       executeScroll()
       // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -112,16 +122,30 @@ function GameboardComponent({
       return gameboardState.chars.filter( c => c.key === gameboardState.activeChar)[0].index;
     }
 
-    function nextActiveChar(){
+    function nextActiveChar(skip = 1){
       const i = indexOfactiveChar()
-      if(!charIndexExists(gameboardState, i+1)) return 
-      setActiveChar(gameboardState.chars[i+1].key)
+      if(!charIndexExists(gameboardState, i + skip)) return 
+      
+      if( isGreen(gameboardState, i + skip) ){ 
+        return nextActiveChar( skip + 1)
+      }
+      
+      setActiveChar(gameboardState.chars[i + skip].key)
     }
 
-    function prevActiveChar(){
+    function isGreen(gameboardState, slotKey){
+      const slot = gameboardState.chars
+        .find( char => char.index == slotKey )
+
+      return slot.status === 3
+    }
+
+    function prevActiveChar(skip = 1){
       const i = indexOfactiveChar()
-      if(!charIndexExists(gameboardState, i-1)) return 
-      setActiveChar(gameboardState.chars[i-1].key)
+
+      if(!charIndexExists(gameboardState, i - skip)) return 
+
+      setActiveChar(gameboardState.chars[i - skip].key)
     }
     function prevActiveRow(){
       const i = indexOfactiveChar()
