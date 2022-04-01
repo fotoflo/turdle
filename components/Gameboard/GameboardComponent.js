@@ -35,12 +35,12 @@ function GameboardComponent({
     const scrollRef = useRef(null)
     const executeScroll = () => scrollRef.current.scrollIntoView()
 
-    const wonRound = useCallback( () => {
+    const wonRound = () => {
       alert(`YOU WIN! The word was ${word}`)
       wordLengthToggler()
       setLevel( level + 1)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [word] )
+    }
 
     useEffect( () => {
       window.addEventListener("keydown", keydownHandler);
@@ -60,6 +60,7 @@ function GameboardComponent({
       }
       
       const newGameboard = addRowToGameboard(gameboardState)
+      
       setGameboardState({
         ...newGameboard,
         activeChar: `row-${newGameboard.rows-1}__slot-0`})
@@ -72,7 +73,7 @@ function GameboardComponent({
       console.log(`word updated, ${word}`)
       setGameboardState( generateNewGameboardState(word) )
       // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[level])
+    },[word])
 
 
     function didWinRound(gameboardState){

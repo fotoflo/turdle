@@ -9,7 +9,7 @@
     "test": "jest --watch",
     "jest": "jest",
     "checkEnv": "set",
-    "pwGUI": "npx playwright codegen localhost:3000",
+    "pwgui": "npx playwright codegen localhost:3000",
     "pwh": "npx playwright test --headed",
     "pw": "npx playwright test",
     "precommit-msg": "echo 'Pre-commit checks...' && exit 0"

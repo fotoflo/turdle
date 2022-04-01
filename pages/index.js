@@ -53,10 +53,7 @@ function Index({
   const { data: wordlist, mutate } = useSWR(
       key,
       clientSideFetcher, { 
-    fallbackData: fallback['/api/wordlist'],
-    revalidateIfStale: false, 
-    revalidateOnMount: false,
-    revalidateOnFocus: false
+    fallbackData: fallback['/api/wordlist']
   })
 
   const [word, setWord] = useState( generateRandomWord(wordlist) );
@@ -65,7 +62,7 @@ function Index({
     mutate(key).then((wordlist)=>{
       if( !wordlist ) return
       setWord( generateRandomWord(wordlist) )
-      console.log("### wordlist changed")
+      console.log(`### wordlist changed - ${wordlist[0].length} - letter words`)
     })
   }, [level, wordLength, key, mutate])
   
