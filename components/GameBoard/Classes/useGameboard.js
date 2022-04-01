@@ -29,7 +29,7 @@ export default function useGameboard(){
  * @param  {} startingRow=0 
  */
  export const generateNewGameboardState = (word, rows = 1, startingRow = 0) => {
-  if(!word){ console.trace(`GenerateNewGameBoardState no word`); return }
+  if(!word){ console.trace(`GenerateNewGameboardState no word`); return }
   const slots = word.length
   const newGameboardState = { activeChar: 'row-0__slot-0', word, rows, slots}
   

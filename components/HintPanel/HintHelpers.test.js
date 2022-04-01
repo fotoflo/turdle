@@ -5,7 +5,7 @@ import THREE_LETTER_WORDLIST from '../../public/dictonaries/3-letter-words.json'
 
 import { 
   Wordlist 
-} from '../GameBoard/Classes/Wordlist';
+} from '../Gameboard/Classes/Wordlist';
 
 import {
   //Wordlist.filter,

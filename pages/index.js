@@ -4,7 +4,7 @@ import Head from 'next/head'
 
 import useSWR from 'swr'
 
-import GameBoard from '../components/GameBoard/GameBoard';
+import GameboardComponent from '../components/Gameboard/GameboardComponent';
 import NavBar from '../components/NavBar';
 import {WordComponent} from '../components/WordComponent';
 
@@ -16,7 +16,7 @@ import {
   DEFAULT_SHOW_DEBUG
 } from "../next.config";
 
-import { Wordlist } from "../components/GameBoard/Classes/Wordlist";
+import { Wordlist } from "../components/Gameboard/Classes/Wordlist";
 
 console.log({BASE_URL})
 const WORDLIST_BASEURL = `${BASE_URL}/api/wordlist`;
@@ -115,7 +115,7 @@ function Index({
         level={level}
       />
 
-      <GameBoard 
+      <GameboardComponent 
           word={word}
           wordList={wordlist}
           showHints={showHints}

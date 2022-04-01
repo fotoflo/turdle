@@ -1,9 +1,9 @@
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import GameBoard from "./GameBoard";
+import GameboardComponent from "./GameBGameboardComponentoard";
 import { Wordlist } from "./Classes/Wordlist";
 
-describe("GameBoard Componenent", () => {
+describe("GameboardComponent", () => {
   it("renders", () => {
     const word = "test";
     const wordList = new Wordlist("test", "tests");
@@ -12,7 +12,7 @@ describe("GameBoard Componenent", () => {
     const setWordLength = () => {};
 
     render(
-      <GameBoard
+      <GameboardComponent
         word={word}
         wordList={wordList}
         showHints={showHints}

@@ -8,7 +8,7 @@ import {
   activeCharIsBlank,
   getActiveCharStatus,
   getActiveCharLetter
-} from "./GameBoardHelpers";
+} from "./GameboardHelpers";
 
 import {
   generateNewGameboardState,

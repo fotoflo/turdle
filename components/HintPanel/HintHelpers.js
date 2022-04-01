@@ -1,5 +1,5 @@
 import { MAX_HINTS } from "../../next.config"
-import { Wordlist } from "../GameBoard/Classes/Wordlist"
+import { Wordlist } from "../Gameboard/Classes/Wordlist"
 
 export const getKeyValueFromPair = (pair) => {
   const char = Object.keys(pair)[0]

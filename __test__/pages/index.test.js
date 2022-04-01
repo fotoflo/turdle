@@ -3,7 +3,7 @@
 import next from 'next'
 next({});
 
-import { Wordlist } from '../../components/GameBoard/Classes/Wordlist';
+import { Wordlist } from '../../components/Gameboard/Classes/Wordlist';
 
 import {getStaticProps, staticFetcher} from '../../pages/index'
 import {BASE_URL} from '../../next.config';

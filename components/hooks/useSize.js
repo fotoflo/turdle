@@ -1,5 +1,8 @@
 import { useCallback, useEffect, useLayoutEffect, useState } from "react";
 
+import useIsomorphicLayoutEffect from './useIsomorphicLayoutEffect.js'
+
+
 function useSize(targetRef) {
   const getSize = useCallback(() => {
     console.log({targetRef})
@@ -21,7 +24,7 @@ function useSize(targetRef) {
   }, [handleResize]);
 
 
-  useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     handleResize();
   }, [handleResize]);
 

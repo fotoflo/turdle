@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import GameSlot from './GameSlot'
 import styled from 'styled-components';
-import useSize from '../useSize';
+import useSize from '../hooks/useSize';
 
 // import {FaSignOutAlt} from 'react-icons/fa'
 

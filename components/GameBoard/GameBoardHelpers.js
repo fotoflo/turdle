@@ -9,7 +9,7 @@
               setCharToLetter
 */
 
-import useGameboard, {composeGameboardRow} from './classes/useGameboard'
+import useGameboard, {composeGameboardRow} from './Classes/useGameboard'
 
 export const getActiveChar = (gameboardState) => {
   const [activeChar] = gameboardState.chars.filter(c => c.key === gameboardState.activeChar);

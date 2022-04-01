@@ -17,11 +17,11 @@ import {
   rowIsNotFull,
   getLastRowGreens,
   getActiveChar
-} from './GameBoardHelpers';
+} from './GameboardHelpers';
 
 import useGameboard, { generateNewGameboardState } from './Classes/useGameboard'
 
-function GameBoard({
+function GameboardComponent({
   word,
   wordList,
   showHints,
@@ -227,8 +227,8 @@ const FooterScrollRef = styled.div`
   margin-top: 100px;
 `
 
-GameBoard.propTypes = {
+GameboardComponent.propTypes = {
   showHints: PropTypes.bool,
 }
 
-export default GameBoard
+export default GameboardComponent
