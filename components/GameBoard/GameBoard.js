@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useRef} from 'react';
+import React, {useEffect, useState, useRef, useCallback} from 'react';
 
 import PropTypes from 'prop-types';
 import { Container } from 'react-bootstrap';
@@ -33,7 +33,13 @@ function GameBoard({
 }){
 
     const scrollRef = useRef(null)
-    const executeScroll = () => scrollRef.current.scrollIntoView()    
+    const executeScroll = () => scrollRef.current.scrollIntoView()
+
+    const wonRound = useCallback( () => {
+      alert(`YOU WIN! The word was ${word}`)
+      wordLengthToggler()
+      setLevel( level + 1)
+    }, [setLevel, wordLengthToggler, word, level] )
 
     useEffect( () => {
       window.addEventListener("keydown", keydownHandler);
@@ -58,23 +64,18 @@ function GameBoard({
         activeChar: `row-${newGameboard.rows-1}__slot-0`})
         
       executeScroll()
-    },[gameboardState])
+    },[gameboardState, setGameboardState, wonRound])
 
     useEffect( ()=>{
       console.log(`word updated, ${word}`)
       setGameboardState( generateNewGameboardState(word) )
-    },[word])
+    },[word, setGameboardState])
 
 
     function didWinRound(gameboardState){
       return getLastRowGreens(gameboardState).length === gameboardState.slots 
     }
-
-    function wonRound(){
-      alert(`YOU WIN! The word was ${word}`)
-      wordLengthToggler()
-      setLevel( level + 1)
-    }
+    
     
     function iterateStatus(previousStatus, pressedKey){
       // if hints are on, iterate through the statuses

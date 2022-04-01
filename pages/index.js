@@ -67,7 +67,7 @@ function Index({
       setWord( generateRandomWord(wordlist) )
       console.log("### wordlist changed")
     })
-  }, [level, wordLength])
+  }, [level, wordLength, key, mutate])
   
   // if(error) return(
   //   <div className="error">
