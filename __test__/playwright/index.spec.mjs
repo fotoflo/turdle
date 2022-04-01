@@ -1,4 +1,9 @@
 import { test, expect } from '@playwright/test';
+
+const sleep = (ms) => {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 test.describe('the index page render', ()=>{
   test('index page H1 renders', async ({ page }) => {
     await page.goto('http://localhost:3000/');
@@ -16,4 +21,26 @@ test.describe('the index page render', ()=>{
     await expect(firstChar).toHaveCSS('background-color', "rgb(53, 229, 45)")
 
   });
+
+  test.only('guessing the word goes to next level', async ({ page }) => {
+    await page.goto('http://localhost:3000/');
+    let H1 = await page.locator('[data-testid="word-h1"]').innerText()
+
+    console.log("$$$$$ first pass", H1)
+    
+    await page.keyboard.press(H1[0]);
+    await sleep(70)
+    await page.keyboard.press(H1[1]);
+    await sleep(70)
+    await page.keyboard.press(H1[2]);
+    await sleep(70)
+    await page.keyboard.press(H1[3]);
+    await sleep(70)
+    
+    H1 = await page.locator('[data-testid="word-h1"]').innerText()
+    console.log("$$$$$$$ second pass", H1)
+    expect(H1.length).toEqual(5);
+    await page.pause();
+  });
+
 })
