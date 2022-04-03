@@ -33,7 +33,7 @@ function GameboardComponent({
 }){
 
     const scrollRef = useRef(null)
-    const executeScroll = () => scrollRef.current.scrollIntoView()
+    const scrollRefIntoView = () => scrollRef.current.scrollIntoView()
 
     const wonRound = () => {
       alert(`YOU WIN! The word was ${word}`)
@@ -75,7 +75,7 @@ function GameboardComponent({
         ...newGameboard,
         activeChar: key})
         
-      executeScroll()
+      scrollRefIntoView()
       // eslint-disable-next-line react-hooks/exhaustive-deps
     },[gameboardState])
 
