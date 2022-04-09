@@ -58,6 +58,7 @@ const WordLengthToggler = styled.div`
 
 const StyledNavbar = styled(Navbar)`
   border-bottom: 1px solid ${ props => props.theme.fontColor};
+  color: ${ props => props.theme.fontColor};
   left: 50%;
   transform: translatex(-50%);
   width:95%;

@@ -9,10 +9,10 @@ import MainHead from "../components/MainHead"
 import MainScript from "../components/MainScript"
 import { darkTheme, GlobalStyles, lightTheme } from "../components/Themes";
 import { ThemeProvider } from 'styled-components'
-import { DEFAULT_SHOW_HINTS } from "../next.config";
+import { DEFAULT_SHOW_HINTS, DEFAULT_THEME } from "../next.config";
 
 export default function App({ Component, pageProps }) {
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState(DEFAULT_THEME);
   const [showHelpModal, setShowHelpModal] = useState(false);
   const [showHints, setShowHints] = useState(DEFAULT_SHOW_HINTS); 
 

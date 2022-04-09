@@ -11,6 +11,7 @@ module.exports = {
   MAX_HINTS: 100,
   DEFAULT_SHOW_HINTS: true,
   DEFAULT_SHOW_DEBUG: process.env.NEXT_PUBLIC_BUILD_SHOW_DEBUG === 'true',
+  DEFAULT_THEME: 'dark',
   BASE_URL: process.env.NEXT_PUBLIC_WORDCHEATER_BASE_URL,
   WORDLIST_API_PATH: '/api/wordlist',
   compiler: {

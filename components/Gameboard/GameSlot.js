@@ -37,6 +37,7 @@ const SlotBox = styled.div`
   background-color: ${ props => props.theme[props.char.status] };
   height: 100%;
   width: ${props => props.squareSide}px;
+  border-radius: 20px;
 `
     
 
