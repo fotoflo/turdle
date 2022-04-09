@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components'
 
-import { Button, Modal, ModalTitle } from 'react-bootstrap';
+import { Button, Modal } from 'react-bootstrap';
 
 const HelpModal = ({showHelpModal, helpModalToggler}) => {
 
@@ -33,7 +33,7 @@ const HelpModal = ({showHelpModal, helpModalToggler}) => {
 const StyledModal = styled(Modal)`
 & .modal-content {
   background-color: ${ props => props.theme.background };
-  border: 1px solid ${ props => "white"};
+  border: 1px solid ${ props => props.theme.fontColor};
 }
 `
 

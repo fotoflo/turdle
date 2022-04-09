@@ -2,7 +2,7 @@ import { createGlobalStyle } from "styled-components";
 // from https://www.youtube.com/watch?v=G00V4tRx1ME
 
 export const lightTheme = {
-  background: "green",
+  background: "white",
   fontColor: "#000", // black
   InfoBGColor: 'ivory',
   0: "white",  // White, Blank
