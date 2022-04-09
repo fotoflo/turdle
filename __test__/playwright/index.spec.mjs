@@ -26,7 +26,7 @@ test.describe('the index page render', ()=>{
     const firstChar = page.locator('[data-testid="row-0"] div').first()
 
     await expect(firstChar).toHaveText(H1[0])
-    await expect(firstChar).toHaveCSS('background-color', "rgb(53, 229, 45)")
+    await expect(firstChar).toHaveCSS('background-color', "rgb(97, 194, 17)")
 
   });
 

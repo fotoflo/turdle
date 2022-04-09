@@ -1,11 +1,9 @@
 import { createGlobalStyle } from "styled-components";
 // from https://www.youtube.com/watch?v=G00V4tRx1ME
 
-const periwinkle = "#CCCCFF"
-
 export const lightTheme = {
-  background: "white",
-  fontColor: "#000",
+  background: "green",
+  fontColor: "#000", // black
   InfoBGColor: 'ivory',
   0: "white",  // White, Blank
   1: "grey", // not in word, grey
@@ -15,7 +13,7 @@ export const lightTheme = {
 
 export const darkTheme = {
   background: "black",
-  fontColor: "#fff",
+  fontColor: "#fff", // white
   InfoBGColor: '#240026',
   0: "black",   // black, Blank
   1: "grey", // not in word, grey

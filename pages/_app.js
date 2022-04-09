@@ -37,13 +37,13 @@ export default function App({ Component, pageProps }) {
       <MainScript />
 
       <GlobalStyles theme={ theme == "light" ? lightTheme : darkTheme } />
+      {/* THIS IS THE INDEX PAGE!! */}
+    <ThemeProvider theme={ theme == "light" ? lightTheme : darkTheme }>
       <HelpModal 
       helpModalToggler={helpModalToggler} 
         showHelpModal={showHelpModal}
       />
 
-        {/* THIS IS THE INDEX PAGE!! */}
-      <ThemeProvider theme={ theme == "light" ? lightTheme : darkTheme }>
         <Component   // see index.js
           theme={theme}
           themeToggler={themeToggler}
