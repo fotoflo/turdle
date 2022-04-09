@@ -26,7 +26,7 @@ export const darkTheme = {
 export const GlobalStyles = createGlobalStyle`
 	body {
     max-width: 800px;
-    min-width: 300px;
+    min-width: 320px;
 		background-color: ${ props => props.theme.background };
     color: ${ props => props.theme.fontColor };
     caret-color: transparent;

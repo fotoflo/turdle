@@ -32,9 +32,10 @@ function NavBar({
         <Navbar.Brand href="#home">WordCheater</Navbar.Brand>
       </Container>
       <Container className="justify-content-end">
-        <span 
+        <WordLengthToggler 
           data-testid={'navWordLength' }
-          onClick={wordLengthToggler}>{wordLength}</span>
+          onClick={wordLengthToggler}>{wordLength}
+        </WordLengthToggler>
         <ThemeToggleSwitch defaultValue={true} toggleFn={themeToggler} />
         <HintToggler onClick={hintToggler}>
           <FaLightbulb/>
@@ -48,13 +49,18 @@ function NavBar({
 const HintToggler = styled.div`
   color: ${ props => props.theme.fontColor};
   padding-bottom: 2px;
+  margin-left: 10px;
 `;
+
+const WordLengthToggler = styled.div`
+  margin-right: 10px;
+`
 
 const StyledNavbar = styled(Navbar)`
   border-bottom: 1px solid ${ props => props.theme.fontColor};
   left: 50%;
   transform: translatex(-50%);
-  width:80%;
+  width:95%;
   margin-bottom: 2rem;
 `
 
