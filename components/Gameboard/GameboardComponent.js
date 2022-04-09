@@ -27,6 +27,7 @@ function GameboardComponent({
   showHints,
   setShowHints,
   wordLengthToggler,
+  levelUpModalToggler,
   level, 
   setLevel,
   ...props
@@ -36,7 +37,7 @@ function GameboardComponent({
     const scrollRefIntoView = () => scrollRef.current.scrollIntoView()
 
     const wonRound = () => {
-      alert(`YOU WIN! The word was ${word}`)
+      levelUpModalToggler(word, level)
       wordLengthToggler()
       setLevel( level + 1)
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -48,7 +49,7 @@ function GameboardComponent({
         window.removeEventListener("keydown", keydownHandler);
       }
     })
-    
+
     const [gameboardState, setGameboardState] = new useGameboard( )
 
     const getFirstEmptyCharKeyOfGameboard = (gameboardState) => {
@@ -230,7 +231,7 @@ function GameboardComponent({
 
     return (
       <GameboardContainer data-testid="GameboardContainer" id="GameboardContainer">
-          
+
           <Prompt word={word} level={level} gameboardState={gameboardState}/>
 
           {  GameRows() }

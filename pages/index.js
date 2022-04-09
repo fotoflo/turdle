@@ -30,6 +30,7 @@ function Index({
   theme,
   themeToggler,
   helpModalToggler,
+  levelUpModalToggler,
   showHints,
   setShowHints,
   hintToggler,
@@ -53,7 +54,7 @@ function Index({
     if (level === 0 && wordLength == DEFAULT_WORD_LENGTH ) return null
     return `/api/wordlist?wordlength=${wordLength}`
   }
-  
+
   const key = setKey()
 
   const { data: wordlist, mutate } = useSWR(
@@ -120,6 +121,7 @@ function Index({
       />
 
       <GameboardComponent 
+          levelUpModalToggler={levelUpModalToggler}
           word={word}
           wordList={wordlist}
           showHints={showHints}
