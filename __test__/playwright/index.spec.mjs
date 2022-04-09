@@ -34,7 +34,7 @@ test.describe('the index page render', ()=>{
     await page.goto('http://localhost:3000/');
     let H1 = await page.locator('[data-testid="word-h1"]').innerText()
 
-    console.log("$$$$$ first pass", H1)
+    // console.log("$$$$$ first pass", H1)
     
     await page.keyboard.press(H1[0]);
     await sleep()
@@ -46,7 +46,20 @@ test.describe('the index page render', ()=>{
     await sleep()
     
     H1 = await page.locator('[data-testid="word-h1"]').innerText()
-    console.log("$$$$$$$ second pass", H1)
+    // console.log("$$$$$$$ second pass", H1)
+    expect(H1.length).toEqual(5);
+
+    const row0 = await page.locator('[data-testid="row-0"] div').count()
+    expect(row0).toEqual(5);
+  });
+
+  test('clicking the number goes to the next level', async ({ page }) => {
+    await page.goto('http://localhost:3000/');
+    let H1 = await page.locator('[data-testid="word-h1"]').innerText()
+    
+    await page.locator('[data-testid="navWordLength"]').click();
+
+    H1 = await page.locator('[data-testid="word-h1"]').innerText()
     expect(H1.length).toEqual(5);
 
     const row0 = await page.locator('[data-testid="row-0"] div').count()

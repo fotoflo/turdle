@@ -21,6 +21,7 @@ describe.only("Gameboard Class", () => {
       expect(typeof result).toEqual('object')
       expect(result.length).toEqual(2)
       expect(result[0].key).toEqual(`row-0__slot-0`)
+      expect(result[1].key).toEqual(`row-0__slot-1`)
     })
   })
 });

@@ -48,7 +48,13 @@ function Index({
     return new Wordlist(...data)
   }
   
-  const key = level === 0 ? null : `/api/wordlist?wordlength=${wordLength}`;
+  
+  const setKey = ()=>{
+    if (level === 0 && wordLength == DEFAULT_WORD_LENGTH ) return null
+    return `/api/wordlist?wordlength=${wordLength}`
+  }
+  
+  const key = setKey()
 
   const { data: wordlist, mutate } = useSWR(
       key,
@@ -59,10 +65,11 @@ function Index({
   const [word, setWord] = useState( generateRandomWord(wordlist) );
   
   useEffect(()=>{
+    console.log(`mutating to new key: ${key}`)
     mutate(key).then((wordlist)=>{
       if( !wordlist ) return
       setWord( generateRandomWord(wordlist) )
-      console.log(`### wordlist changed - ${wordlist[0].length} - letter words`)
+      console.log(`### ${wordLength} letter wordlist changed - ${wordlist[0].length} - letter words`)
     })
   }, [level, wordLength, key, mutate])
   
