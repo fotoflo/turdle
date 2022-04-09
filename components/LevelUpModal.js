@@ -2,8 +2,16 @@ import React from 'react';
 import styled from 'styled-components'
 
 import { Button, Modal } from 'react-bootstrap';
+import { useKeyboard } from './useKeyboard';
 
 const LevelUpModal = ({showLevelUpModal, levelUpModalToggler}) => {
+
+  const keydownHandler = (pressedKey) => {
+    if(showLevelUpModal === false ) return
+    if(pressedKey === 'Enter' ) levelUpModalToggler()
+  } 
+
+  useKeyboard(keydownHandler)
 
   return (
     <>
