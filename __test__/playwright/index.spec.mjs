@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-const sleep = (ms) => {
+const sleep = (ms = 100) => {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
@@ -37,13 +37,13 @@ test.describe('the index page render', ()=>{
     console.log("$$$$$ first pass", H1)
     
     await page.keyboard.press(H1[0]);
-    await sleep(70)
+    await sleep()
     await page.keyboard.press(H1[1]);
-    await sleep(70)
+    await sleep()
     await page.keyboard.press(H1[2]);
-    await sleep(70)
+    await sleep()
     await page.keyboard.press(H1[3]);
-    await sleep(70)
+    await sleep()
     
     H1 = await page.locator('[data-testid="word-h1"]').innerText()
     console.log("$$$$$$$ second pass", H1)

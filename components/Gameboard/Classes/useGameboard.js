@@ -16,10 +16,35 @@ export class Gameboard {
  
     return this
   }
+  
+  getCharRow(row){
+    return this.chars
+      .filter( char => char.row === row)
+  }  
+
+  setActiveChar(key){
+    this._activeChar = key
+    return this
+  }
+
+  updateState(newState){
+    return Object.assign(this, newState)
+  }
 }
 
+
 export default function useGameboard(){
-  return useState(new Gameboard())
+  const [gameboardState, setGameboardState] = useState(new Gameboard())
+
+  const updateGameboardState = (state) => {
+    if(state.constructor !== Gameboard ){
+      const gameboard = new Gameboard()
+      state = gameboard.updateState(state)
+    }
+    setGameboardState(state.updateState(state))
+  }
+
+  return [gameboardState, updateGameboardState]
 }
 
 /**
