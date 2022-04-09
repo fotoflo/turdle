@@ -7,6 +7,7 @@ import ThemeToggleSwitch from './ThemeToggleSwitch';
 import {Navbar, Container} from 'react-bootstrap'
 
 import { FaLightbulb, FaRegQuestionCircle } from 'react-icons/fa';
+import { DEFAULT_THEME } from "../next.config";
 
 
 // import {FaSignOutAlt} from 'react-icons/fa'
@@ -20,6 +21,9 @@ function NavBar({
   wordLengthToggler 
 }) {
  
+  const getDefaultThemeToggleSwitchColor = () => {
+    return DEFAULT_THEME === 'light' ? true : false; 
+  }
 
   return (
     <StyledNavbar variant={theme} className="justify-content-between">
@@ -36,7 +40,7 @@ function NavBar({
           data-testid={'navWordLength' }
           onClick={wordLengthToggler}>{wordLength}
         </WordLengthToggler>
-        <ThemeToggleSwitch defaultValue={true} toggleFn={themeToggler} />
+        <ThemeToggleSwitch defaultValue={getDefaultThemeToggleSwitchColor()} toggleFn={themeToggler} />
         <HintToggler onClick={hintToggler}>
           <FaLightbulb/>
         </HintToggler>
