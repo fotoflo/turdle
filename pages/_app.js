@@ -27,7 +27,7 @@ export default function App({ Component, pageProps }) {
   };
 
 
-  const [showLevelUpModal, setShowLevelUpModal] = useState(true);
+  const [showLevelUpModal, setShowLevelUpModal] = useState(false);
 
   const levelUpModalToggler = () => {
     showLevelUpModal === true ? setShowLevelUpModal(false): setShowLevelUpModal(true)
