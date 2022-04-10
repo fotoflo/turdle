@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components'
 
 import { Button, Modal } from 'react-bootstrap';
-import { useKeyboard } from './useKeyboard';
+import { useKeyboard } from './hooks/useKeyboard';
 
 const LevelUpModal = ({showLevelUpModal, levelUpModalToggler}) => {
 

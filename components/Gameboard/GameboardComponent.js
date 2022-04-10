@@ -20,6 +20,7 @@ import {
 } from './GameboardHelpers';
 
 import useGameboard, { generateNewGameboardState } from './Classes/useGameboard'
+import { useKeyboard } from '../hooks/useKeyboard';
 
 function GameboardComponent({
   word,
@@ -43,12 +44,7 @@ function GameboardComponent({
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }
 
-    useEffect( () => {
-      window.addEventListener("keydown", keydownHandler);
-      return () => {
-        window.removeEventListener("keydown", keydownHandler);
-      }
-    })
+    useKeyboard(keydownHandler)
 
     const [gameboardState, setGameboardState] = new useGameboard( )
 
@@ -167,10 +163,7 @@ function GameboardComponent({
     }
 
 
-    function keydownHandler( {repeat, key: pressedKey} ){
-      if(repeat) return
-      console.log("keydownHandler", pressedKey, word)
-
+    function keydownHandler( pressedKey ){
       switch(true){
         case pressedKey === " ":
         case pressedKey === "Tab":

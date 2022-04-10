@@ -5,7 +5,7 @@ export const useKeyboard = function(keydownHandler){
 
   const _keydownHandler = ( {repeat, key: pressedKey}  ) =>{
     if(repeat) return
-    console.log("keydownHandler", pressedKey)
+    console.log("useKeyboard", pressedKey)
     keydownHandler( pressedKey  )
   }
 
