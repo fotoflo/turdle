@@ -24,7 +24,7 @@ function KeyboardLetter({label, keydownHandler, gameboardState, ...props}){
       {...props}
       id={`${label}-key`}
       status={status}
-      onClick={()=>keydownHandler({key: label})}
+      onClick={()=>keydownHandler(label)}
       className="text-center align-middle"
     >
       {label.toUpperCase()}
