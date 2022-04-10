@@ -17,9 +17,9 @@ const LevelUpModal = ({showLevelUpModal, levelUpModalToggler}) => {
     <>
       <StyledModal centered show={showLevelUpModal} onHide={levelUpModalToggler}>
         <Modal.Header closeButton>
-          <Modal.Title>LEVEL UP!</Modal.Title>
+          <Modal.Title>⭐⭐ &nbsp; LEVEL UP! ⭐⭐</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Yay! You leveled up</Modal.Body>
+        <Modal.Body>⭐ &nbsp; Yay! You leveled up &nbsp;⭐</Modal.Body>
         <Modal.Footer>
           <Button variant="primary" onClick={levelUpModalToggler}>
             Ok
