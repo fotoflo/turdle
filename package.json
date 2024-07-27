@@ -14,7 +14,11 @@
     "pw": "npx playwright test",
     "precommit-msg": "echo 'Pre-commit checks...' && exit 0"
   },
-  "pre-commit": ["lint", "jest", "pw" ],
+  "pre-commit": [
+    "lint",
+    "jest",
+    "pw"
+  ],
   "dependencies": {
     "bootstrap": "^5.1.3",
     "next": "^12.1.0",

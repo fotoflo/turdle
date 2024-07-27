@@ -6,78 +6,60 @@ import "../styles/globals.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import { darkTheme, GlobalStyles, lightTheme } from "../components/Themes";
-import { ThemeProvider } from 'styled-components'
+import { ThemeProvider } from "styled-components";
 
-import MainHead from "../components/MainHead"
-import MainScript from "../components/MainScript"
+import MainHead from "../components/MainHead";
+import MainScript from "../components/MainScript";
 
-import HelpModal from "../components/HelpModal"
-import LevelUpModal from "../components/LevelUpModal";
+import HelpModal from "../components/HelpModal";
 
 import { DEFAULT_SHOW_HINTS, DEFAULT_THEME } from "../next.config";
 
 export default function App({ Component, pageProps }) {
   const [theme, setTheme] = useState(DEFAULT_THEME);
   const [showHelpModal, setShowHelpModal] = useState(false);
-  
-  const [showHints, setShowHints] = useState(DEFAULT_SHOW_HINTS); 
+
+  const [showHints, setShowHints] = useState(DEFAULT_SHOW_HINTS);
 
   const helpModalToggler = () => {
-    showHelpModal === true ? setShowHelpModal(false): setShowHelpModal(true)
+    showHelpModal === true ? setShowHelpModal(false) : setShowHelpModal(true);
   };
-
-
-  const [showLevelUpModal, setShowLevelUpModal] = useState(false);
-
-  const levelUpModalToggler = () => {
-    showLevelUpModal === true ? setShowLevelUpModal(false): setShowLevelUpModal(true)
-  };
-  
-
 
   const hintToggler = () => {
     showHints === false ? setShowHints(true) : setShowHints(false);
-    console.log("toggling")
+    console.log("toggling");
   };
 
   const themeToggler = () => {
     theme === "light" ? setTheme("dark") : setTheme("light");
-    console.log("toggling")
+    console.log("toggling");
   };
-
 
   return (
     <div className={styles.container}>
       <MainHead />
       <MainScript />
 
-      <GlobalStyles theme={ theme == "light" ? lightTheme : darkTheme } />
+      <GlobalStyles theme={theme == "light" ? lightTheme : darkTheme} />
       {/* THIS IS THE INDEX PAGE!! */}
-    <ThemeProvider theme={ theme == "light" ? lightTheme : darkTheme }>
-      <HelpModal 
-        helpModalToggler={helpModalToggler} 
-        showHelpModal={showHelpModal}
-      />
-      
-      <LevelUpModal 
-            levelUpModalToggler={levelUpModalToggler} 
-            showLevelUpModal={showLevelUpModal}
-          />
+      <ThemeProvider theme={theme == "light" ? lightTheme : darkTheme}>
+        <HelpModal
+          helpModalToggler={helpModalToggler}
+          showHelpModal={showHelpModal}
+        />
 
-        <Component   // see index.js
+        <Component // see index.js
           theme={theme}
           themeToggler={themeToggler}
           helpModalToggler={helpModalToggler}
           showHelpModal={showHelpModal}
-          levelUpModalToggler={levelUpModalToggler}
           showHints={showHints}
           setShowHints={setShowHints}
           hintToggler={hintToggler}
-          {...pageProps} 
-          />
-          {/* THIS IS THE INDEX PAGE!! */}
+          {...pageProps}
+        />
+        {/* THIS IS THE INDEX PAGE!! */}
       </ThemeProvider>
-
     </div>
   );
 }
