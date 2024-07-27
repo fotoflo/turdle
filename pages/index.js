@@ -1,5 +1,5 @@
 // page appearing at ://wordcheater.app/
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Head from "next/head";
 
 import useSWR from "swr";
@@ -40,10 +40,17 @@ function Index({
   const [wordLength, setWordLength] = useState(DEFAULT_WORD_LENGTH);
   const [level, setLevel] = useState(0);
   const [showLevelUpModal, setShowLevelUpModal] = useState(false);
+
   const levelUpModalToggler = () => {
     showLevelUpModal === true
       ? setShowLevelUpModal(false)
       : setShowLevelUpModal(true);
+  };
+
+  const closeLevelUpModal = () => {
+    wordRef.current = word;
+    console.log("####$$$$##### seeting wordref to ", word);
+    levelUpModalToggler();
   };
 
   const clientSideFetcher = async () => {
@@ -67,6 +74,7 @@ function Index({
   });
 
   const [word, setWord] = useState(generateRandomWord(wordlist));
+  const wordRef = useRef(word);
 
   useEffect(() => {
     console.log(`mutating to new key: ${key}`);
@@ -116,19 +124,21 @@ function Index({
         wordLength={wordLength}
         wordLengthToggler={wordLengthToggler}
       />
-
+      word: {word}
+      <br />
+      ref: {wordRef.current}
+      <br />
       <WordComponent
         showWord={showWord}
         word={word}
         wordlist={wordlist}
         level={level}
       />
-
       <LevelUpModal
-        levelUpModalToggler={levelUpModalToggler}
+        closeLevelUpModal={closeLevelUpModal}
         showLevelUpModal={showLevelUpModal}
+        wordRef={wordRef}
       />
-
       <GameboardComponent
         levelUpModalToggler={levelUpModalToggler}
         word={word}
