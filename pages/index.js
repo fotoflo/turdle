@@ -124,10 +124,6 @@ function Index({
         wordLength={wordLength}
         wordLengthToggler={wordLengthToggler}
       />
-      word: {word}
-      <br />
-      ref: {wordRef.current}
-      <br />
       <WordComponent
         showWord={showWord}
         word={word}
