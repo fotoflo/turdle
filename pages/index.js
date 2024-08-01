@@ -13,7 +13,7 @@ import {
   MIN_WORD_LENGTH,
   MAX_WORD_LENGTH,
   DEFAULT_WORD_LENGTH,
-  DEFAULT_SHOW_DEBUG,
+  DEBUG_MODE,
 } from "../next.config";
 
 import { Wordlist } from "../components/Gameboard/Classes/Wordlist";
@@ -36,7 +36,7 @@ function Index({
   hintToggler,
   fallback,
 }) {
-  const [showWord] = useState(DEFAULT_SHOW_DEBUG);
+  const [showWord] = useState(DEBUG_MODE);
   const [wordLength, setWordLength] = useState(DEFAULT_WORD_LENGTH);
   const [level, setLevel] = useState(0);
   const [showLevelUpModal, setShowLevelUpModal] = useState(false);
