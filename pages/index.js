@@ -18,6 +18,7 @@ import {
 
 import { Wordlist } from "../components/Gameboard/Classes/Wordlist";
 import LevelUpModal from "../components/LevelUpModal";
+import { useGameState } from "../components/hooks/useGameState";
 
 console.log({ BASE_URL });
 const WORDLIST_BASEURL = `${BASE_URL}/api/wordlist`;
@@ -36,15 +37,14 @@ function Index({
   hintToggler,
   fallback,
 }) {
-  const [wordLength, setWordLength] = useState(DEFAULT_WORD_LENGTH);
-  const [level, setLevel] = useState(0);
-  const [showLevelUpModal, setShowLevelUpModal] = useState(false);
-
-  const levelUpModalToggler = () => {
-    showLevelUpModal === true
-      ? setShowLevelUpModal(false)
-      : setShowLevelUpModal(true);
-  };
+  const {
+    wordLength,
+    level,
+    showLevelUpModal,
+    setLevel,
+    levelUpModalToggler,
+    wordLengthToggler,
+  } = useGameState();
 
   const closeLevelUpModal = () => {
     wordRef.current = word;
@@ -94,13 +94,6 @@ function Index({
   // )
 
   // if(!wordList) return <div>loading wordlist...</div>
-
-  function wordLengthToggler() {
-    console.log("wordLengthToggler");
-    wordLength < MAX_WORD_LENGTH
-      ? setWordLength(wordLength + 1)
-      : setWordLength(MIN_WORD_LENGTH);
-  }
 
   function generateRandomWord(wordlist) {
     const min = 0;
