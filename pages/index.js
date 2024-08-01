@@ -36,7 +36,6 @@ function Index({
   hintToggler,
   fallback,
 }) {
-  const [showWord] = useState(DEBUG_MODE);
   const [wordLength, setWordLength] = useState(DEFAULT_WORD_LENGTH);
   const [level, setLevel] = useState(0);
   const [showLevelUpModal, setShowLevelUpModal] = useState(false);
@@ -125,7 +124,7 @@ function Index({
         wordLengthToggler={wordLengthToggler}
       />
       <WordComponent
-        showWord={showWord}
+        showWord={DEBUG_MODE}
         word={word}
         wordlist={wordlist}
         level={level}
