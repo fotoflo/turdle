@@ -19,6 +19,7 @@ import {
 import { Wordlist } from "../components/Gameboard/Classes/Wordlist";
 import LevelUpModal from "../components/LevelUpModal";
 import { useGameState } from "../components/hooks/useGameState";
+import { staticFetcher } from "../helpers/staticFetcher";
 
 console.log({ BASE_URL });
 const WORDLIST_BASEURL = `${BASE_URL}/api/wordlist`;
@@ -132,25 +133,12 @@ function Index({
   );
 }
 
-export async function staticFetcher() {
-  const url = `${WORDLIST_BASEURL}?wordlength=${DEFAULT_WORD_LENGTH}`;
-  const res = await fetch(url);
-
-  if (!res.ok) {
-    throw new Error(
-      `${context.resolvedUrl} getStaticProps could not fetch ${url}`
-    );
-  }
-
-  const data = await res.json();
-  console.log(`### staticFetcher fetched ${data.length} words`);
-
-  return new Wordlist(...data);
-}
-
 // Send the wordList to props
 export async function getStaticProps(context) {
-  const data = await staticFetcher(context).catch((err) => {
+  const url = `${WORDLIST_BASEURL}?wordlength=${DEFAULT_WORD_LENGTH}`;
+
+  const data = await staticFetcher(url).catch((err) => {
+    console.error("Error fetching wordlist:", err);
     return { notFound: true };
   });
 
