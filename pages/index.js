@@ -9,8 +9,7 @@ import { DEFAULT_WORD_LENGTH, DEBUG_MODE } from "../next.config";
 
 import LevelUpModal from "../components/LevelUpModal";
 import { useGameState } from "../components/hooks/useGameState";
-import { fetchWordlist, staticFetcher } from "../helpers/staticFetcher";
-import useWord from "../components/hooks/useWord";
+import { fetchWordlist } from "../helpers/staticFetcher";
 
 // wordlist comes from getServerSideProps
 // theme, showHints, setShowhings comes from _app.js
@@ -23,22 +22,19 @@ function Index({
   showHints,
   setShowHints,
   hintToggler,
-  fallback,
+  fallbackWordlist,
 }) {
   const {
+    word,
+    wordRef,
+    wordlist,
     wordLength,
     level,
     levelUp,
     showLevelUpModal,
     levelUpModalToggler,
     wordLengthToggler,
-  } = useGameState();
-
-  const { word, wordRef, wordlist } = useWord({
-    wordLength,
-    fallback,
-    level,
-  });
+  } = useGameState(fallbackWordlist);
 
   const closeLevelUpModal = () => {
     wordRef.current = word;
@@ -92,7 +88,7 @@ export async function getStaticProps(context) {
   const wordlist = await fetchWordlist(DEFAULT_WORD_LENGTH);
 
   const props = {
-    fallback: {
+    fallbackWordlist: {
       "/api/wordlist": wordlist,
     },
   };
