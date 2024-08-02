@@ -20,11 +20,17 @@ export const useGameState = () => {
     );
   }, []);
 
+  const levelUp = useCallback(() => {
+    wordLengthToggler();
+    setLevel(level + 1);
+  }, []);
+
   return {
     wordLength,
     level,
     showLevelUpModal,
     setLevel,
+    levelUp,
     levelUpModalToggler,
     wordLengthToggler,
   };

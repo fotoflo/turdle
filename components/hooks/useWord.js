@@ -1,10 +1,4 @@
-import {
-  useCallback,
-  useEffect,
-  useLayoutEffect,
-  useRef,
-  useState,
-} from "react";
+import { useEffect, useRef, useState } from "react";
 import { fetchWordlist } from "../../helpers/staticFetcher";
 import useSWR from "swr";
 import generateRandomWord from "../../helpers/generateWord.js";
