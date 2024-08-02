@@ -45,9 +45,10 @@ function Index({
     wordLengthToggler,
   } = useGameState();
 
-  const { word, setWord, wordRef, mutateWord, wordlist, key } = useWord({
+  const { word, wordRef, wordlist } = useWord({
     wordLength,
     fallback,
+    level,
   });
 
   const closeLevelUpModal = () => {
@@ -55,17 +56,6 @@ function Index({
     console.log("####$$$$##### setting wordref to ", word);
     levelUpModalToggler();
   };
-
-  useEffect(() => {
-    console.log(`mutating to new key: ${key}`);
-    mutateWord(key).then((wordlist) => {
-      if (!wordlist) return;
-      setWord(generateRandomWord(wordlist));
-      console.log(
-        `### ${wordLength} letter wordlist changed - ${wordlist[0].length} - letter words`
-      );
-    });
-  }, [level, wordLength]);
 
   if (!word) {
     return <div>Error: No word</div>;
