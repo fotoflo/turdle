@@ -25,17 +25,6 @@ export const useGameState = (fallbackWordlist) => {
     }
   );
 
-  useEffect(() => {
-    console.log(`mutating to new key: ${key}`);
-    mutateWord(key).then((wordlist) => {
-      if (!wordlist) return;
-      setWord(generateRandomWord(wordlist));
-      console.log(
-        `### ${wordLength} letter wordlist changed - ${wordlist[0].length} - letter words`
-      );
-    });
-  }, [level, wordLength]);
-
   const [word, setWord] = useState(generateRandomWord(wordlist));
   const wordRef = useRef(word);
 
@@ -53,6 +42,18 @@ export const useGameState = (fallbackWordlist) => {
     wordLengthToggler();
     setLevel(level + 1);
   }, []);
+
+  useEffect(() => {
+    if (level == 0) return;
+
+    mutateWord(key).then((wordlist) => {
+      if (!wordlist) return;
+
+      const newWord = generateRandomWord(wordlist);
+      setWord(newWord);
+      wordRef.current = newWord;
+    });
+  }, [level, wordLength]);
 
   return {
     wordlist,

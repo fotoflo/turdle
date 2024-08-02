@@ -11,7 +11,7 @@ import LevelUpModal from "../components/LevelUpModal";
 import { useGameState } from "../components/hooks/useGameState";
 import { fetchWordlist } from "../helpers/staticFetcher";
 
-// wordlist comes from getServerSideProps
+// fallbackWordlist comes from getServerSideProps
 // theme, showHints, setShowhings comes from _app.js
 
 // MAIN COMPONENT DEF
@@ -35,12 +35,6 @@ function Index({
     levelUpModalToggler,
     wordLengthToggler,
   } = useGameState(fallbackWordlist);
-
-  const closeLevelUpModal = () => {
-    wordRef.current = word;
-    console.log("####$$$$##### setting wordref to ", word);
-    levelUpModalToggler();
-  };
 
   if (!word) {
     return <div>Error: No word</div>;
@@ -66,7 +60,7 @@ function Index({
         level={level}
       />
       <LevelUpModal
-        closeLevelUpModal={closeLevelUpModal}
+        closeLevelUpModal={levelUpModalToggler}
         showLevelUpModal={showLevelUpModal}
         wordRef={wordRef}
       />
