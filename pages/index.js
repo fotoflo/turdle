@@ -1,4 +1,4 @@
-// page appearing at ://wordcheater.app/
+// index.js page appearing at ://wordcheater.app/
 import React, { useEffect, useRef, useState } from "react";
 import Head from "next/head";
 
@@ -50,14 +50,7 @@ function Index({
     levelUpModalToggler();
   };
 
-  const clientSideFetcher = async () => {
-    const res = await fetch(`/api/wordlist?wordlength=${wordLength}`);
-    const data = await res.json();
-    console.log(
-      `### clientSideFetcher feched ${data.length} ${data[0].length} letter words`
-    );
-    return new Wordlist(...data);
-  };
+  const clientSideFetcher = () => fetchWordlist(wordLength);
 
   const setKey = () => {
     if (level === 0 && wordLength == DEFAULT_WORD_LENGTH) return null;
