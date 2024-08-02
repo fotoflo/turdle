@@ -21,6 +21,7 @@ import LevelUpModal from "../components/LevelUpModal";
 import { useGameState } from "../components/hooks/useGameState";
 import { fetchWordlist, staticFetcher } from "../helpers/staticFetcher";
 import generateRandomWord from "../helpers/generateWord";
+import useWord from "../components/hooks/useWords";
 
 // wordlist comes from getServerSideProps
 // theme, showHints, setShowhings comes from _app.js
@@ -44,38 +45,31 @@ function Index({
     wordLengthToggler,
   } = useGameState();
 
+  const { word, setWord, wordRef, mutateWord, wordlist, key } = useWord({
+    wordLength,
+    fallback,
+  });
+
   const closeLevelUpModal = () => {
     wordRef.current = word;
-    console.log("####$$$$##### seeting wordref to ", word);
+    console.log("####$$$$##### setting wordref to ", word);
     levelUpModalToggler();
   };
 
-  const clientSideFetcher = () => fetchWordlist(wordLength);
-
-  const setKey = () => {
-    if (level === 0 && wordLength == DEFAULT_WORD_LENGTH) return null;
-    return `/api/wordlist?wordlength=${wordLength}`;
-  };
-
-  const key = setKey();
-
-  const { data: wordlist, mutate } = useSWR(key, clientSideFetcher, {
-    fallbackData: fallback["/api/wordlist"],
-  });
-
-  const [word, setWord] = useState(generateRandomWord(wordlist));
-  const wordRef = useRef(word);
-
   useEffect(() => {
     console.log(`mutating to new key: ${key}`);
-    mutate(key).then((wordlist) => {
+    mutateWord(key).then((wordlist) => {
       if (!wordlist) return;
       setWord(generateRandomWord(wordlist));
       console.log(
         `### ${wordLength} letter wordlist changed - ${wordlist[0].length} - letter words`
       );
     });
-  }, [level, wordLength, key, mutate]);
+  }, [level, wordLength]);
+
+  if (!word) {
+    return <div>Error: No word</div>;
+  }
 
   return (
     <>
