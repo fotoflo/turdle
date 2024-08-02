@@ -86,15 +86,6 @@ function Index({
     });
   }, [level, wordLength, key, mutate]);
 
-  // if(error) return(
-  //   <div className="error">
-  //     <p className="error-message">Error: failed to load wordlist</p>
-  //     <p>Detail: useSWR error - {JSON.stringify(error)}</p>
-  //   </div>
-  // )
-
-  // if(!wordList) return <div>loading wordlist...</div>
-
   function generateRandomWord(wordlist) {
     const min = 0;
     const max = wordlist.length - 1;
@@ -159,15 +150,13 @@ export async function staticFetcher() {
 
 // Send the wordList to props
 export async function getStaticProps(context) {
-  const staticWordlist = await staticFetcher(context).catch((err) => {
+  const data = await staticFetcher(context).catch((err) => {
     return { notFound: true };
   });
 
-  // By returning { props: { wordList } }, the component
-  // will receive `wordList` as a prop at build time
   const props = {
     fallback: {
-      "/api/wordlist": staticWordlist,
+      "/api/wordlist": new Wordlist(...data),
     },
   };
   return { props };
