@@ -20,6 +20,7 @@ import { Wordlist } from "../components/Gameboard/Classes/Wordlist";
 import LevelUpModal from "../components/LevelUpModal";
 import { useGameState } from "../components/hooks/useGameState";
 import { fetchWordlist, staticFetcher } from "../helpers/staticFetcher";
+import generateRandomWord from "../helpers/generateWord";
 
 // wordlist comes from getServerSideProps
 // theme, showHints, setShowhings comes from _app.js
@@ -82,14 +83,6 @@ function Index({
       );
     });
   }, [level, wordLength, key, mutate]);
-
-  function generateRandomWord(wordlist) {
-    const min = 0;
-    const max = wordlist.length - 1;
-    const rand = Math.floor(Math.random() * (max - min + 1) + min);
-    const theWord = wordlist[rand];
-    return theWord;
-  }
 
   return (
     <>
