@@ -252,7 +252,13 @@ function GameboardComponent({
   );
 }
 
-const GameboardContainer = styled(Container)``;
+const GameboardContainer = styled(Container)`
+  padding-bottom: 80px;
+
+  @media (max-width: 768px) {
+    padding-bottom: 0%;
+  }
+`;
 const FooterScrollRef = styled.div`
   margin-top: 100px;
 `;
