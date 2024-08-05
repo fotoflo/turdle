@@ -1,22 +1,76 @@
-/// route at {host}/api/wordlist?wordlength=5
+import { promises as fs } from "fs";
+import path from "path";
+import Cors from "cors";
 
-const fsp = require('fs').promises
-const path = require('path')
+// Initialize the cors middleware
+const cors = Cors({
+  methods: ["GET", "HEAD"],
+});
+
+// Helper method to wait for a middleware to execute before continuing
+// And to throw an error when an error happens in a middleware
+function runMiddleware(req, res, fn) {
+  return new Promise((resolve, reject) => {
+    fn(req, res, (result) => {
+      if (result instanceof Error) {
+        return reject(result);
+      }
+      return resolve(result);
+    });
+  });
+}
 
 export default async function handler(req, res) {
-  const wordlength = req.query.wordlength
-  
-  try {
-    if(!wordlength) throw "no wordlength"
+  // Run the middleware
+  await runMiddleware(req, res, cors);
 
-    const filepath = path.resolve(process.cwd() + `/public/dictonaries/${wordlength}-letter-words.json`)
-    const file_data = await fsp.readFile(filepath , 'utf8')
-    const json_data = JSON.parse(file_data)
-
-    res.status(200).json(json_data)
+  // Only allow GET requests
+  if (req.method !== "GET") {
+    return res.status(405).json({ error: "Method Not Allowed" });
   }
-  catch (error) {
-    console.log(error)
-    res.status(500).json({ error: `Error reading data, ${error}` })
+
+  const wordLength = req.query.wordlength;
+
+  try {
+    // Validate wordLength
+    if (
+      !wordLength ||
+      !/^\d+$/.test(wordLength) ||
+      parseInt(wordLength) < 3 ||
+      parseInt(wordLength) > 15
+    ) {
+      throw new Error("Invalid word length");
+    }
+
+    const filePath = path.join(
+      process.cwd(),
+      "public",
+      "dictonaries",
+      `${wordLength}-letter-words.json`
+    );
+
+    // Check if file exists
+    await fs.access(filePath);
+
+    const fileData = await fs.readFile(filePath, "utf8");
+    const jsonData = JSON.parse(fileData);
+
+    // Set cache headers
+    res.setHeader(
+      "Cache-Control",
+      "public, max-age=86400, s-maxage=86400, stale-while-revalidate=604800"
+    );
+
+    res.status(200).json(jsonData);
+  } catch (error) {
+    console.error(`Error in wordlist API: ${error.message}`);
+
+    if (error.message === "Invalid word length" || error.code === "ENOENT") {
+      res
+        .status(400)
+        .json({ error: "Invalid word length or wordlist not found" });
+    } else {
+      res.status(500).json({ error: "Internal Server Error" });
+    }
   }
 }

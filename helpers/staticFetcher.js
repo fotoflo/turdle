@@ -7,6 +7,7 @@ export async function staticFetcher(url) {
   if (!res.ok) {
     console.error(`Static Fetcher could not fetch ${url}`);
     // throw new Error(`Static Fetcher could not fetch ${url}`);
+    return []; // Return an empty array instead of { notFound: true }
   }
 
   const data = await res.json();
