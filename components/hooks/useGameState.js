@@ -12,18 +12,14 @@ export const useGameState = (fallbackWordlist) => {
   const [wordLength, setWordLength] = useState(DEFAULT_WORD_LENGTH);
   const key = `wordlist-${wordLength}`;
 
-  const clientSideFetcher = () => fetchWordlist(wordLength);
+  const wordlistFetcher = () => fetchWordlist(wordLength);
 
   const [level, setLevel] = useState(0);
   const [showLevelUpModal, setShowLevelUpModal] = useState(false);
 
-  const { data: wordlist, mutate: mutateWord } = useSWR(
-    key,
-    clientSideFetcher,
-    {
-      fallbackData: fallbackWordlist["/api/wordlist"],
-    }
-  );
+  const { data: wordlist, mutate: mutateWord } = useSWR(key, wordlistFetcher, {
+    fallbackData: fallbackWordlist["/api/wordlist"],
+  });
 
   const [word, setWord] = useState(generateRandomWord(wordlist));
   const wordRef = useRef(word);

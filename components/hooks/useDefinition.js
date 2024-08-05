@@ -1,18 +1,11 @@
 import { useEffect, useState } from "react";
-import { staticFetcher } from "../../helpers/staticFetcher";
+import { fetchDefinition, staticFetcher } from "../../helpers/staticFetcher";
+import useSWRImmutable from "swr/immutable";
 
 export default function useDefinition(word) {
-  const [def, setDef] = useState();
+  const defFetcher = () => fetchDefinition(word);
 
-  useEffect(() => {
-    async function fetchData() {
-      const url = `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`;
-      const data = await staticFetcher(url);
-      setDef(data);
-    }
-
-    fetchData();
-  }, [word]);
+  const { data: def } = useSWRImmutable(word, defFetcher);
 
   return { def };
 }

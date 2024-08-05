@@ -24,3 +24,13 @@ export async function fetchWordlist(wordLength) {
 
   return new Wordlist(...data);
 }
+
+export async function fetchDefinition(word) {
+  const url = `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`;
+  const data = await staticFetcher(url).catch((err) => {
+    console.error("Error fetching defintion:", err);
+    return { notFound: true };
+  });
+
+  return new Wordlist(...data);
+}
