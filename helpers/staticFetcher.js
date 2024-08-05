@@ -5,7 +5,8 @@ export async function staticFetcher(url) {
   const res = await fetch(url);
 
   if (!res.ok) {
-    throw new Error(`Static Fetcher could not fetch ${url}`);
+    console.error(`Static Fetcher could not fetch ${url}`);
+    // throw new Error(`Static Fetcher could not fetch ${url}`);
   }
 
   const data = await res.json();
