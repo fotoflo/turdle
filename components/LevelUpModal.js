@@ -20,9 +20,14 @@ const LevelUpModal = ({ showLevelUpModal, closeLevelUpModal, wordRef }) => {
         <Modal.Header closeButton>
           <Modal.Title>&nbsp; LEVEL UP!</Modal.Title>
         </Modal.Header>
-        <Modal.Body>&nbsp; Yay! You leveled up &nbsp;</Modal.Body>
-        <Modal.Body> The word was {wordRef.current}!!</Modal.Body>
         <Modal.Body>
+          <div>
+            <h2>
+              The word was&nbsp; &quot;
+              <strong>{wordRef.current.toUpperCase()}</strong>
+              &quot;
+            </h2>
+          </div>
           <Definition word={wordRef.current} />
         </Modal.Body>
         <Modal.Footer>
@@ -40,13 +45,14 @@ const StyledModal = styled(Modal)`
     background-color: ${(props) => props.theme.background};
     border: 1px solid ${(props) => props.theme.fontColor};
     width: 100%;
-    height: 1000px;
+    height: 100%;
   }
 
   & .modal-dialog {
     display: flex;
-    align-items: center;
+    align-items: flex-start; // Change from center to flex-start
     justify-content: center;
+    padding-top: 20vh; // This will push the modal 20% down from the top
   }
 
   & .modal-dialog-centered {

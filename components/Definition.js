@@ -7,11 +7,11 @@ const Definition = ({ word }) => {
 
   return (
     <div>
-      <li>
-        {def?.[0].meanings.map((meaning) => {
-          return meaning.definitions[0].definition;
-        })}
-      </li>
+      <strong>Definitions:</strong>
+      {def?.[0].meanings.map((meaning) => {
+        const def = meaning.definitions[0].definition;
+        return <li key={def}>{def}</li>;
+      })}
     </div>
   );
 };
